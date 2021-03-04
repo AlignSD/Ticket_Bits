@@ -4,10 +4,14 @@ import './App.css';
 import Marketplace from '../abis/Marketplace.json'
 import Navbar from './Navbar'
 import Main from './Main'
+import LoginButton from './LoginButton';
+import LogoutButton from './LogoutButton';
+import Profile from './Profile';
+
 
 
 class App extends Component {
-
+  
   async componentWillMount() {
     await this.loadWeb3()
     await this.loadBlockchainData()
@@ -128,7 +132,9 @@ purchaseTicket(id, price) {
   render() {
     return (
       <div>
+        
         <Navbar account={this.state.account} />
+        
         <div className="row">
             <main role="main" className="col-lg-12 d-flex">
               { this.state.loading
@@ -139,6 +145,9 @@ purchaseTicket(id, price) {
                 purchaseTicket={this.purchaseTicket}/>
               }
             </main>
+            <LoginButton></LoginButton>
+            <LogoutButton></LogoutButton>
+            <Profile></Profile>
           </div>
       </div>
     );
