@@ -7,8 +7,10 @@ import Main from './Main'
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 import Profile from './Profile';
+import TicketMarketPlace from './TicketMarketPlace'
 
 
+<<<<<<< HEAD
 
 class App extends Component {
   
@@ -105,10 +107,19 @@ purchaseTicket(id, price) {
       </div>
     );
   }
+=======
+function App() {
+  return (
+    <div>
+      <TicketMarketPlace />
+    </div>
+  );
+>>>>>>> 997f52f94c38d9d67a3f23ec37f57beb50e6522e
 }
 
 export default App;
 
+<<<<<<< HEAD
 
 //   async componentWillMount(){
 //     await this.loadWeb3();
@@ -156,3 +167,7 @@ export default App;
 //     window.alert('Marketplace contract not deployed to detected network.')
 //   }
 // }
+=======
+  
+  
+>>>>>>> 997f52f94c38d9d67a3f23ec37f57beb50e6522e
