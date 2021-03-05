@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css'
-import App from './components/App';
+import App from "./App";
 import * as serviceWorker from './serviceWorker';
 import { Auth0Provider } from "@auth0/auth0-react";
+import "../src/pages/shanesStyle.css"
 
 ReactDOM.render(
+ 
     <Auth0Provider
       domain={"ucsdproject3.us.auth0.com"}
       clientId="bMbAEFLsufycv3Y5PEsflHkcsutmwQ2b"
@@ -14,6 +16,7 @@ ReactDOM.render(
       <App />
     </Auth0Provider>,
     document.getElementById("root")
+
   );
 
 // If you want your app to work offline and load faster, you can change
