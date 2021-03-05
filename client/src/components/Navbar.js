@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
+import Button from '@material-ui/core/Button'
 
-class Navbar extends Component {
-
-  render() {
+const Navbar = () => {
+    const { logout } = useAuth0();
     return (
         <div>
         <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
@@ -14,15 +15,21 @@ class Navbar extends Component {
           >
             Ticket Bits
           </a>
+          <Button href="#" variant="contained" color="primary">
+      <a onClick={() => logout({ returnTo: window.location.origin })}>
+      Log Out
+    </a>
+      </Button>
           <ul className="navbar-nav px-3">
             <li className="nav-item text-nowrap d-none d-sm-none d-sm-block">
-              <small className="text-white"><span id="account">{this.props.account}</span></small>
+              {/* <small className="text-white"><span id="account">{this.props.account}</span></small> */}
             </li>
           </ul>
         </nav>
         </div>
-    );
-  }
-}
+    )
+    
+  
+};
 
 export default Navbar;
