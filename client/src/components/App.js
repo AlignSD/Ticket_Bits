@@ -55,53 +55,6 @@ class App extends Component {
     }
   }
 
-//   async componentWillMount(){
-//     await this.loadWeb3();
-//     console.log("*********",window.ethereum);
-//     this.loadBlockchainData();
-//   }
-
-//   async loadWeb3() {
-//     if (window.ethereum) {
-//       handleEthereum();
-//     } else {
-//       window.addEventListener('ethereum#initialized', handleEthereum, {
-//         once: true,
-//       });
-    
-//       // If the event is not dispatched by the end of the timeout,
-//       // the user probably doesn't have MetaMask installed.
-//       setTimeout(handleEthereum, 3000); // 3 seconds
-//     }
-    
-//     function handleEthereum() {
-//       const { ethereum } = window;
-//       if (ethereum && ethereum.isMetaMask) {
-//         console.log('Ethereum successfully detected!');
-//         // Access the decentralized web!
-//       } else {
-//         console.log('Please install MetaMask!');
-//       }
-//     }
-// }
-  
-// async loadBlockchainData() {
-//   // const web3 = window.web3
-//   // Load account
-//   const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-//   this.setState({ account: accounts[0] })
-//   const networkId = await window.ethereum.request({ method: 'eth_chainId' });
-//   console.log(networkId);
-//   const networkData = Marketplace.networks[networkId]
-//   console.log(networkData)
-//   if(networkData) {
-//     const marketplace = window.ethereum.request.Contract(Marketplace.abi, networkData.address)
-//     console.log(marketplace)
-//   } else {
-//     window.alert('Marketplace contract not deployed to detected network.')
-//   }
-// }
-
 constructor(props) {
   super(props)
   this.state = {
@@ -155,3 +108,51 @@ purchaseTicket(id, price) {
 }
 
 export default App;
+
+
+//   async componentWillMount(){
+//     await this.loadWeb3();
+//     console.log("*********",window.ethereum);
+//     this.loadBlockchainData();
+//   }
+
+//   async loadWeb3() {
+//     if (window.ethereum) {
+//       handleEthereum();
+//     } else {
+//       window.addEventListener('ethereum#initialized', handleEthereum, {
+//         once: true,
+//       });
+    
+//       // If the event is not dispatched by the end of the timeout,
+//       // the user probably doesn't have MetaMask installed.
+//       setTimeout(handleEthereum, 3000); // 3 seconds
+//     }
+    
+//     function handleEthereum() {
+//       const { ethereum } = window;
+//       if (ethereum && ethereum.isMetaMask) {
+//         console.log('Ethereum successfully detected!');
+//         // Access the decentralized web!
+//       } else {
+//         console.log('Please install MetaMask!');
+//       }
+//     }
+// }
+  
+// async loadBlockchainData() {
+//   // const web3 = window.web3
+//   // Load account
+//   const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+//   this.setState({ account: accounts[0] })
+//   const networkId = await window.ethereum.request({ method: 'eth_chainId' });
+//   console.log(networkId);
+//   const networkData = Marketplace.networks[networkId]
+//   console.log(networkData)
+//   if(networkData) {
+//     const marketplace = window.ethereum.request.Contract(Marketplace.abi, networkData.address)
+//     console.log(marketplace)
+//   } else {
+//     window.alert('Marketplace contract not deployed to detected network.')
+//   }
+// }
