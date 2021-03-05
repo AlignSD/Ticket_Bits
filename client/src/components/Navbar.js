@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from '@material-ui/core/Button'
 
@@ -13,9 +13,9 @@ const Navbar = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Ticket Bits
+            Scripted Tickets
           </a>
-          <Button href="#" variant="contained" color="primary">
+          <Button variant="contained" color="primary">
       <a onClick={() => logout({ returnTo: window.location.origin })}>
       Log Out
     </a>

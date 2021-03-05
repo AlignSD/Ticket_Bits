@@ -1,5 +1,7 @@
 import React from 'react';
 import Login from "../src/pages/login"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "../src/pages/shanesStyle.css"
 
 import './App.css';
 // import LoginButton from "./components/LoginButton"
@@ -12,7 +14,7 @@ import './App.css';
 
 function App() {
   return (
-    <div>      
+    <div className="shanesLogin text-white">      
       <Login/>
     </div>
   );
