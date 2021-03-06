@@ -10,6 +10,8 @@ import Navbar from "../components/Navbar"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../pages/shanesStyle.css"
 import Logo from "../pages/Images/scripted_Tickets.png"
+import Home from "../pages/Home";
+import {Redirect} from "react-router-dom";
 
 
 function Login() {
@@ -19,8 +21,8 @@ function Login() {
   if (isAuthenticated === false){
   return (
     <div>
-      
-      <br></br>
+    <Redirect to="/" />
+      {/* <br></br>
 
       <div className="container shanesLogin jubotron">
         <img className="img-fluid" src={Logo}></img>
@@ -31,7 +33,7 @@ function Login() {
       </Button>
       
       </div>
-      </div>
+      </div> */}
     </div>
   )}
   else { return(

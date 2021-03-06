@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 
 class Main extends Component {
 
-  render() {
+  render(props) {
+    console.log(props);
     return (
       <div id="content">
         <h1>Add Ticket</h1>
@@ -45,7 +46,7 @@ class Main extends Component {
             </tr>
           </thead>
           <tbody id="ticketList">
-            { this.props.tickets.map((ticket, key) => {
+            { props.tickets.map((ticket, key) => {
               return(
                 <tr key={key}>
                   <th scope="row">{ticket.id.toString()}</th>
