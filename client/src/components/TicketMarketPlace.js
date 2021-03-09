@@ -8,12 +8,11 @@ import { loadWeb3, loadBlockchainData } from "./Main"
 
     
 function TicketMarketPlace() {
-  const [accountName, setAccountName ] = useState({
-    account: '',
-    ticketCount: 0,
-    tickets: [],
-    loading: true
-  });
+  let [account, setAccountName ] = useState('');
+  let [ticketCount, setTicketCount ] = useState(0);
+  let [tickets, setTickets ] = useState([]);
+  let [loading, setLoading ] = useState(true);
+
 
   const [marketplaceState, setMarket ] = useState();
   
@@ -45,9 +44,10 @@ function TicketMarketPlace() {
     // Load account
     const accounts = await web3.eth.getAccounts()
     console.log(accounts[0]);
+    console.log(account);
     let accountNum = accounts[0]
-    setAccountName( ...accountName, ({ account: accountNum }))
-    console.log(accountName.account);
+    setAccountName(account += accountNum )
+    console.log(account);
     const networkId = await web3.eth.net.getId()
     const networkData = Marketplace.networks[networkId]
     if(networkData) {
@@ -62,7 +62,7 @@ function TicketMarketPlace() {
           tickets: [...this.state.tickets, ticket]
         })
       }
-      setAccountName({ ...accountName, loading: false })
+      setLoading({ loading: false })
       console.log(marketplace);
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
@@ -95,19 +95,19 @@ function TicketMarketPlace() {
 function createTicket(name, price) {
   
   if(marketplaceState){
-    console.log(accountName)
-    setAccountName({ ...accountName, loading: true })
-    marketplaceState.methods.createTicket(name, price).send({ from: accountName.account }).once('receipt', (receipt) => {
-      setAccountName({ ...accountName, loading: false })
+    console.log(account)
+    setLoading({loading: true })
+    marketplaceState.methods.createTicket(name, price).send( account ).once('receipt', (receipt) => {
+      setLoading({loading: false })
     })
   }
 }
 function purchaseTicket(id, price) {
   if(marketplaceState){
-    console.log(accountName.account)
-    setAccountName({ ...accountName, loading: true })
-    marketplaceState.methods.purchaseTicket(id).send({ from: accountName.account, value: price }).once('receipt', (receipt) => {
-      setAccountName({ ...accountName, loading: false })
+    console.log(account)
+    setLoading({ loading: true })
+    marketplaceState.methods.purchaseTicket(id).send( account, account.price ).once('receipt', (receipt) => {
+      setLoading({ loading: false })
     })
   }
 }
@@ -119,16 +119,16 @@ function purchaseTicket(id, price) {
     return (
       <div>
         
-        <Navbar account={accountName.accounts} />
+        <Navbar account={account} />
         
         <div className="row">
             <main role="main" className="col-lg-12 d-flex">
-              { accountName.loading
+              { loading
                 ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
                 : 
                 
                 <Main 
-                tickets={accountName.tickets} 
+                tickets={tickets} 
                 createTicket={createTicket} 
                 purchaseTicket={purchaseTicket}/>
               }
