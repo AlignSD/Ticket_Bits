@@ -8,6 +8,14 @@ import { loadWeb3, loadBlockchainData } from "./Main"
 
     
 function TicketMarketPlace() {
+  const [accountName, setAccountName ] = useState({
+    account: '',
+    ticketCount: 0,
+    tickets: [],
+    loading: true
+  });
+
+  const [marketplaceState, setMarket ] = useState();
   
   useEffect(() => {
     // Update the document title using the browser API
@@ -15,14 +23,9 @@ function TicketMarketPlace() {
     loadWeb3();
     loadBlockchainData();
     
-  });
+  },[]);
 
-  const [accountName, setAccountName ] = useState({
-    account: '',
-    ticketCount: 0,
-    tickets: [],
-    loading: true
-  });
+  
 
   async function loadWeb3() {
     if (window.ethereum) {
@@ -41,12 +44,16 @@ function TicketMarketPlace() {
     const web3 = window.web3
     // Load account
     const accounts = await web3.eth.getAccounts()
-    setAccountName({ account: accounts[0] })
+    console.log(accounts[0]);
+    let accountNum = accounts[0]
+    setAccountName( ...accountName, ({ account: accountNum }))
+    console.log(accountName.account);
     const networkId = await web3.eth.net.getId()
     const networkData = Marketplace.networks[networkId]
     if(networkData) {
       const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
-      setAccountName({ marketplace })
+      console.log(marketplace);
+      setMarket(marketplace);
       const ticketCount = await marketplace.methods.ticketCount().call()
       // Load Products
       for (var i = 1; i<= ticketCount; i++) {
@@ -55,8 +62,8 @@ function TicketMarketPlace() {
           tickets: [...this.state.tickets, ticket]
         })
       }
-      setAccountName({ loading: false })
-      
+      setAccountName({ ...accountName, loading: false })
+      console.log(marketplace);
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
     }
@@ -85,19 +92,25 @@ function TicketMarketPlace() {
 //   this.purchaseTicket = this.purchaseTicket.bind(this)
 // }
 
-// createTicket(name, price) {
-//   this.setState({ loading: true })
-//   this.state.marketplace.methods.createTicket(name, price).send({ from: this.state.account }).once('receipt', (receipt) => {
-//     this.setState({ loading: false })
-//   })
-// }
-
-// purchaseTicket(id, price) {
-//   this.setState({ loading: true })
-//   this.state.marketplace.methods.purchaseTicket(id).send({ from: this.state.account, value: price }).once('receipt', (receipt) => {
-//     this.setState({ loading: false })
-//   })
-// }
+function createTicket(name, price) {
+  
+  if(marketplaceState){
+    console.log(accountName)
+    setAccountName({ ...accountName, loading: true })
+    marketplaceState.methods.createTicket(name, price).send({ from: accountName.account }).once('receipt', (receipt) => {
+      setAccountName({ ...accountName, loading: false })
+    })
+  }
+}
+function purchaseTicket(id, price) {
+  if(marketplaceState){
+    console.log(accountName.account)
+    setAccountName({ ...accountName, loading: true })
+    marketplaceState.methods.purchaseTicket(id).send({ from: accountName.account, value: price }).once('receipt', (receipt) => {
+      setAccountName({ ...accountName, loading: false })
+    })
+  }
+}
         
         
         
@@ -116,8 +129,8 @@ function TicketMarketPlace() {
                 
                 <Main 
                 tickets={accountName.tickets} 
-                createTicket={accountName.createTicket} 
-                purchaseTicket={accountName.purchaseTicket}/>
+                createTicket={createTicket} 
+                purchaseTicket={purchaseTicket}/>
               }
             </main>
           </div>
