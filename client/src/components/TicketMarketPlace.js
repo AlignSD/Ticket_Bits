@@ -14,7 +14,7 @@ function TicketMarketPlace() {
   let [loading, setLoading ] = useState(true);
 
 
-  const [marketplaceState, setMarket ] = useState();
+  let [marketplaceState, setMarket ] = useState();
   
   useEffect(() => {
     // Update the document title using the browser API
@@ -52,17 +52,18 @@ function TicketMarketPlace() {
     const networkData = Marketplace.networks[networkId]
     if(networkData) {
       const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
-      console.log(marketplace);
-      setMarket(marketplace);
-      const ticketCount = await marketplace.methods.ticketCount().call()
+      setMarket(marketplaceState = marketplace);
+      console.log(marketplaceState)
+      setTicketCount(ticketCount = await marketplace.methods.ticketCount().call())
+      console.log(ticketCount);
       // Load Products
       for (var i = 1; i<= ticketCount; i++) {
-        const ticket = await marketplace.methods.tickets(i).call()
-        this.setState({
-          tickets: [...this.state.tickets, ticket]
-        })
+        setTickets(tickets = await marketplace.methods.tickets(i).call())
+        
       }
-      setLoading({ loading: false })
+      console.log(tickets);
+      setLoading( loading = false )
+      console.log(loading);
       console.log(marketplace);
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
@@ -106,7 +107,7 @@ function purchaseTicket(id, price) {
   if(marketplaceState){
     console.log(account)
     setLoading({ loading: true })
-    marketplaceState.methods.purchaseTicket(id).send( account, account.price ).once('receipt', (receipt) => {
+    marketplaceState.methods.purchaseTicket(id).send( account ).once('receipt', (receipt) => {
       setLoading({ loading: false })
     })
   }
