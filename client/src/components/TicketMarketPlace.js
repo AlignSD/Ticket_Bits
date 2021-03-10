@@ -1,54 +1,176 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState, setState } from 'react';
 import Web3 from 'web3';
 import Marketplace from '../abis/Marketplace.json'
 import Navbar from './Navbar'
 import Main from './Main'
+import { useAuth0 } from "@auth0/auth0-react";
+import { loadWeb3, loadBlockchainData } from "./Main"
 
-class TicketMarketPlace extends Component {
+    
+function TicketMarketPlace() {
+  let [account, setAccountName ] = useState('');
+  let [ticketCount, setTicketCount ] = useState(0);
+  let [tickets, setTickets ] = useState([]);
+  let [loading, setLoading ] = useState(true);
 
-    async componentWillMount() {
-        await this.loadWeb3()
-        await this.loadBlockchainData()
-      }
+
+  let [marketplaceState, setMarket ] = useState();
+  
+  useEffect(() => {
+    // Update the document title using the browser API
     
-      async loadWeb3() {
-        if (window.ethereum) {
-          window.web3 = new Web3(window.ethereum)
-          await window.ethereum.enable()
-        }
-        else if (window.web3) {
-          window.web3 = new Web3(window.web3.currentProvider)
-        }
-        else {
-          window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-        }
-      }
+    loadWeb3();
+    loadBlockchainData();
     
-      async loadBlockchainData() {
-        const web3 = window.web3
-        // Load account
-        const accounts = await web3.eth.getAccounts()
-        this.setState({ account: accounts[0] })
-        const networkId = await web3.eth.net.getId()
-        const networkData = Marketplace.networks[networkId]
-        if(networkData) {
-          const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
-          this.setState({ marketplace })
-          const ticketCount = await marketplace.methods.ticketCount().call()
-          // Load Products
-          for (var i = 1; i<= ticketCount; i++) {
-            const ticket = await marketplace.methods.tickets(i).call()
-            this.setState({
-              tickets: [...this.state.tickets, ticket]
-            })
-          }
-          this.setState({ loading: false })
-          
-        } else {
-          window.alert('Marketplace contract not deployed to detected network.')
-        }
+  },[]);
+
+  
+
+  async function loadWeb3() {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum)
+      await window.ethereum.enable()
+    }
+    else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider)
+    }
+    else {
+      window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    }
+  }
+
+  async function loadBlockchainData() {
+    const web3 = window.web3
+    // Load account
+    const accounts = await web3.eth.getAccounts()
+    console.log(accounts[0]);
+    console.log(account);
+    let accountNum = accounts[0]
+    setAccountName(account += accountNum )
+    console.log(account);
+    const networkId = await web3.eth.net.getId()
+    const networkData = Marketplace.networks[networkId]
+    if(networkData) {
+      const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
+      setMarket(marketplaceState = marketplace);
+      console.log(marketplaceState)
+      setTicketCount(ticketCount = await marketplace.methods.ticketCount().call())
+      console.log(ticketCount);
+      // Load Products
+      for (var i = 1; i<= ticketCount; i++) {
+        tickets = [await marketplace.methods.tickets(i).call()]
+        setTickets(tickets)
       }
+      console.log(tickets);
+      setLoading( loading = false )
+      console.log(loading);
+      console.log(marketplace);
+    } else {
+      window.alert('Marketplace contract not deployed to detected network.')
+    }
+  }
+
+  
+  
+        
+  
+  // state = {
+  //       account: '',
+  //       ticketCount: 0,
+  //       tickets: [],
+  //       loading: true
+  //     }
+// constructor(props) {
+//   super(props)
+//   this.state = {
+//     account: '',
+//     ticketCount: 0,
+//     tickets: [],
+//     loading: true
+//   }
+
+//   this.createTicket = this.createTicket.bind(this)
+//   this.purchaseTicket = this.purchaseTicket.bind(this)
+// }
+
+function createTicket(name, price) {
+  
+  if(marketplaceState){
+    console.log(account)
+    setLoading({loading: true })
+    marketplaceState.methods.createTicket(name, price).send( {from: account} ).once('receipt', (receipt) => {
+      setLoading({loading: false })
+    })
+  }
+}
+function purchaseTicket(id, price) {
+  if(marketplaceState){
+    console.log(account)
+    setLoading({ loading: true })
+    marketplaceState.methods.purchaseTicket(id).send( { from: account, value: price } ).once('receipt', (receipt) => {
+      setLoading({ loading: false })
+    })
+  }
+}
+        
+        
+        
+  const {isAuthenticated} = useAuth0();
+  
+    return (
+      <div>
+        
+        <Navbar account={account} />
+        
+        <div className="row">
+            <main role="main" className="col-lg-12 d-flex text-white">
+              {
+                <Main 
+                tickets={tickets} 
+                createTicket={createTicket} 
+                purchaseTicket={purchaseTicket}/>
+              }
+            </main>
+          </div>
+      </div>
+    );
+    }
+  
+  //   async componentDidMount() { //useEffect is the same
+      
+  //       await this.loadWeb3()
+  //       await this.loadBlockchainData()
+      
+  //     }
     
+     
+    
+    //   render() {
+    //     return (
+    //       <div>
+            
+    //         <Navbar account={this.state.account} />
+            
+    //         <div className="row">
+    //             <main role="main" className="col-lg-12 d-flex">
+    //               { this.state.loading
+    //                 ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
+    //                 : 
+                    
+    //                 <Main 
+    //                 tickets={this.state.tickets} 
+    //                 createTicket={this.createTicket} 
+    //                 purchaseTicket={this.purchaseTicket}/>
+    //               }
+    //             </main>
+    //           </div>
+    //       </div>
+    //     );
+    //   }
+    // }
+    
+    export default TicketMarketPlace;
+
     //   async componentWillMount(){
     //     await this.loadWeb3();
     //     console.log("*********",window.ethereum);
@@ -95,54 +217,104 @@ class TicketMarketPlace extends Component {
     //     window.alert('Marketplace contract not deployed to detected network.')
     //   }
     // }
-    
-    constructor(props) {
-      super(props)
-      this.state = {
-        account: '',
-        ticketCount: 0,
-        tickets: [],
-        loading: true
-      }
-    
-      this.createTicket = this.createTicket.bind(this)
-      this.purchaseTicket = this.purchaseTicket.bind(this)
-    }
-    
-    createTicket(name, price) {
-      this.setState({ loading: true })
-      this.state.marketplace.methods.createTicket(name, price).send({ from: this.state.account }).once('receipt', (receipt) => {
-        this.setState({ loading: false })
-      })
-    }
-    
-    purchaseTicket(id, price) {
-      this.setState({ loading: true })
-      this.state.marketplace.methods.purchaseTicket(id).send({ from: this.state.account, value: price }).once('receipt', (receipt) => {
-        this.setState({ loading: false })
-      })
-    }
-    
-      render() {
-        return (
-          <div>
+
+
+    // class TicketMarketPlace extends Component {
+     
+    //   async componentDidMount() { //useEffect is the same
+        
+    //       await this.loadWeb3()
+    //       await this.loadBlockchainData()
+        
+    //     }
+      
+    //     async loadWeb3() {
+    //       if (window.ethereum) {
+    //         window.web3 = new Web3(window.ethereum)
+    //         await window.ethereum.enable()
+    //       }
+    //       else if (window.web3) {
+    //         window.web3 = new Web3(window.web3.currentProvider)
+    //       }
+    //       else {
+    //         window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+    //       }
+    //     }
+      
+    //     async loadBlockchainData() {
+    //       const web3 = window.web3
+    //       // Load account
+    //       const accounts = await web3.eth.getAccounts()
+    //       this.setState({ account: accounts[0] })
+    //       const networkId = await web3.eth.net.getId()
+    //       const networkData = Marketplace.networks[networkId]
+    //       if(networkData) {
+    //         const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
+    //         this.setState({ marketplace })
+    //         const ticketCount = await marketplace.methods.ticketCount().call()
+    //         // Load Products
+    //         for (var i = 1; i<= ticketCount; i++) {
+    //           const ticket = await marketplace.methods.tickets(i).call()
+    //           this.setState({
+    //             tickets: [...this.state.tickets, ticket]
+    //           })
+    //         }
+    //         this.setState({ loading: false })
             
-            <Navbar account={this.state.account} />
-            
-            <div className="row">
-                <main role="main" className="col-lg-12 d-flex">
-                  { this.state.loading
-                    ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
-                    : <Main 
-                    tickets={this.state.tickets} 
-                    createTicket={this.createTicket} 
-                    purchaseTicket={this.purchaseTicket}/>
-                  }
-                </main>
-              </div>
-          </div>
-        );
-      }
-    }
-    
-    export default TicketMarketPlace;
+    //       } else {
+    //         window.alert('Marketplace contract not deployed to detected network.')
+    //       }
+    //     }
+      
+    //  constructor(props) {
+    //     super(props)
+    //     this.state = {
+    //       account: '',
+    //       ticketCount: 0,
+    //       tickets: [],
+    //       loading: true
+    //     }
+      
+    //     this.createTicket = this.createTicket.bind(this)
+    //     this.purchaseTicket = this.purchaseTicket.bind(this)
+    //   }
+      
+    //   createTicket(name, price) {
+    //     this.setState({ loading: true })
+    //     this.state.marketplace.methods.createTicket(name, price).send({ from: this.state.account }).once('receipt', (receipt) => {
+    //       this.setState({ loading: false })
+    //     })
+    //   }
+      
+    //   purchaseTicket(id, price) {
+    //     this.setState({ loading: true })
+    //     this.state.marketplace.methods.purchaseTicket(id).send({ from: this.state.account, value: price }).once('receipt', (receipt) => {
+    //       this.setState({ loading: false })
+    //     })
+    //   }
+      
+    //     render() {
+    //       return (
+    //         <div>
+              
+    //           <Navbar account={this.state.account} />
+              
+    //           <div className="row">
+    //               <main role="main" className="col-lg-12 d-flex">
+    //                 { this.state.loading
+    //                   ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
+    //                   : 
+                      
+    //                   <Main 
+    //                   tickets={this.state.tickets} 
+    //                   createTicket={this.createTicket} 
+    //                   purchaseTicket={this.purchaseTicket}/>
+    //                 }
+    //               </main>
+    //             </div>
+    //         </div>
+    //       );
+    //     }
+    //   }
+      
+    //   export default TicketMarketPlace;
