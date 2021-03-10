@@ -58,8 +58,8 @@ function TicketMarketPlace() {
       console.log(ticketCount);
       // Load Products
       for (var i = 1; i<= ticketCount; i++) {
-        setTickets(tickets = await marketplace.methods.tickets(i).call())
-        
+        tickets = [await marketplace.methods.tickets(i).call()]
+        setTickets(tickets)
       }
       console.log(tickets);
       setLoading( loading = false )
@@ -98,7 +98,7 @@ function createTicket(name, price) {
   if(marketplaceState){
     console.log(account)
     setLoading({loading: true })
-    marketplaceState.methods.createTicket(name, price).send( account ).once('receipt', (receipt) => {
+    marketplaceState.methods.createTicket(name, price).send( {from: account} ).once('receipt', (receipt) => {
       setLoading({loading: false })
     })
   }
@@ -107,7 +107,7 @@ function purchaseTicket(id, price) {
   if(marketplaceState){
     console.log(account)
     setLoading({ loading: true })
-    marketplaceState.methods.purchaseTicket(id).send( account ).once('receipt', (receipt) => {
+    marketplaceState.methods.purchaseTicket(id).send( { from: account, value: price } ).once('receipt', (receipt) => {
       setLoading({ loading: false })
     })
   }
@@ -123,11 +123,8 @@ function purchaseTicket(id, price) {
         <Navbar account={account} />
         
         <div className="row">
-            <main role="main" className="col-lg-12 d-flex">
-              { loading
-                ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
-                : 
-                
+            <main role="main" className="col-lg-12 d-flex text-white">
+              {
                 <Main 
                 tickets={tickets} 
                 createTicket={createTicket} 
