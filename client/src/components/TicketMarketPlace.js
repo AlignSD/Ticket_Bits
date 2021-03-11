@@ -5,6 +5,12 @@ import Main from './Main'
 import Buyer from './Buyer'
 import Seller from './Seller'
 import { useAuth0 } from '@auth0/auth0-react'
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import {Grid} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
+
 import AccountNameContext from '../utils/AccountNameContext'
 
 function TicketMarketPlace() {
@@ -74,25 +80,6 @@ function TicketMarketPlace() {
     }
   }
 
-  // state = {
-  //       account: '',
-  //       ticketCount: 0,
-  //       tickets: [],
-  //       loading: true
-  //     }
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     account: '',
-  //     ticketCount: 0,
-  //     tickets: [],
-  //     loading: true
-  //   }
-
-  //   this.createTicket = this.createTicket.bind(this)
-  //   this.purchaseTicket = this.purchaseTicket.bind(this)
-  // }
-
   function createTicket(name, price) {
     if (marketplaceState) {
       console.log(account)
@@ -117,8 +104,38 @@ function TicketMarketPlace() {
         })
     }
   }
-
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    button: {
+      padding: theme.spacing(1),
+      textAlign: 'center',
+      color: theme.palette.text.secondary,
+    },
+    marginAutoContainer: {
+      
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 5
+      
+      
+    },
+  }));
+  const MyButton = styled(Button)({
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+  });
   const { isAuthenticated } = useAuth0();
+  const classes = useStyles();
 
   const renderUserTable = () => {
     let result = null;
@@ -147,222 +164,36 @@ function TicketMarketPlace() {
   }
 
   return (
-    // <div>
-    // {/* <AccountNameContext.Provider value={account}>
-    //   <testContext account = {account}></testContext>
-    // </AccountNameContext.Provider>
-    // </div> */}
 
-    // // <div>
-
-    <div className="row">
-      <main role="main" className="col-lg-12 d-flex text-white justify-content-center">
-        <div className="row">
-          <div className="container">
-        <div className="btn-container">
-          <div className="col-md-4 d-flex">
-          <button onClick={ () => { setUserType("Buyer") }}>Buyer</button>
-          </div>
-          <div className="col-md-4 d-flex">
-          <button onClick={ () => { setUserType("Seller") }}>Seller</button>
-          </div>
-          <div className="col-md-4 d-flex">
-          <button onClick={ () => { setUserType("") }}>Ticket Feed</button>
-          </div>
-          {/* <button onClick={ () => { setUserType("Buyer") }}>Buyer</button>
-          <button onClick={ () => { setUserType("Seller") }}>Seller</button>
-          <button onClick={ () => { setUserType("") }}>Ticket Feed</button> */}
-        </div>
         <div>
-        </div>
-        </div>
+          <div className={classes.marginAutoContainer}>
+          <Grid container xs={4} align-content-xs-center>
+            <Grid item xs={4} className={classes.marginAutoContainer} >
+            <MyButton  onClick={ () => { setUserType("Buyer") }}>Buyer</MyButton>
+            </Grid>
+            <Grid item xs={4} className={classes.marginAutoContainer} >
+            <MyButton   onClick={ () => { setUserType("Seller") }}>Seller</MyButton>
+            </Grid>
+            <Grid item xs={4} className={classes.marginAutoContainer} >
+            <MyButton  onClick={ () => { setUserType("") }}>Ticket Feed</MyButton>
+            </Grid>
+          </Grid>
+          
+          </div>
         <div className="row">
         <div className="container">
         {renderUserTable()}
         </div>
         </div>
         </div>
-      </main>
-    </div>
+        
+        
+         
+        
+      
+    
   )
 }
 
-//   async componentDidMount() { //useEffect is the same
-
-//       await this.loadWeb3()
-//       await this.loadBlockchainData()
-
-//     }
-
-//   render() {
-//     return (
-//       <div>
-
-//         <Navbar account={this.state.account} />
-
-//         <div className="row">
-//             <main role="main" className="col-lg-12 d-flex">
-//               { this.state.loading
-//                 ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
-//                 :
-
-//                 <Main
-//                 tickets={this.state.tickets}
-//                 createTicket={this.createTicket}
-//                 purchaseTicket={this.purchaseTicket}/>
-//               }
-//             </main>
-//           </div>
-//       </div>
-//     );
-//   }
-// }
-
 export default TicketMarketPlace
 
-//   async componentWillMount(){
-//     await this.loadWeb3();
-//     console.log("*********",window.ethereum);
-//     this.loadBlockchainData();
-//   }
-
-//   async loadWeb3() {
-//     if (window.ethereum) {
-//       handleEthereum();
-//     } else {
-//       window.addEventListener('ethereum#initialized', handleEthereum, {
-//         once: true,
-//       });
-
-//       // If the event is not dispatched by the end of the timeout,
-//       // the user probably doesn't have MetaMask installed.
-//       setTimeout(handleEthereum, 3000); // 3 seconds
-//     }
-
-//     function handleEthereum() {
-//       const { ethereum } = window;
-//       if (ethereum && ethereum.isMetaMask) {
-//         console.log('Ethereum successfully detected!');
-//         // Access the decentralized web!
-//       } else {
-//         console.log('Please install MetaMask!');
-//       }
-//     }
-// }
-
-// async loadBlockchainData() {
-//   // const web3 = window.web3
-//   // Load account
-//   const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-//   this.setState({ account: accounts[0] })
-//   const networkId = await window.ethereum.request({ method: 'eth_chainId' });
-//   console.log(networkId);
-//   const networkData = Marketplace.networks[networkId]
-//   console.log(networkData)
-//   if(networkData) {
-//     const marketplace = window.ethereum.request.Contract(Marketplace.abi, networkData.address)
-//     console.log(marketplace)
-//   } else {
-//     window.alert('Marketplace contract not deployed to detected network.')
-//   }
-// }
-
-// class TicketMarketPlace extends Component {
-
-//   async componentDidMount() { //useEffect is the same
-
-//       await this.loadWeb3()
-//       await this.loadBlockchainData()
-
-//     }
-
-//     async loadWeb3() {
-//       if (window.ethereum) {
-//         window.web3 = new Web3(window.ethereum)
-//         await window.ethereum.enable()
-//       }
-//       else if (window.web3) {
-//         window.web3 = new Web3(window.web3.currentProvider)
-//       }
-//       else {
-//         window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-//       }
-//     }
-
-//     async loadBlockchainData() {
-//       const web3 = window.web3
-//       // Load account
-//       const accounts = await web3.eth.getAccounts()
-//       this.setState({ account: accounts[0] })
-//       const networkId = await web3.eth.net.getId()
-//       const networkData = Marketplace.networks[networkId]
-//       if(networkData) {
-//         const marketplace = new web3.eth.Contract(Marketplace.abi, networkData.address)
-//         this.setState({ marketplace })
-//         const ticketCount = await marketplace.methods.ticketCount().call()
-//         // Load Products
-//         for (var i = 1; i<= ticketCount; i++) {
-//           const ticket = await marketplace.methods.tickets(i).call()
-//           this.setState({
-//             tickets: [...this.state.tickets, ticket]
-//           })
-//         }
-//         this.setState({ loading: false })
-
-//       } else {
-//         window.alert('Marketplace contract not deployed to detected network.')
-//       }
-//     }
-
-//  constructor(props) {
-//     super(props)
-//     this.state = {
-//       account: '',
-//       ticketCount: 0,
-//       tickets: [],
-//       loading: true
-//     }
-
-//     this.createTicket = this.createTicket.bind(this)
-//     this.purchaseTicket = this.purchaseTicket.bind(this)
-//   }
-
-//   createTicket(name, price) {
-//     this.setState({ loading: true })
-//     this.state.marketplace.methods.createTicket(name, price).send({ from: this.state.account }).once('receipt', (receipt) => {
-//       this.setState({ loading: false })
-//     })
-//   }
-
-//   purchaseTicket(id, price) {
-//     this.setState({ loading: true })
-//     this.state.marketplace.methods.purchaseTicket(id).send({ from: this.state.account, value: price }).once('receipt', (receipt) => {
-//       this.setState({ loading: false })
-//     })
-//   }
-
-//     render() {
-//       return (
-//         <div>
-
-//           <Navbar account={this.state.account} />
-
-//           <div className="row">
-//               <main role="main" className="col-lg-12 d-flex">
-//                 { this.state.loading
-//                   ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
-//                   :
-
-//                   <Main
-//                   tickets={this.state.tickets}
-//                   createTicket={this.createTicket}
-//                   purchaseTicket={this.purchaseTicket}/>
-//                 }
-//               </main>
-//             </div>
-//         </div>
-//       );
-//     }
-//   }
-
-//   export default TicketMarketPlace;
