@@ -24,9 +24,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.light,
   },
   container: {
+    position: 'sticky',
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
-    display: 'flex',
+    
   },
   iconsWrapper: {
     height: 120,

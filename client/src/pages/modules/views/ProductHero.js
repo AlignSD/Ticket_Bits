@@ -6,7 +6,7 @@ import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 
 const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
+  'https://images.pexels.com/photos/373543/pexels-photo-373543.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260';
 
 const styles = (theme) => ({
   background: {
@@ -37,7 +37,7 @@ function ProductHero(props) {
       {/* Increase the network loading priority of the background image. */}
       <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        The Fuckin Sickest BlockChained Event Tickets Dude
+        Block-Chained Ticket Servicing Application
       </Typography>
       <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
         Buy And Sell Tickets The Secure Way
@@ -48,7 +48,7 @@ function ProductHero(props) {
         size="large"
         className={classes.button}
         component="a"
-        href="/premium-themes/onepirate/sign-up/"
+        href="/TicketMarketPlace"
       >
         Search Events
       </Button>
