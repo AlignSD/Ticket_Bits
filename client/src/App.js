@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/Navbar";
 import Loading from "./components/loading";
 import Footer from "./components/footer";
 // import NavBar from "./components/NavBar";
@@ -14,6 +14,16 @@ import ProtectedRoute from "./auth/protected-route";
 
 const App = () => {
   const { isLoading } = useAuth0();
+
+  const apiKey = '3bb54333680d7672149c11bb6d783ccfe95329ecf2f5a7df443e0d323ea3db25';
+
+
+  var request = require('request');
+  request('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH&tsyms=USD,EUR&api_key=3bb54333680d7672149c11bb6d783ccfe95329ecf2f5a7df443e0d323ea3db25' , function (error, response, body) {
+    console.log('error:', error);
+    console.log('statusCode:', response && response.statusCode); 
+    console.log('body:', body);
+  });
 
   if (isLoading) {
     return <Loading/>;

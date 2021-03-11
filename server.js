@@ -9,6 +9,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+
 const config = {
   authRequired: false,
   auth0Logout: true,
