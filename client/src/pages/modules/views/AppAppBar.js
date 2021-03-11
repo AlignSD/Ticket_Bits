@@ -13,27 +13,48 @@ import { useAuth0 } from "@auth0/auth0-react";
 const styles = (theme) => ({
   title: {
     fontSize: 24,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   placeholder: toolbarStyles(theme).root,
-  toolbar: {
-    justifyContent: 'space-between',
-  },
+  
+  // toolbar: {
+  //   justifyContent: 'space-around',
+  // },
+
   left: {
-    flex: 1,
+    flex: 0,
+    display: 'flex',
+    justifyContent: 'flex-start',
   },
   leftLinkActive: {
     color: theme.palette.common.white,
   },
   right: {
-    flex: 1,
+    flex: 3,
     display: 'flex',
     justifyContent: 'flex-end',
+  },
+  center: {
+    flex: 1.5,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    
   },
   rightLink: {
     fontSize: 16,
     color: theme.palette.common.white,
     marginLeft: theme.spacing(3),
   },
+  LeftLink: {
+    fontSize: 16,
+    color: theme.palette.common.white,
+    marginLeft: theme.spacing(3),
+    
+    
+  },
+
   linkSecondary: {
     color: theme.palette.secondary.main,
   },
@@ -47,16 +68,32 @@ function AppAppBar(props) {
     <div>
       <AppBar position="fixed">
         <Toolbar className={classes.toolbar}>
-          <div className={classes.left} />
+
+        <div className={classes.left}/>
+          <Link 
+            variant="h6"
+            underline="none"
+            className={clsx(classes.linkSecondary)}
+            href="/TicketMarketPlace"
+          >
+          {"Marketplace"}
+          </Link>
+
+        <div className={classes.center} />
           <Link
             variant="h6"
             underline="none"
             color="inherit"
-            className={classes.title}
+            className={(classes.title)}
             href="/"
           >
-            {'Fuckin Bit Ticks n Shit'}
+            {'Ticket-Bits'}
           </Link>
+          
+
+            
+          
+          
           <div className={classes.right}>
             {/* <Link
               color="inherit"
@@ -84,14 +121,7 @@ function AppAppBar(props) {
               {'Sign Up'}
             </Link> */}
 
-            <Link 
-              variant="h6"
-              underline="none"
-              className={clsx(classes.rightLink, classes.linkSecondary)}
-              href="/TicketMarketPlace"
-            >
-            {"Marketplace"}
-            </Link>
+            
           </div>
         </Toolbar>
       </AppBar>
