@@ -6,12 +6,11 @@ import Buyer from './Buyer'
 import Seller from './Seller'
 import { useAuth0 } from '@auth0/auth0-react'
 import Button from '@material-ui/core/Button';
-import Container from '@material-ui/core/Container';
 import {Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@material-ui/core/styles';
 
-import AccountNameContext from '../utils/AccountNameContext'
+
 
 function TicketMarketPlace() {
   let [account, setAccountName] = useState('')
@@ -92,6 +91,8 @@ function TicketMarketPlace() {
         })
     }
   }
+
+  // implement code that inputs user accountid from auth0 and ticket owner's metamask account number
   function purchaseTicket(id, price) {
     if (marketplaceState) {
       console.log(account)
@@ -136,6 +137,10 @@ function TicketMarketPlace() {
   });
   const { isAuthenticated } = useAuth0();
   const classes = useStyles();
+
+  const getUserInfo= () => { 
+    console.log()
+  }
 
   const renderUserTable = () => {
     let result = null;
