@@ -2,15 +2,17 @@ import React from 'react';
 import ReactDOM  from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css'
 // import App from "./App";
-import Home from "./pages/Home"
+import App from "./App"
 import * as serviceWorker from './serviceWorker';
-import "../src/pages/shanesStyle.css"
+import { BrowserRouter as Router } from 'react-router-dom';
+import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 
 ReactDOM.render(
- 
-    
-      <Home />,
-      
+    <Router>
+      <Auth0ProviderWithHistory>
+      <App />
+      </Auth0ProviderWithHistory>
+      </Router>,
     document.getElementById("root")
     
   );
