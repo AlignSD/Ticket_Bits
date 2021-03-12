@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/Navbar";
 import Loading from "./components/loading";
 import Footer from "./components/footer";
 // import NavBar from "./components/NavBar";
@@ -20,7 +20,7 @@ const App = () => {
   }
 
   return (
-    <div id="app" className="d-flex flex-column h-100">
+    <div id="app" style={{height: "100%"}} className="d-flex flex-column h-100">
       <NavBar />
       <div className="container flex-grow-1">
         <Switch>

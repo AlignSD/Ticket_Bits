@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, {useRef, useState, useEffect, setState} from "react";
 
-class Buyer extends Component {
+export default function PaypalTest(props){
+    console.log(props)
 
-  render() {
-    console.log(this.props);
-    return (
-      <div id="content">
+    return(
+        <div id="content">
         <h2 style={{color: "white"}}>Buy Ticket</h2>
         <table className="table text-white">
           <thead>
@@ -18,7 +17,7 @@ class Buyer extends Component {
             </tr>
           </thead>
           <tbody id="ticketList">
-            { this.props.tickets.map((ticket, key) => {
+            {props.tickets.map((ticket, key) => {
               return(
                 <tr key={key}>
                   <th scope="row">{ticket.id.toString()}</th>
@@ -26,16 +25,16 @@ class Buyer extends Component {
                   <td>{window.web3.utils.fromWei(ticket.price.toString(), 'Ether')}</td>
                   <td>{ticket.owner}</td>
                   <td>
-                   { !ticket.purchased
+                  { !ticket.purchased
                     ? <button className="buyButton text-dark font-weight-bold rounded btn-success" 
-                      name={ticket.id}
-                      value={ticket.price} 
-                        onClick={(event) => {
-                          this.props.purchaseTicket(event.target.name, event.target.value)
-                        } }
-                      >
-                        Buy
-                        </button>
+                    name={ticket.id}
+                    value={ticket.price} 
+                      onClick={(event) => {
+                        props.purchaseTicket(event.target.name, event.target.value)
+                      } }
+                    >
+                      Buy
+                      </button>
                         : null
                     }
                     </td>
@@ -45,8 +44,5 @@ class Buyer extends Component {
           </tbody>
         </table>
       </div>
-    );
-  }
+    )
 }
-
-export default Buyer;
