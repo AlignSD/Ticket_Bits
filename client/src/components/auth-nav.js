@@ -1,6 +1,6 @@
 import React from "react";
 import AuthenticationButton from "./AuthenticationButton";
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 
 const AuthNav = () => (
   <div className="navbar-nav ml-auto">
