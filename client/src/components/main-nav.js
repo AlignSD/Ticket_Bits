@@ -12,6 +12,14 @@ const MainNav = () => (
       Home
     </NavLink>
     <NavLink
+      to="/coinbaseAPI"
+      exact
+      className="nav-link"
+      activeClassName="router-link-exact-active"
+    >
+      CoinbaseAPI
+    </NavLink> 
+    <NavLink
       to="/profile"
       exact
       className="nav-link"
