@@ -17,9 +17,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'))
-
-// Auth0 information
 const config = {
   authRequired: false,
   auth0Logout: true,
