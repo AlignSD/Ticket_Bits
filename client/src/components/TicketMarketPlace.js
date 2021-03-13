@@ -26,7 +26,8 @@ function TicketMarketPlace() {
 
     loadWeb3()
     loadBlockchainData()
-  }, [])
+
+  }, [userType])
 
   async function loadWeb3() {
     if (window.ethereum) {
@@ -48,8 +49,7 @@ function TicketMarketPlace() {
     console.log(accounts[0])
     console.log(account)
     let accountNum = accounts[0]
-    setAccountName((account += accountNum))
-    console.log(account)
+    setAccountName((account = accountNum))
     const networkId = await web3.eth.net.getId()
     const networkData = Marketplace.networks[networkId]
     if (networkData) {
@@ -58,30 +58,26 @@ function TicketMarketPlace() {
         networkData.address,
       )
       setMarket((marketplaceState = marketplace))
-      console.log(marketplaceState)
-      
       const ticketCount = await marketplace.methods.ticketCount().call()
-      
-      console.log(ticketCount)
-      // Load Products
-      for (var i = 1; i <= ticketCount; i++) {
-        const ticket = await marketplace.methods.tickets(i).call()
-        console.log(ticket)
-        setTickets(tickets => [...tickets, ticket])
-        console.log(tickets)
-      }
-      console.log(tickets)
-      setLoading((loading = false))
-      console.log(loading)
-      console.log(marketplace)
+      loadProducts(ticketCount, marketplace); 
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
-    }
+    }  
   }
+// Load Products
+  async function loadProducts(ticketCount, marketplace) {
+    let ticketarr = [];
+    for (var i = 1; i <= ticketCount; i++) {
+      const ticket = await marketplace.methods.tickets(i).call()
+      ticketarr.push(ticket)
+    }
+    setTickets(ticketarr)
+    setLoading((loading = false))
+  } 
+  
 
   function createTicket(name, price) {
     if (marketplaceState) {
-      console.log(account)
       setLoading({ loading: true })
       marketplaceState.methods
         .createTicket(name, price)
@@ -95,7 +91,6 @@ function TicketMarketPlace() {
   // implement code that inputs user accountid from auth0 and ticket owner's metamask account number
   function purchaseTicket(id, price) {
     if (marketplaceState) {
-      console.log(account)
       setLoading({ loading: true })
       marketplaceState.methods
         .purchaseTicket(id)
@@ -138,8 +133,7 @@ function TicketMarketPlace() {
   const { isAuthenticated } = useAuth0();
   const classes = useStyles();
 
-  const getUserInfo= () => { 
-    console.log()
+  const getUserInfo= () => {
   }
 
   const renderUserTable = () => {
