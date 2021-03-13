@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Buyer extends Component {
 
   render() {
+    
     console.log(this.props);
     return (
       <div id="content">
