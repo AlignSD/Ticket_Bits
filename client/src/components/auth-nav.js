@@ -1,6 +1,7 @@
 import React from "react";
 import AuthenticationButton from "./AuthenticationButton";
-// import Link from '@material-ui/core/Link';
+
+// AuthNav links should be only visible to logged in members
 
 const AuthNav = () => (
   <div className="navbar-nav ml-auto">

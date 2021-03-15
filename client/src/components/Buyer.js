@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+
+// Loads buyer page thru ticketmarketplace
 class Buyer extends Component {
 
   render() {

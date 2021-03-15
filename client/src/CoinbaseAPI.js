@@ -4,7 +4,6 @@ import Dashboard from "./components/dashboard"
 const CoinbasePro = require('coinbase-pro');
 const publicClient = new CoinbasePro.PublicClient();
 
-
 export default function CoinbaseAPI () {
     // let result;
     // publicClient.getProducts((error, response, data) => {
