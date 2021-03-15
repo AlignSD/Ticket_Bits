@@ -1,6 +1,8 @@
 import {NavLink} from "react-router-dom";
 import React from "react";
 
+// MainNav links are visible to all users
+
 const MainNav = () => (
   <div className="navbar-nav mr-auto">
     <NavLink

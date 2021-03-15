@@ -1,6 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 
+//We may not need this anymore. Used it to display the current pice of ETH
+
 function Dashboard({ price, data }) {
   const opts = {
     tooltips: {
