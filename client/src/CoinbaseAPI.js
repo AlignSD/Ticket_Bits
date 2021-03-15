@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import Dashboard from "./components/dashboard"
 
 const CoinbasePro = require('coinbase-pro');

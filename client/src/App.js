@@ -16,7 +16,7 @@ import CoinbaseAPI from "./CoinbaseAPI";
 const App = () => {
   const { isLoading } = useAuth0();
 
-  const apiKey = '3bb54333680d7672149c11bb6d783ccfe95329ecf2f5a7df443e0d323ea3db25';
+  // const apiKey = '3bb54333680d7672149c11bb6d783ccfe95329ecf2f5a7df443e0d323ea3db25';
 
 
   // var request = require('request');
