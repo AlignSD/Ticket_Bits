@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Web3 from "web3";
-import Marketplace from "../abis/Marketplace.json";
-import Main from "./Main";
-import Buyer from "./Buyer";
-import Seller from "./Seller";
-import PaypalTest from "./PayPalTest";
-import Paypal from "./Paypal";
-import { useAuth0 } from "@auth0/auth0-react";
-import Button from "@material-ui/core/Button";
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { styled } from "@material-ui/core/styles";
+import React, { useEffect, useState } from 'react'
+import Web3 from 'web3'
+import Marketplace from '../abis/Marketplace.json'
+import Main from './Main'
+import Buyer from './Buyer'
+import Seller from './Seller'
+import Button from '@material-ui/core/Button';
+import {Grid} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
 
+
+// *****STATES*****
 function TicketMarketPlace() {
   let [account, setAccountName] = useState("");
   // let [ticketCount, setTicketCount] = useState(0)
@@ -26,19 +25,25 @@ function TicketMarketPlace() {
 
   let [marketplaceState, setMarket] = useState();
 
+  // *****Use Effect Function*****
   useEffect(() => {
     // Update the document title using the browser API
 
-    loadWeb3();
-    loadBlockchainData();
-  }, []);
+    loadWeb3()
+    loadBlockchainData()
 
+  }, [userType])
+
+  // *****This Function Loads Web3*****
   async function loadWeb3() {
+    // If client is using a etherium browser we request the account tied to it
     if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
+      window.web3 = new Web3(window.ethereum)
+      await window.ethereum.request({ method: 'eth_requestAccounts' })
+      // Else if they're using a web3 browser
     } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
+      window.web3 = new Web3(window.web3.currentProvider)
+      // Directs clients to install MetaMask
     } else {
       window.alert(
         "Non-Ethereum browser detected. You should consider trying MetaMask!"
@@ -46,48 +51,47 @@ function TicketMarketPlace() {
     }
   }
 
+  // *****Blockchain data function*****
   async function loadBlockchainData() {
     const web3 = window.web3;
     // Load account
-    const accounts = await web3.eth.getAccounts();
-    console.log(accounts[0]);
-    console.log(account);
-    let accountNum = accounts[0];
-    setAccountName((account += accountNum));
-    console.log(account);
-    const networkId = await web3.eth.net.getId();
-    const networkData = Marketplace.networks[networkId];
+    const accounts = await web3.eth.getAccounts()
+    let accountNum = accounts[0]
+    // Change account state to equal accountNum
+    setAccountName((account = accountNum))
+    const networkId = await web3.eth.net.getId()
+    const networkData = Marketplace.networks[networkId]
+  // Verify application is connected to the blockchain network
     if (networkData) {
       const marketplace = new web3.eth.Contract(
         Marketplace.abi,
-        networkData.address
-      );
-      setMarket((marketplaceState = marketplace));
-      console.log(marketplaceState);
-
-      const ticketCount = await marketplace.methods.ticketCount().call();
-
-      console.log(ticketCount);
-      // Load Products
-      for (var i = 1; i <= ticketCount; i++) {
-        const ticket = await marketplace.methods.tickets(i).call();
-        console.log(ticket);
-        setTickets((tickets) => [...tickets, ticket]);
-        console.log(tickets);
-      }
-      console.log(tickets);
-      setLoading((loading = false));
-      console.log(loading);
-      console.log(marketplace);
+        networkData.address,
+      )
+      // Set marketplace state and load items into shop
+      setMarket((marketplaceState = marketplace))
+      const ticketCount = await marketplace.methods.ticketCount().call()
+      loadProducts(ticketCount, marketplace); 
     } else {
-      window.alert("Marketplace contract not deployed to detected network.");
-    }
+      window.alert('Marketplace contract not deployed to detected network.')
+    }  
   }
-
+  // *****Load Products function*****
+  async function loadProducts(ticketCount, marketplace) {
+    // We're pushing ticketarr into ticket to update the state when needed
+    // if we push straight to ticket it causes an infinite loop
+    let ticketarr = [];
+    for (var i = 1; i <= ticketCount; i++) {
+      const ticket = await marketplace.methods.tickets(i).call()
+      ticketarr.push(ticket)
+    }
+    setTickets(ticketarr)
+    setLoading((loading = false))
+  } 
+  
+  // *****Create ticket function*****
   function createTicket(name, price) {
     if (marketplaceState) {
-      console.log(account);
-      setLoading({ loading: true });
+      setLoading({ loading: true })
       marketplaceState.methods
         .createTicket(name, price)
         .send({ from: account })
@@ -108,12 +112,11 @@ function TicketMarketPlace() {
   //   }
   // }
 
-  // implement code that inputs user accountid from auth0 and ticket owner's metamask account number
+  // *****Purchase ticket function*****
   function purchaseTicket(id, price) {
     //Add setPaypalState to update shoping cart inventory and total value
     if (marketplaceState) {
-      console.log(account);
-      setLoading({ loading: true });
+      setLoading({ loading: true })
       marketplaceState.methods
         .purchaseTicket(id)
         .send({ from: account, value: price })
@@ -122,6 +125,10 @@ function TicketMarketPlace() {
         });
     }
   }
+
+  // implement code that inputs user accountid from auth0 and ticket owner's metamask account number
+
+  // *****Styles functions*****
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
@@ -149,17 +156,11 @@ function TicketMarketPlace() {
     height: 48,
     padding: "0 30px",
   });
-  const { isAuthenticated } = useAuth0();
+ 
   const classes = useStyles();
 
-  const getUserInfo = () => {
-    console.log();
-  };
-  // function onAdd(tickets, price) {
-  //   setPaypalState({
-  //     checkoutList: [...this.]
-  //   })
-
+  // *****table render funcion*****
+  // This switch changes the component rendered based on what button is clicked
   const renderUserTable = () => {
     // checkCheckout();
     let result = null;
@@ -190,62 +191,29 @@ function TicketMarketPlace() {
   };
 
   return (
-    <div>
-      <div className="row"><button
-              onClick={(event) => {
-                setUserType("Paypal")
-                changeCheckout();
-              }}
-            >
-              Checkout
-            </button></div>
-      <div className={classes.marginAutoContainer}>
-        <Grid container xs={4} align-content-xs-center>
-          <Grid item xs={4} className={classes.marginAutoContainer}>
-            <MyButton
-              onClick={() => {
-                setUserType("Buyer");
-              }}
-            >
-              Buyer
-            </MyButton>
+
+        <div>
+          <div className={classes.marginAutoContainer}>
+          <Grid container item={true} xs={4} align-content-xs-center='true'>
+            <Grid item xs={4} className={classes.marginAutoContainer} >
+            <MyButton  onClick={ () => { setUserType("Buyer") }}>Buyer</MyButton>
+            </Grid>
+            <Grid item xs={4} className={classes.marginAutoContainer} >
+            <MyButton   onClick={ () => { setUserType("Seller") }}>Seller</MyButton>
+            </Grid>
+            <Grid item xs={4} className={classes.marginAutoContainer} >
+            <MyButton  onClick={ () => { setUserType("") }}>Ticket Feed</MyButton>
+            </Grid>
           </Grid>
-          <Grid item xs={4} className={classes.marginAutoContainer}>
-            <MyButton
-              onClick={() => {
-                setUserType("Seller");
-              }}
-            >
-              Seller
-            </MyButton>
-          </Grid>
-          <Grid item xs={4} className={classes.marginAutoContainer}>
-            <MyButton
-              onClick={() => {
-                setUserType("");
-              }}
-            >
-              Ticket Feed
-            </MyButton>
-          </Grid>
-          <Grid item xs={4} className={classes.marginAutoContainer}>
-            <MyButton
-              onClick={() => {
-                setUserType("PaypalTest");
-              }}
-            >
-              Checkout
-            </MyButton>
-          </Grid>
-          <Grid item xs={4} className={classes.marginAutoContainer}>
-          </Grid>
-        </Grid>
-      </div>
-      <div className="row">
-        <div className="container">{renderUserTable()}</div>
-      </div>
-    </div>
-  );
+          
+          </div>
+        <div className="row">
+        <div className="container">
+        {renderUserTable()}
+        </div>
+        </div>
+        </div>
+  )
 }
 
 export default TicketMarketPlace;

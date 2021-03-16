@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
 
+// Event host sells tickets thru Seller component
+// could be converted into a functional component if bored
 class Seller extends Component {
 
   render() {

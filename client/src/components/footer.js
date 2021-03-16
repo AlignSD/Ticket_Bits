@@ -7,9 +7,9 @@ const Footer = () => (
   <footer className="bg-dark p-3 text-center">
     <div className="logo" />
     <p>
-      Sample project provided by{" "}
+      Ticket-Bits{" "}
       <a target="_blank" rel="noopener noreferrer" href="https://auth0.com">
-        Auth0
+        Link to some random place
       </a>
     </p>
   </footer>

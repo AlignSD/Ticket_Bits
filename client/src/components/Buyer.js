@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
+
+// Loads buyer page thru ticketmarketplace
 class Buyer extends Component {
 
   render() {
+    
     console.log(this.props);
     return (
       <div id="content">
