@@ -5,6 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 /* Changes button components depending on the user being logged in or out
    so that we dont need two buttons taking up space on navbar */
+   
 const AuthenticationButton = () => {
   const { isAuthenticated } = useAuth0();
 
