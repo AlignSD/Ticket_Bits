@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const userController = require("../../server/controllers/userController");
+const userController = require("../../controllers/userController");
 
 // get favorites and save favorite
 router.route('/')
