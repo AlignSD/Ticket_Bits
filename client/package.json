@@ -2,6 +2,7 @@
   "name": "eth-ticket-exchange",
   "version": "0.1.0",
   "description": "An Ethereum Ticket Marketplace",
+  "homepage": "https://ticket-bits.herokuapp.com/",
   "author": "",
   "dependencies": {
     "@auth0/auth0-react": "^1.3.0",
