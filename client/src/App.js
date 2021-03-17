@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
@@ -11,7 +11,11 @@ import Profile from "./views/profile";
 import ExternalApi from "./views/external-api";
 import ProtectedRoute from "./auth/protected-route";
 import CoinbaseAPI from "./CoinbaseAPI";
+import Popup from './components/Popup'
 import CreateEvent from "./pages/pages/CreateEvent"
+import UserProfile from "./pages/pages/UserProfile"
+import Paypal from "./components/Paypal"
+import TicketsContextProvider from "./utils/TicketsContext"
 // --- Post bootstrap -----
 
 const App = () => {
@@ -32,17 +36,25 @@ const App = () => {
   }
 
   return (
+ 
     <div id="app" style={{height: "100%"}} className="d-flex flex-column h-100">
-      <NavBar />
+      <NavBar
+    />
       <div className="container flex-grow-1">
         <Switch>
         <Route path="/" exact component={Home} />
-        <ProtectedRoute path="/coinbaseAPI" component={CoinbaseAPI} />
-          <ProtectedRoute path="/profile" component={Profile} />
+          <ProtectedRoute path="/coinbaseAPI" component={CoinbaseAPI} />
+          <ProtectedRoute path="/profile" component={UserProfile} />
           <ProtectedRoute path="/external-api" component={ExternalApi} />
           <ProtectedRoute exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
+          <ProtectedRoute exact path='/CreateEvent' component={CreateEvent}/>
+          <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
+
+
+
         </Switch>
-        <CreateEvent/>
+  
+        
         
       </div>
       <Footer />

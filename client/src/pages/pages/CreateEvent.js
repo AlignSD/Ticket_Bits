@@ -6,11 +6,13 @@ import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: "white",
     display: "flex",
     flexWrap: "wrap",
     marginTop: "2rem",
   },
   textField: {
+    backgroundColor: "white",
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: "25ch",
@@ -30,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LayoutTextFields() {
   const classes = useStyles();
+  
 
   return (
     <div className={classes.root}>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Web3 from 'web3'
 import Marketplace from '../abis/Marketplace.json'
 import Main from './Main'
@@ -8,27 +8,31 @@ import Button from '@material-ui/core/Button';
 import {Grid} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { styled } from '@material-ui/core/styles';
-
+import Paypal from './Paypal'
+import PaypalTest from "./PayPalTest"
+import {TicketsContext} from '../../src/utils/TicketsContext'
 
 // *****STATES*****
 function TicketMarketPlace() {
-  let [account, setAccountName] = useState("");
-  // let [ticketCount, setTicketCount] = useState(0)
-  let [tickets, setTickets] = useState([]);
-  let [loading, setLoading] = useState(true);
-  let [userType, setUserType] = useState("");
-  let [paypalState, setPaypalState] = useState({
-    total: 0,
-    checkoutList: [],
-    isCheckout: false,
-  });
 
-  let [marketplaceState, setMarket] = useState();
+  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup} = useContext(TicketsContext)
+  // let [account, setAccountName] = useState("");
+  // // let [ticketCount, setTicketCount] = useState(0)
+  // let [tickets, setTickets] = useState([]);
+  // let [loading, setLoading] = useState(true);
+  // let [userType, setUserType] = useState("");
+  // let [paypalState, setPaypalState] = useState({
+  //   total: 0,
+  //   checkoutList: [],
+  //   isCheckout: false,
+  // });
+
+  // let [marketplaceState, setMarket] = useState();
+  // let [openPopup, setOpenPopup] = useState(false)
 
   // *****Use Effect Function*****
   useEffect(() => {
     // Update the document title using the browser API
-
     loadWeb3()
     loadBlockchainData()
 
@@ -193,6 +197,7 @@ function TicketMarketPlace() {
   return (
 
         <div>
+
           <div className={classes.marginAutoContainer}>
           <Grid container item={true} xs={4} align-content-xs-center='true'>
             <Grid item xs={4} className={classes.marginAutoContainer} >
@@ -204,6 +209,9 @@ function TicketMarketPlace() {
             <Grid item xs={4} className={classes.marginAutoContainer} >
             <MyButton  onClick={ () => { setUserType("") }}>Ticket Feed</MyButton>
             </Grid>
+            <Grid item xs={4} className={classes.marginAutoContainer} >
+            <MyButton  onClick={ () => { setOpenPopup(true) }}>Create Event</MyButton>
+            </Grid>
           </Grid>
           
           </div>
@@ -212,7 +220,9 @@ function TicketMarketPlace() {
         {renderUserTable()}
         </div>
         </div>
+
         </div>
+         
   )
 }
 

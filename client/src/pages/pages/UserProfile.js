@@ -3,9 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    backgroundColor: "white",
     display: "flex",
     flexWrap: "wrap",
     marginTop: "2rem",
@@ -29,7 +31,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LayoutTextFields() {
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const classes = useStyles();
+
+  console.log(user)
 
   return (
     <div className={classes.root}>
@@ -44,7 +49,7 @@ export default function LayoutTextFields() {
             component="p"
             className={classes.paragraphText}
           >
-            Username: XXXXXX
+            Username: {user.nickname}
           </Typography>
           <Typography
             variant="body2"
@@ -52,7 +57,7 @@ export default function LayoutTextFields() {
             component="p"
             className={classes.paragraphText}
           >
-            Email: XXXXXX
+            Email: {user.name}
           </Typography>
           <Typography
             variant="body2"
