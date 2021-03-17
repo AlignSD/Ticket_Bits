@@ -1,0 +1,117 @@
+pragma solidity 0.6.2;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "./Ticket.sol";
+
+// Event contract for creating/managing events
+// Ownable is for implimenting ownership in your contracts
+contract Event is Ownable {
+
+    // Emergency stop
+    bool private stopped = false;
+
+    // Address of the Ticket contract
+    address public ticketAddress;
+
+    struct EventInfo {
+        // Name of the event
+        string name;
+        // Price of ticket (in wei)
+        uint price;
+        // total number of ticket offered
+        uint totalTickets;
+        // number of tickets remaining
+        uint remainingTickets;
+        // owner address of the event
+        address owner;
+    }
+
+    //All events
+    EventInfo[] public events;
+
+    //event EventCreated is called each time an event is created
+    event EventCreated(uint indexed eventId, address indexed creator);
+
+    // event PurchasedTicket is called each time a new ticket is minted
+    event PurchasedTicket(uint indexed ticketId, address indexed buyer);
+
+    // event TicketRedeem called each time a ticket is redeemed
+    event TicketRedeem(uint indexed ticketID);
+
+    // Modifier for emergency stop
+    modifier emergencyStop () {
+        require(!stopped, "Contract has been place in emergency stop");
+        _;
+    }
+    // No methods can run during emergency stop
+
+    constructor(address _ticketAddress) public {
+        ticketAddress = _ticketAddress;
+    }
+
+    // Emergency stop to prevent creation of new events and buying tickets
+    // onlyOwner throws if called by any account other than the owner
+    function emergencyStopSwitch() public onlyOwner {
+        stopped = !stopped;
+    }
+
+    // Update the address of the Ticket contract
+    // _ticketAddress is the new Ticket contract address
+    function updateTicketAddress(address _ticketAddress) external onlyOwner {
+        ticketAddress = _ticketAddress;
+    }
+
+    // Creates a new event
+    //name is String name of event
+    // price uint price of ticket in wei of the Tickets
+    // totalTickets is the total number of tickets for this event
+    // return is uint ID of the new event created
+    function createEvent(string calldata name, uint price, uint totalTickets) external emergencyStop () returns (uint) {
+        uint id = events.push(EventInfo(name, price, totalTickets, msg.sender)) -1;
+        emit EventCreated(id, msg.sender);
+        return id;
+    }
+    
+    // Buy new ticket from event
+    // eventId uint ID of the event to buy a ticket 
+    //returns uint ID of the new minted ticket
+    function buyTicket(uint eventId) external emergencyStop payable returns (uint) {
+        // Event must exist
+        require(events[eventId].owner != 0, "Event doesn't exist");
+
+        //There must be tickets left
+        require(events[eventId].remainingTickets > 0, "There are no remaining tickets");
+
+        // The payment must be exact to the price of the ticket
+        require(msg.value == events[eventId].price, "Payment did not match event ticket price");
+
+        //Mint a new ticket
+        Ticket ticketContract = Ticket(ticketAddress);
+        uint ticketId = ticketContract.purchaseTicket(msg.sender, eventId);
+
+        //Decrement tickets remaining
+        events[eventId].remainingTickets--;
+
+        emit PurchasedTicket(ticketId, msg.sender);
+
+        return ticketId;
+    }
+
+    //Redeems the ticket with the given id. This is called after the event host has checked checkRedeemedStatus() on the ticket
+    //ticketId uint ID of the ticket to redeem
+    //eventId uint ID of the event the ticket belongs to
+    function redeemTicket(uint ticketId, uint eventId) external emergencyStop {
+        //the event must exist
+        address owner = events[eventId].owner;
+        require(owner > 0, "The event does not exist");
+
+        //The caller must be the owner of the event
+        require(msg.sender == owner, "Sender must be the owner of the event");
+
+        Ticket ticketContract = Ticket(ticketAddress);
+
+        // Validation that the ticket belongs to the event happens in Ticket contract
+        ticketContract.redeem(ticketId, eventId);
+    }
+}
