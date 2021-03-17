@@ -9,7 +9,7 @@ class Seller extends Component {
     console.log(this.props);
     return (
       <div id="content">
-        <h1>Add Ticket</h1>
+        <h1 style={{color: "white"}}>Add Ticket</h1>
         <form onSubmit={(event) => {
           event.preventDefault()
           const name = this.ticketName.value
@@ -18,19 +18,21 @@ class Seller extends Component {
         }}>
           <div className="form-group mr-sm-2">
             <input
+              style={{widith: "30%"}}
               id="ticketName"
               type="text"
               ref={(input) => { this.ticketName = input }}
-              className="form-control"
+              className="form"
               placeholder="Ticket Name"
               required />
           </div>
-          <div className="form-group mr-sm-2">
+          <div  className="form-group mr-sm-2">
             <input
+              style={{widith: "30%"}}
               id="ticketPrice"
               type="text"
               ref={(input) => { this.ticketPrice = input }}
-              className="form-control"
+              className="form"
               placeholder="Ticket Price"
               required />
           </div>

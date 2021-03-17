@@ -1,7 +1,10 @@
 import React from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import { styled } from '@material-ui/core/styles';
+
 
 const Footer = () => (
-  <footer className="bg-light p-3 text-center">
+  <footer className="bg-dark p-3 text-center">
     <div className="logo" />
     <p>
       Ticket-Bits{" "}
@@ -11,5 +14,6 @@ const Footer = () => (
     </p>
   </footer>
 );
+
 
 export default Footer;

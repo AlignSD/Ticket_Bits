@@ -5,7 +5,7 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <h1>Ticket Feed</h1>
+        <h1 style={{color: "white"}}>Ticket Feed</h1>
       </div>
     )
   }

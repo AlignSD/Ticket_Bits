@@ -6,12 +6,17 @@ import App from "./App"
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
+import TicketsContextProvider from './utils/TicketsContext'
 
 ReactDOM.render(
     <Router>
+         
       <Auth0ProviderWithHistory>
+      <TicketsContextProvider>
       <App />
+      </TicketsContextProvider>
       </Auth0ProviderWithHistory>
+     
       </Router>,
     document.getElementById("root")
     
