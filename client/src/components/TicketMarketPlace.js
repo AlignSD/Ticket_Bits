@@ -16,19 +16,6 @@ import {TicketsContext} from '../../src/utils/TicketsContext'
 function TicketMarketPlace() {
 
   let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup} = useContext(TicketsContext)
-  // let [account, setAccountName] = useState("");
-  // // let [ticketCount, setTicketCount] = useState(0)
-  // let [tickets, setTickets] = useState([]);
-  // let [loading, setLoading] = useState(true);
-  // let [userType, setUserType] = useState("");
-  // let [paypalState, setPaypalState] = useState({
-  //   total: 0,
-  //   checkoutList: [],
-  //   isCheckout: false,
-  // });
-
-  // let [marketplaceState, setMarket] = useState();
-  // let [openPopup, setOpenPopup] = useState(false)
 
   // *****Use Effect Function*****
   useEffect(() => {
