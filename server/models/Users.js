@@ -1,4 +1,4 @@
-const mongoose = require("mongoose"); 
+import mongoose from "mongoose";
 const Schema =  mongoose.Schema; 
 
 const userSchema = new Schema({
@@ -6,9 +6,13 @@ const userSchema = new Schema({
     email: {type: String, required: false}, 
     accountNumber: {type: String, required: false},
     ticketsOwned: {type: String, required: false},
-    thumbnail: {type:String , required: false}
+    thumbnail: {type:String , required: false},
+    createdAt: {
+        type: Date,
+        default: new Date(),
+    }
 }); 
 
 const userSaved = mongoose.model("userSaved", userSchema); 
 
-module.exports = userSaved; 
+export default userSaved; 
