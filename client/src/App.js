@@ -24,20 +24,18 @@ import Marketplace from './abis/Marketplace.json'
 import Event from './abis/Event.json'
 import EventFactory from './abis/EventFactory.json'
 
-
-// --- Post bootstrap -----
-
 const App = () => {
   let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel} = useContext(TicketsContext)
 
-
-console.log(EventFactory)
+  console.log(EventFactory)
   useEffect(() => {
     // Update the document title using the browser API
     loadWeb3()
     loadBlockchainData()
 
   }, [userType])
+
+    // *****This Function Loads Web3*****
   async function loadWeb3() {
     // If client is using a etherium browser we request the account tied to it
     if (window.ethereum) {
@@ -149,33 +147,25 @@ console.log(EventFactory)
   return (
  
     <div id="app" style={{height: "100%"}} className="d-flex flex-column h-100">
-      <NavBar
-    />
+      <NavBar/>
       <div className="container flex-grow-1">
         <Switch>
-        <Route path="/" exact component={Home} />
-          <ProtectedRoute path="/coinbaseAPI" component={CoinbaseAPI} />
-          <ProtectedRoute path="/profile" component={UserProfile} />
-          <ProtectedRoute path="/external-api" component={ExternalApi} />
-          <ProtectedRoute exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
-          <ProtectedRoute exact path='/CreateEvent'><CreateEvent
-                                                    eventModel = {eventModel}
-                                                    setEventModel = {setEventModel}
-          /></ProtectedRoute>
-          <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
-          <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
-          <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
-
-
-
-
+          <Route path="/" exact component={Home} />
+            <ProtectedRoute path="/coinbaseAPI" component={CoinbaseAPI} />
+            <ProtectedRoute path="/profile" component={UserProfile} />
+            <ProtectedRoute path="/external-api" component={ExternalApi} />
+            <ProtectedRoute exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
+            <ProtectedRoute exact path='/CreateEvent'><CreateEvent
+                                                      eventModel = {eventModel}
+                                                      setEventModel = {setEventModel}
+            /></ProtectedRoute>
+            <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
+            <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
+            <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
         </Switch>
-  
-        
-        
       </div>
-      <Footer />
-    </div>
+    <Footer />
+  </div>
   );
 };
 

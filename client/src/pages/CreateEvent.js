@@ -67,350 +67,97 @@ console.log(createEventModel)
           <Typography gutterBottom variant="h4" component="h2">
             Basic Event Info
           </Typography>
-          <Button
-          size="large"
-          variant="contained"
-          color="primary"
-          className={classes.btnMargin}
-          type="sumbit"
-        >
+          <Button size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
           CREATE EVENT
         </Button>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
+          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
             Name your event and tell the event-goers why they should come. Add
             details that highlight what makes it unique.
           </Typography>
-          <TextField
-            name= "Event Name"
-            id="outlined-full-width"
-            label="Event Name *"
-            style={{ padding: 6 }}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            
-            variant="outlined"
+          <TextField name= "Event Name" id="outlined-full-width" label="Event Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
             onChange = {(e)=> setModelName({name: e.target.value})}
           />
-           <TextField
-            id="outlined-margin-none"
-            label="Event Starts *"
-            placeholder="mm/dd/yyyy"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-          
-            variant="outlined"
+           <TextField id="outlined-margin-none" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
             onChange = {(e)=> setModelStart({start: e.target.value})}
           />
-          <TextField
-            id="outlined-margin-none"
-            label="Event Ends *"
-            placeholder="mm/dd/yyyy"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            
-            variant="outlined"
+          <TextField id="outlined-margin-none" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
             onChange = {(e)=> setModelEnd({end: e.target.value})}
           />
-           <TextField
-            id="outlined-margin-none"
-            label="Ticket Amount *"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            // value = {0}
-            variant="outlined"
+           <TextField id="outlined-margin-none" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
             onChange = {(e)=> setModelAmount({amount: e.target.value})}
           />
-          <TextField
-            id="outlined-margin-none"
-            label="Ticket Price (US dollars) *"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            // value = {0}
-            variant="outlined"
+          <TextField id="outlined-margin-none" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
             onChange = {(e)=> setModelPrice({price: e.target.value})}
           />
-          <TextField
-            id="outlined-full-width"
-            label="Summary *"
-            style={{ padding: 6 }}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            multiline
-            // value = ""
-            variant="outlined"
+          <TextField id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} multiline variant="outlined"
             onChange = {(e)=> setModelSummary({summary: e.target.value})}
-            
           />
-          <TextField
-            id="outlined-full-width"
-            label="Venue Name *"
-            style={{ padding: 6 }}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            // value = ""
-            variant="outlined"
-            onChange = {(e)=> setModelVenue({venue: e.target.value})}
+          <TextField id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
+            onChange = {(e)=> setModelVenue({venue: e.target.value})} 
           />
-          <TextField
-            id="outlined-full-width"
-            label="Organizer *"
-            style={{ padding: 6 }}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Event Type *"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Category *"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Ticket Amount *"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Ticket Price (US dollars) *"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
+          <TextField id="outlined-full-width" label="Organizer *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
+          <TextField id="outlined-margin-none" label="Event Type *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
+          <TextField id="outlined-margin-none" label="Category *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
+          <TextField id="outlined-margin-none" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
+          <TextField id="outlined-margin-none" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
         </div>
         <hr />
         <div>
           <Typography gutterBottom variant="h4" component="h2">
             Event Location
           </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
+          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
             Help people in the area discover your event and let attendees know
             where to show up.
           </Typography>
-          <TextField
-            id="outlined-full-width"
-            label="Venue Name *"
-            style={{ padding: 6 }}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-full-width"
-            label="Address *"
-            style={{ padding: 6 }}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-full-width"
-            label="City *"
-            style={{ padding: 6 }}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="State *"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Zip Code *"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
+          <TextField id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }}  fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
+          <TextField id="outlined-full-width" label="Address *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
+          <TextField id="outlined-full-width" label="City *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
+          <TextField id="outlined-margin-none" label="State *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
+          <TextField id="outlined-margin-none" label="Zip Code *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
         </div>
         <hr />
         <div>
           <Typography gutterBottom variant="h4" component="h2">
             Date &amp; Time
           </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
+          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
             Tell event-goers when your event starts and ends so they can make
             plans to attend.
           </Typography>
-          <TextField
-            id="outlined-margin-none"
-            label="Event Starts *"
-            placeholder="mm/dd/yyyy"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Start Time *"
-            placeholder="00:00"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Event Ends *"
-            placeholder="mm/dd/yyyy"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="End Time *"
-            placeholder="00:00"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
+          <TextField id="outlined-margin-none" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
+          <TextField id="outlined-margin-none" label="Start Time *" placeholder="00:00" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
+          <TextField id="outlined-margin-none" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
+          <TextField id="outlined-margin-none" label="End Time *" placeholder="00:00" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
         </div>
         <hr />
         <div>
           <Typography gutterBottom variant="h4" component="h2">
             Event Description
           </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
+          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
             Add more details to your event like your schedule, sponsors, or
             featured guests.
           </Typography>
-          <TextField
-            id="outlined-full-width"
-            label="Summary *"
-            style={{ padding: 6 }}
-            fullWidth
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-            multiline
-          />
+          <TextField id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" multiline/>
         </div>
         <hr />
-        <Typography gutterBottom variant="h4" component="h2">
-          Event Image
-        </Typography>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          component="p"
-          className={classes.paragraphText}
-        >
-          Upload your event flyer or photo.
-        </Typography>
-        <input
-          accept="image/*"
-          className={classes.input}
-          id="contained-button-file"
-          multiple
-          type="file"
-        />
-        <label htmlFor="contained-button-file">
+          <Typography gutterBottom variant="h4" component="h2">
+            Event Image
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}
+          >
+            Upload your event flyer or photo.
+          </Typography>
+          <input accept="image/*" className={classes.input} id="contained-button-file" multiple type="file"
+          />
+          <label htmlFor="contained-button-file">
           <Button variant="contained" color="primary" component="span">
             Upload
           </Button>
         </label>
         <hr />
-        
-      
-        <Button size="large" variant="contained" className={classes.btnMargin}>
+         <Button size="large" variant="contained" className={classes.btnMargin}>
           CANCEL
         </Button>
         </form>

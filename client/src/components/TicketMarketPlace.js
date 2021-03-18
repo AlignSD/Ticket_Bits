@@ -17,7 +17,7 @@ function TicketMarketPlace() {
 
   // *****Use Effect Function*****
 
-  // *****This Function Loads Web3*****
+
 
   
   // *****Create ticket function*****

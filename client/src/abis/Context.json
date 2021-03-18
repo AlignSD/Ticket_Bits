@@ -8,15 +8,25 @@
       "type": "constructor"
     }
   ],
+<<<<<<< Updated upstream
   "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/S/Code/Project_3/Cryptick/Ticket_Bits/client/src/contracts/Context.sol\":\"Context\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/S/Code/Project_3/Cryptick/Ticket_Bits/client/src/contracts/Context.sol\":{\"keccak256\":\"0x37dc42902efc7989706ffda571ab420f0996a264641ca19c4013c4c267fa083e\",\"urls\":[\"bzz-raw://f165415343a5e04282dd155221fbbaa2f30010016556da422c139509d6abdf3d\",\"dweb:/ipfs/QmY5JGt78QvuEboDrxxvKXjEbzsa3hx1RyKouxoEm8sxSz\"]}},\"version\":1}",
+=======
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/gripn/Desktop/Programing/AlignSD.gitlab.io/Ticket_Bits/client/src/contracts/Context.sol\":\"Context\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/gripn/Desktop/Programing/AlignSD.gitlab.io/Ticket_Bits/client/src/contracts/Context.sol\":{\"keccak256\":\"0x37dc42902efc7989706ffda571ab420f0996a264641ca19c4013c4c267fa083e\",\"urls\":[\"bzz-raw://f165415343a5e04282dd155221fbbaa2f30010016556da422c139509d6abdf3d\",\"dweb:/ipfs/QmY5JGt78QvuEboDrxxvKXjEbzsa3hx1RyKouxoEm8sxSz\"]}},\"version\":1}",
+>>>>>>> Stashed changes
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.5.0;\r\n\r\n/*\r\n * @dev Provides information about the current execution context, including the\r\n * sender of the transaction and its data. While these are generally available\r\n * via msg.sender and msg.data, they should not be accessed in such a direct\r\n * manner, since when dealing with GSN meta-transactions the account sending and\r\n * paying for execution may not be the actual sender (as far as an application\r\n * is concerned).\r\n *\r\n * This contract is only required for intermediate, library-like contracts.\r\n */\r\ncontract Context {\r\n    // Empty internal constructor, to prevent people from mistakenly deploying\r\n    // an instance of this contract, which should be used via inheritance.\r\n    constructor () internal { }\r\n    // solhint-disable-previous-line no-empty-blocks\r\n\r\n    function _msgSender() internal view returns (address payable) {\r\n        return msg.sender;\r\n    }\r\n\r\n    function _msgData() internal view returns (bytes memory) {\r\n        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691\r\n        return msg.data;\r\n    }\r\n}",
+<<<<<<< Updated upstream
   "sourcePath": "S:/Code/Project_3/Cryptick/Ticket_Bits/client/src/contracts/Context.sol",
   "ast": {
     "absolutePath": "/S/Code/Project_3/Cryptick/Ticket_Bits/client/src/contracts/Context.sol",
+=======
+  "sourcePath": "C:/Users/gripn/Desktop/Programing/AlignSD.gitlab.io/Ticket_Bits/client/src/contracts/Context.sol",
+  "ast": {
+    "absolutePath": "/C/Users/gripn/Desktop/Programing/AlignSD.gitlab.io/Ticket_Bits/client/src/contracts/Context.sol",
+>>>>>>> Stashed changes
     "exportedSymbols": {
       "Context": [
         26
@@ -299,7 +309,11 @@
   },
   "legacyAST": {
     "attributes": {
+<<<<<<< Updated upstream
       "absolutePath": "/S/Code/Project_3/Cryptick/Ticket_Bits/client/src/contracts/Context.sol",
+=======
+      "absolutePath": "/C/Users/gripn/Desktop/Programing/AlignSD.gitlab.io/Ticket_Bits/client/src/contracts/Context.sol",
+>>>>>>> Stashed changes
       "exportedSymbols": {
         "Context": [
           26
@@ -656,7 +670,11 @@
   },
   "networks": {},
   "schemaVersion": "3.3.4",
+<<<<<<< Updated upstream
   "updatedAt": "2021-03-18T05:11:29.464Z",
+=======
+  "updatedAt": "2021-03-18T05:50:37.070Z",
+>>>>>>> Stashed changes
   "devdoc": {
     "methods": {}
   },
