@@ -30,7 +30,7 @@ const TicketsContextProvider = (props) => {
 
 
   return(
-    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup}}>
+    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel}}>
         {props.children}
         </TicketsContext.Provider>
 )
