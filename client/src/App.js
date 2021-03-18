@@ -21,12 +21,16 @@ import Paypal from "./components/Paypal"
 import TicketsContextProvider from "./utils/TicketsContext"
 import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
+import Event from './abis/Event.json'
+import EventFactory from './abis/EventFactory.json'
 
 
 // --- Post bootstrap -----
 
 const App = () => {
-  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup} = useContext(TicketsContext)
+  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel} = useContext(TicketsContext)
+
+
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -64,14 +68,30 @@ const App = () => {
         Marketplace.abi,
         networkData.address,
       )
+      const event = new web3.eth.Contract(
+        Event.abi,
+        networkData.address,
+      )
+      console.log(event);
+      const eventfactory = new web3.eth.Contract(
+        EventFactory.abi,
+        networkData.address,
+      )
+      console.log(eventfactory);
       // Set marketplace state and load items into shop
       setMarket((marketplaceState = marketplace))
       const ticketCount = await marketplace.methods.ticketCount().call()
-      loadTickets(ticketCount, marketplace); 
+      loadTickets(ticketCount, marketplace);
+      
+      // setEventModel((eventModel = event))
+      
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
     }  
   }
+
+  // async getEventById(id)
+
   async function loadTickets(ticketCount, marketplace) {
     // We're pushing ticketarr into ticket to update the state when needed
     // if we push straight to ticket it causes an infinite loop
