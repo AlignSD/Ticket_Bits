@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
@@ -25,9 +25,8 @@ import Event from './abis/Event.json'
 import EventFactory from './abis/EventFactory.json'
 
 const App = () => {
-  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel} = useContext(TicketsContext)
+  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel, setEvent, eventState, eventFactoryState, setEventFactory} = useContext(TicketsContext)
 
-  console.log(EventFactory)
   useEffect(() => {
     // Update the document title using the browser API
     loadWeb3()
@@ -78,8 +77,14 @@ const App = () => {
       console.log(eventfactory);
       // Set marketplace state and load items into shop
       setMarket((marketplaceState = marketplace))
+      setEvent((eventState = event))
+      setEventFactory((eventFactoryState = eventfactory))
       const ticketCount = await marketplace.methods.ticketCount().call()
+      console.log(marketplace.methods, "marketplacemethods")
       loadTickets(ticketCount, marketplace);
+      // const eventList = await eventfactory.methods.getDeployedEvents().call()
+      // console.log(eventList)
+      
       
       setEventModel((eventModel = eventfactory))
       console.log(eventModel)

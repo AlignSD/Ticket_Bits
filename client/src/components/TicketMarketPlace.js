@@ -14,11 +14,6 @@ import {TicketsContext} from '../../src/utils/TicketsContext'
 function TicketMarketPlace() {
 
   let {account, tickets, loading, userType, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setMarket, setOpenPopup} = useContext(TicketsContext)
-
-  // *****Use Effect Function*****
-
-
-
   
   // *****Create ticket function*****
   function createTicket(name, price) {
