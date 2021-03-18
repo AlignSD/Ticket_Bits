@@ -18,66 +18,9 @@ function TicketMarketPlace() {
   let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup} = useContext(TicketsContext)
 
   // *****Use Effect Function*****
-  useEffect(() => {
-    // Update the document title using the browser API
-    loadWeb3()
-    loadBlockchainData()
-
-  }, [userType])
 
   // *****This Function Loads Web3*****
-  async function loadWeb3() {
-    // If client is using a etherium browser we request the account tied to it
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum)
-      await window.ethereum.request({ method: 'eth_requestAccounts' })
-      // Else if they're using a web3 browser
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider)
-      // Directs clients to install MetaMask
-    } else {
-      window.alert(
-        "Non-Ethereum browser detected. You should consider trying MetaMask!"
-      );
-    }
-  }
 
-  // *****Blockchain data function*****
-  async function loadBlockchainData() {
-    const web3 = window.web3;
-    // Load account
-    const accounts = await web3.eth.getAccounts()
-    let accountNum = accounts[0]
-    // Change account state to equal accountNum
-    setAccountName((account = accountNum))
-    const networkId = await web3.eth.net.getId()
-    const networkData = Marketplace.networks[networkId]
-  // Verify application is connected to the blockchain network
-    if (networkData) {
-      const marketplace = new web3.eth.Contract(
-        Marketplace.abi,
-        networkData.address,
-      )
-      // Set marketplace state and load items into shop
-      setMarket((marketplaceState = marketplace))
-      const ticketCount = await marketplace.methods.ticketCount().call()
-      loadTickets(ticketCount, marketplace); 
-    } else {
-      window.alert('Marketplace contract not deployed to detected network.')
-    }  
-  }
-  // *****Load Ticketss function*****
-  async function loadTickets(ticketCount, marketplace) {
-    // We're pushing ticketarr into ticket to update the state when needed
-    // if we push straight to ticket it causes an infinite loop
-    let ticketArr = [];
-    for (var i = 1; i <= ticketCount; i++) {
-      const ticket = await marketplace.methods.tickets(i).call()
-      ticketArr.push(ticket)
-    }
-    setTickets(ticketArr)
-    setLoading((loading = false))
-  } 
   
   // *****Create ticket function*****
   function createTicket(name, price) {
