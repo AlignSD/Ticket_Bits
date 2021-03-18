@@ -31,7 +31,7 @@ const App = () => {
   let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel} = useContext(TicketsContext)
 
 
-
+console.log(EventFactory)
   useEffect(() => {
     // Update the document title using the browser API
     loadWeb3()
@@ -83,7 +83,9 @@ const App = () => {
       const ticketCount = await marketplace.methods.ticketCount().call()
       loadTickets(ticketCount, marketplace);
       
-      // setEventModel((eventModel = event))
+      setEventModel((eventModel = eventfactory))
+      console.log(eventModel)
+      
       
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
@@ -156,7 +158,10 @@ const App = () => {
           <ProtectedRoute path="/profile" component={UserProfile} />
           <ProtectedRoute path="/external-api" component={ExternalApi} />
           <ProtectedRoute exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
-          <ProtectedRoute exact path='/CreateEvent' component={CreateEvent}/>
+          <ProtectedRoute exact path='/CreateEvent'><CreateEvent
+                                                    eventModel = {eventModel}
+                                                    setEventModel = {setEventModel}
+          /></ProtectedRoute>
           <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
           <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
           <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
