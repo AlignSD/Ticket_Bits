@@ -12,8 +12,8 @@ import ExternalApi from "./views/external-api";
 import ProtectedRoute from "./auth/protected-route";
 import CoinbaseAPI from "./CoinbaseAPI";
 import Popup from './components/Popup'
-import CreateEvent from "./pages/pages/CreateEvent"
-import UserProfile from "./pages/pages/UserProfile"
+import CreateEvent from "./pages/CreateEvent"
+import UserProfile from "./pages/UserProfile"
 import Paypal from "./components/Paypal"
 import TicketsContextProvider from "./utils/TicketsContext"
 // --- Post bootstrap -----
