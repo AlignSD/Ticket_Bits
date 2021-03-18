@@ -1,5 +1,7 @@
 pragma solidity ^0.5.0;
+
 import "./ERC721Full.sol";
+
 
 
 /** @title Event */
@@ -11,9 +13,9 @@ contract Event is ERC721Full {
     uint256 public endDate;
     uint256 public available;
     string public location;
-    uint8 private MAX_PURCHASE = 5;
+    // uint8 private MAX_PURCHASE = 5;
     string public  description;
-    string public imageHash;
+    // string public imageHash;
     bool private canceled;
     uint public ticketPrice;
     address payable public  owner;
@@ -21,7 +23,7 @@ contract Event is ERC721Full {
     event TicketPurchased(address purchaser, uint quanntity, uint date, address indexed indexedPurchased );
     event TicketTransfered(address _from, address _to, uint _tokenId);
     event PaymentCollected(address _event, address _organizer, uint _balance );
-    event TicketRefended(address _event, address _requestedBy, uint _ticketId, uint _ticketPrice);
+    // event TicketRufended(address _event, address _requestedBy, uint _ticketId, uint _ticketPrice);
 
 
     /**@dev created new instance of Event
@@ -43,7 +45,7 @@ contract Event is ERC721Full {
     string memory _location,
     uint supply, 
     uint _ticketPrice
-    ) ERC721Full(_name, "TKT") public {
+    ) ERC721Full(_name, "CRYPTICKS") public {
 
         name = _name;
         startDate = _start;
@@ -63,7 +65,7 @@ contract Event is ERC721Full {
     @param quantity total amount of ticket the user wishes to purchase maximum amount is 5
     */
     function purchaseTicket(uint quantity) public payable {
-        require(quantity <= MAX_PURCHASE, "can not purchase more than 5 ticket at once");
+        // require(quantity <= MAX_PURCHASE, "can not purchase more than 5 ticket at once");
         require(available  >= quantity, "not enough ticket quantity available!!!");
         require(msg.value >= ticketPrice.mul(quantity), "not enough money sent");
         
@@ -78,13 +80,13 @@ contract Event is ERC721Full {
 
 
 
-    /**
-    @dev allows users to upload image of the event
-    @param _imageHash image hash stored o IPFS
-     */
-    function setImage(string memory _imageHash) public {
-   imageHash = _imageHash;
-    }
+//     /**
+//     @dev allows users to upload image of the event
+//     @param _imageHash image hash stored o IPFS
+//      */
+//     function setImage(string memory _imageHash) public {
+//    imageHash = _imageHash;
+//     }
 
     /**
     
@@ -154,13 +156,13 @@ contract Event is ERC721Full {
     @dev returns ether for each ticket the user has incase the event is canceled
     @param ticket id of the ticket to get refunds for
      */
-    function getRefund(uint  ticket) public {
-        require(address(0) != msg.sender, "invalid address provided");
-        require(canceled, "refund is only available for cacanceled events");
-            _burn(ticket);
-        msg.sender.transfer(ticketPrice);
-       emit TicketRefended(address(this), msg.sender, ticket, ticketPrice);
-    }
+    // function getRefund(uint  ticket) public {
+    //     require(address(0) != msg.sender, "invalid address provided");
+    //     require(canceled, "refund is only available for cacanceled events");
+    //         _burn(ticket);
+    //     msg.sender.transfer(ticketPrice);
+    //    emit TicketRefended(address(this), msg.sender, ticket, ticketPrice);
+    // }
 
     /**
     

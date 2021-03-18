@@ -111,14 +111,14 @@ contract("Event", function(accounts) {
   });
 
   // testing attempting to purchase more than the max amount alowed at once (5) throws error
-  it("should revert when attempting to purchase more than 5 ticket at once", async () => {
-    await catchRevert(
-      firstEvent.purchaseTicket(6, {
-        from: accounts[1],
-        value: "3000000"
-      })
-    );
-  });
+  // it("should revert when attempting to purchase more than 5 ticket at once", async () => {
+  //   await catchRevert(
+  //     firstEvent.purchaseTicket(6, {
+  //       from: accounts[1],
+  //       value: "3000000"
+  //     })
+  //   );
+  // });
 
   // testing attempting to buy the available amount throws error
   it("should revert when attempting to purchase more than available amount ", async () => {
@@ -240,24 +240,24 @@ contract("Event", function(accounts) {
     assert.equal(balanceAfterRefund, balanceAfterPurchase);
   }); */
 
-  it("should destroy ticket after refund", async () => {
-    await firstEvent.purchaseTicket(3, { from: accounts[1], value: "3000000" });
-    var purchasedTickets = await firstEvent.getOwnersTicket(accounts[1]);
-    await firstEvent.cancelEvent();
-    await firstEvent.getRefund(purchasedTickets[0], { from: accounts[1] });
-    var ownerTicketAfterRefund = await firstEvent.getOwnersTicket(accounts[1]);
+  // it("should destroy ticket after refund", async () => {
+  //   await firstEvent.purchaseTicket(3, { from: accounts[1], value: "3000000" });
+  //   var purchasedTickets = await firstEvent.getOwnersTicket(accounts[1]);
+  //   await firstEvent.cancelEvent();
+  //   await firstEvent.getRefund(purchasedTickets[0], { from: accounts[1] });
+  //   var ownerTicketAfterRefund = await firstEvent.getOwnersTicket(accounts[1]);
 
-    assert.ok(purchasedTickets.length > ownerTicketAfterRefund.length);
-  });
+  //   assert.ok(purchasedTickets.length > ownerTicketAfterRefund.length);
+  // });
 
-  it("should revert when requesting refund for event not canceled", async () => {
-    await firstEvent.purchaseTicket(3, {
-      from: accounts[1],
-      value: "3000000"
-    });
+  // it("should revert when requesting refund for event not canceled", async () => {
+  //   await firstEvent.purchaseTicket(3, {
+  //     from: accounts[1],
+  //     value: "3000000"
+  //   });
 
-    await catchRevert(firstEvent.getRefund(2, { from: accounts[1] }));
-  });
+  //   await catchRevert(firstEvent.getRefund(2, { from: accounts[1] }));
+  // });
 
   it("should return true when event is canceled", async () => {
     await firstEvent.cancelEvent();
