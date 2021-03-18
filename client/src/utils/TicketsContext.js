@@ -15,6 +15,8 @@ const TicketsContextProvider = (props) => {
   });
 
   const [marketplaceState, setMarket] = useState();
+  const [eventState, setEvent] = useState('');
+  const [eventFactoryState, setEventFactory] = useState('');
   const [openPopup, setOpenPopup] = useState(false)
 
   const [eventModel, setEventModel] = useState({
@@ -29,7 +31,7 @@ const TicketsContextProvider = (props) => {
   })
 
   return(
-    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel}}>
+    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, eventState, eventFactoryState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, setEvent, setEventFactory, eventModel, setEventModel}}>
         {props.children}
         </TicketsContext.Provider>
   )

@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import {TicketsContext} from '../utils/TicketsContext'
+import web3 from 'web3'
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -49,19 +50,32 @@ export default function LayoutTextFields(props) {
   const createEventModel = [modelName.name , modelStart.start , modelEnd.end , modelAmount.amount , modelPrice.price , modelSummary.summary, modelVenue.venue]
   // .then()eventModel.methods.createEvent(createModelsState), console.log(eventModel.methods), console.log(createModelsState)}
   // eventModel.methods.createEvent(createModelsState); console.log(createModelsState)}
-  console.log(createEventModel)
-  
+  function toTimestamp(date) {
+    return new Date(date).valueOf();
+  }
+
   return (
     <div className={classes.root}>
       <div className={classes.containerSm}>
             Basic Event Info
-      <form autoComplete="off" noValidate  onSubmit = {(event) => { event.preventDefault(); eventModel.methods.createEvent("Test event",
-      555555555,
-      666666666,
-      200,
-      1,
-      "event description",
-      "addis ababa"); console.log(eventModel.methods)}}>
+      <form autoComplete="off" noValidate  onSubmit = {(event) => { event.preventDefault();
+          const name = modelName;
+          const start = modelStart;
+          const end = modelEnd;
+          const totalTickets = modelAmount;
+          const price = modelPrice;
+          const priceStr = parseInt(price)
+          const summary = modelSummary;
+          const location = modelVenue;
+          console.log(name, start, end, totalTickets, price, summary,location,"look at price here")
+          
+          const eventCheck = eventModel.methods.createEvent(name, start, end, totalTickets, price, summary,location).send({ from: account })
+          .once("receipt", (receipt) => {
+            console.log(eventCheck, "event check")
+            setLoading({ loading: false });
+          })}}
+          >
+
         <div>
           <Typography gutterBottom variant="h4" component="h2">
             Basic Event Info
@@ -73,25 +87,25 @@ export default function LayoutTextFields(props) {
             Name your event and tell the event-goers why they should come. Add
             details that highlight what makes it unique.
           </Typography>
-          <TextField name= "Event Name" id="outlined-full-width" label="Event Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
+          <TextField name= "Event Name" className="outlined-margin-none" id="EventName" label="Event Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
             onChange = {(e)=> setModelName({name: e.target.value})}
           />
-           <TextField id="outlined-margin-none" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelStart({start: e.target.value})}
+           <TextField className="outlined-margin-none" id="eventStart" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
+            onChange = {(e)=> setModelStart({start: parseInt(e.target.value, 0)})}
           />
-          <TextField id="outlined-margin-none" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelEnd({end: e.target.value})}
+          <TextField className="outlined-margin-none" id="eventEnd" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
+            onChange = {(e)=> setModelEnd({end: parseInt(e.target.value, 0)})}
           />
-           <TextField id="outlined-margin-none" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelAmount({amount: e.target.value})}
+           <TextField className="outlined-margin-none" id="totalTickets" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
+            onChange = {(e)=> setModelAmount({amount: parseInt(e.target.value, 0)})}
           />
-          <TextField id="outlined-margin-none" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelPrice({price: e.target.value})}
+          <TextField className="outlined-margin-none" id="price" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
+            onChange = {(e)=> setModelPrice({price: parseInt(e.target.value, 0)})}
           />
-          <TextField id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} multiline variant="outlined"
+          <TextField className="outlined-margin-none" id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} multiline variant="outlined"
             onChange = {(e)=> setModelSummary({summary: e.target.value})}
           />
-          <TextField id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
+          <TextField className="outlined-margin-none" id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
             onChange = {(e)=> setModelVenue({venue: e.target.value})} 
           />
           <TextField id="outlined-full-width" label="Organizer *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
