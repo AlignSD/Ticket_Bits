@@ -35,8 +35,11 @@ export default function LayoutTextFields() {
   const classes = useStyles();
 
   console.log(user)
-
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
   return (
+    isAuthenticated && (
     <div className={classes.root}>
       <div className={classes.containerSm}>
         <div>
@@ -201,5 +204,6 @@ export default function LayoutTextFields() {
         </Button>
       </div>
     </div>
+    )
   );
 }

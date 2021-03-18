@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
@@ -7,15 +7,15 @@ import Footer from "./components/footer";
 // import NavBar from "./components/NavBar";
 import TicketMarketPlace from './components/TicketMarketPlace';
 import Home from "./views/home";
-import Profile from "./views/profile";
+// import Profile from "./views/profile";
 import ExternalApi from "./views/external-api";
 import ProtectedRoute from "./auth/protected-route";
 import CoinbaseAPI from "./CoinbaseAPI";
-import Popup from './components/Popup'
+// import Popup from './components/Popup'
 import CreateEvent from "./pages/CreateEvent"
 import UserProfile from "./pages/UserProfile"
 import Paypal from "./components/Paypal"
-import TicketsContextProvider from "./utils/TicketsContext"
+// import TicketsContextProvider from "./utils/TicketsContext"
 // --- Post bootstrap -----
 
 const App = () => {

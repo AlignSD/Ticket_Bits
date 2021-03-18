@@ -1,4 +1,4 @@
-import React, {useRef, useState, useEffect, setState} from "react";
+import React from "react";
 
 export default function PaypalTest(props){
     console.log(props)

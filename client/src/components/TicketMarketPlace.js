@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import Web3 from 'web3'
 import Marketplace from '../abis/Marketplace.json'
 import Main from './Main'
@@ -15,7 +15,7 @@ import {TicketsContext} from '../../src/utils/TicketsContext'
 // *****STATES*****
 function TicketMarketPlace() {
 
-  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup} = useContext(TicketsContext)
+  let {account, tickets, loading, userType, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setMarket, setOpenPopup} = useContext(TicketsContext)
 
   // *****Use Effect Function*****
   useEffect(() => {
@@ -91,17 +91,6 @@ function TicketMarketPlace() {
         });
     }
   }
-  const changeCheckout = () => {
-    setPaypalState(true);
-    console.log(paypalState);
-  };
-  // const checkCheckout = () => {
-  //   if(paypalState.isCheckout === true){
-  //     return(
-  //       <Paypal tickets={tickets} purchaseTicket={purchaseTicket}/>
-  //     )
-  //   }
-  // }
 
   // *****Purchase ticket function*****
   function purchaseTicket(id, price) {
