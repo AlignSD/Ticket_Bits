@@ -16,6 +16,19 @@ const TicketsContextProvider = (props) => {
 
   const [marketplaceState, setMarket] = useState();
   const [openPopup, setOpenPopup] = useState(false)
+
+  const [eventModel, setEventModel] = useState({
+    id: 0,
+    name: "",
+    location: "",
+    startDate: 0,
+    endDate: 0,
+    description: "",
+    ticketPrice: 0,
+    availableTickets: 0
+  })
+
+
   return(
     <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup}}>
         {props.children}
