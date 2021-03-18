@@ -61,21 +61,21 @@ function TicketMarketPlace() {
       // Set marketplace state and load items into shop
       setMarket((marketplaceState = marketplace))
       const ticketCount = await marketplace.methods.ticketCount().call()
-      loadProducts(ticketCount, marketplace); 
+      loadTickets(ticketCount, marketplace); 
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
     }  
   }
-  // *****Load Products function*****
-  async function loadProducts(ticketCount, marketplace) {
+  // *****Load Ticketss function*****
+  async function loadTickets(ticketCount, marketplace) {
     // We're pushing ticketarr into ticket to update the state when needed
     // if we push straight to ticket it causes an infinite loop
-    let ticketarr = [];
+    let ticketArr = [];
     for (var i = 1; i <= ticketCount; i++) {
       const ticket = await marketplace.methods.tickets(i).call()
-      ticketarr.push(ticket)
+      ticketArr.push(ticket)
     }
-    setTickets(ticketarr)
+    setTickets(ticketArr)
     setLoading((loading = false))
   } 
   
