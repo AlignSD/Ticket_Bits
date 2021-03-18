@@ -7,9 +7,7 @@ import Button from "@material-ui/core/Button";
 import {TicketsContext} from '../utils/TicketsContext'
 
 const useStyles = makeStyles((theme) => ({
-  
-
-  root: {
+   root: {
     backgroundColor: "white",
     display: "flex",
     flexWrap: "wrap",
@@ -51,7 +49,8 @@ export default function LayoutTextFields(props) {
   const createEventModel = [modelName.name , modelStart.start , modelEnd.end , modelAmount.amount , modelPrice.price , modelSummary.summary, modelVenue.venue]
   // .then()eventModel.methods.createEvent(createModelsState), console.log(eventModel.methods), console.log(createModelsState)}
   // eventModel.methods.createEvent(createModelsState); console.log(createModelsState)}
-console.log(createEventModel)
+  console.log(createEventModel)
+  
   return (
     <div className={classes.root}>
       <div className={classes.containerSm}>
