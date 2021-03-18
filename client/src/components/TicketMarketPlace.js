@@ -1,6 +1,4 @@
-import React, { useEffect, useContext } from 'react'
-import Web3 from 'web3'
-import Marketplace from '../abis/Marketplace.json'
+import React, {useContext } from 'react'
 import Main from './Main'
 import Buyer from './Buyer'
 import Seller from './Seller'

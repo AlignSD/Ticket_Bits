@@ -1,22 +1,16 @@
-<<<<<<< HEAD
-import React, { useEffect, useState, useContext } from "react";
-=======
-import React from "react";
->>>>>>> 03bf4f72d64b31a0b6aef3e30ad66f378dcfec7e
+import React, { useEffect, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
 import Loading from "./components/loading";
 import Footer from "./components/footer";
+import Buyer from './components/Buyer'
+import Seller from './components/Seller'
 // import NavBar from "./components/NavBar";
 import TicketMarketPlace from './components/TicketMarketPlace';
 import Home from "./views/home";
-<<<<<<< HEAD
 import Web3 from 'web3'
 import Profile from "./views/profile";
-=======
-// import Profile from "./views/profile";
->>>>>>> 03bf4f72d64b31a0b6aef3e30ad66f378dcfec7e
 import ExternalApi from "./views/external-api";
 import ProtectedRoute from "./auth/protected-route";
 import CoinbaseAPI from "./CoinbaseAPI";
@@ -24,14 +18,11 @@ import CoinbaseAPI from "./CoinbaseAPI";
 import CreateEvent from "./pages/CreateEvent"
 import UserProfile from "./pages/UserProfile"
 import Paypal from "./components/Paypal"
-<<<<<<< HEAD
 import TicketsContextProvider from "./utils/TicketsContext"
 import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
 
-=======
-// import TicketsContextProvider from "./utils/TicketsContext"
->>>>>>> 03bf4f72d64b31a0b6aef3e30ad66f378dcfec7e
+
 // --- Post bootstrap -----
 
 const App = () => {
@@ -42,7 +33,7 @@ const App = () => {
     loadWeb3()
     loadBlockchainData()
 
-  }, [])
+  }, [userType])
   async function loadWeb3() {
     // If client is using a etherium browser we request the account tied to it
     if (window.ethereum) {
@@ -92,6 +83,31 @@ const App = () => {
     setTickets(ticketArr)
     setLoading((loading = false))
   } 
+  function createTicket(name, price) {
+    if (marketplaceState) {
+      setLoading({ loading: true })
+      marketplaceState.methods
+        .createTicket(name, price)
+        .send({ from: account })
+        .once("receipt", (receipt) => {
+          setLoading({ loading: false });
+        });
+    }
+  }
+
+  // *****Purchase ticket function*****
+  function purchaseTicket(id, price) {
+    //Add setPaypalState to update shoping cart inventory and total value
+    if (marketplaceState) {
+      setLoading({ loading: true })
+      marketplaceState.methods
+        .purchaseTicket(id)
+        .send({ from: account, value: price })
+        .once("receipt", (receipt) => {
+          setLoading({ loading: false });
+        });
+    }
+  }
   const { isLoading } = useAuth0();
 
   // const apiKey = '3bb54333680d7672149c11bb6d783ccfe95329ecf2f5a7df443e0d323ea3db25';
@@ -122,6 +138,9 @@ const App = () => {
           <ProtectedRoute exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
           <ProtectedRoute exact path='/CreateEvent' component={CreateEvent}/>
           <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
+          <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
+          <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
+
 
 
 

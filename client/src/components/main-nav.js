@@ -59,6 +59,22 @@ function MainNav(props){
     >
       CheckOut
     </NavLink>
+    <NavLink
+      to="/Buyer"
+      exact
+      className="nav-link"
+      activeClassName="router-link-exact-active"
+    >
+      Buyer
+    </NavLink>
+    <NavLink
+      to="/Seller"
+      exact
+      className="nav-link"
+      activeClassName="router-link-exact-active"
+    >
+      Seller
+    </NavLink>
   </div>
   )
 };
