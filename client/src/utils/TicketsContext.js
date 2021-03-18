@@ -17,7 +17,7 @@ const TicketsContextProvider = (props) => {
   const [marketplaceState, setMarket] = useState();
   const [openPopup, setOpenPopup] = useState(false)
   return(
-    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, setOpenPopup}}>
+    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup}}>
         {props.children}
         </TicketsContext.Provider>
 )

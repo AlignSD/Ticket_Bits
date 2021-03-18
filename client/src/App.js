@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useEffect, useState, useContext } from "react";
+=======
+import React from "react";
+>>>>>>> 03bf4f72d64b31a0b6aef3e30ad66f378dcfec7e
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
@@ -7,19 +11,27 @@ import Footer from "./components/footer";
 // import NavBar from "./components/NavBar";
 import TicketMarketPlace from './components/TicketMarketPlace';
 import Home from "./views/home";
+<<<<<<< HEAD
 import Web3 from 'web3'
 import Profile from "./views/profile";
+=======
+// import Profile from "./views/profile";
+>>>>>>> 03bf4f72d64b31a0b6aef3e30ad66f378dcfec7e
 import ExternalApi from "./views/external-api";
 import ProtectedRoute from "./auth/protected-route";
 import CoinbaseAPI from "./CoinbaseAPI";
-import Popup from './components/Popup'
+// import Popup from './components/Popup'
 import CreateEvent from "./pages/CreateEvent"
 import UserProfile from "./pages/UserProfile"
 import Paypal from "./components/Paypal"
+<<<<<<< HEAD
 import TicketsContextProvider from "./utils/TicketsContext"
 import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
 
+=======
+// import TicketsContextProvider from "./utils/TicketsContext"
+>>>>>>> 03bf4f72d64b31a0b6aef3e30ad66f378dcfec7e
 // --- Post bootstrap -----
 
 const App = () => {
