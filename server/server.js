@@ -1,32 +1,23 @@
-import dotenv from 'dotenv'
-dotenv.config()
-import express from 'express';
-import mongoose from 'mongoose';
-import postRoutes from "./routes/posts.js";
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const path = require('path')
 const app = express();
-const PORT = process.env.PORT || 5000;
+require('./database');
 
+app.use(bodyParser.json());
+app.use(cors());
 
-// Add routes, both API and view
-app.use('/posts', postRoutes);
-// Define middleware here
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+// API
+const users = require('./api/users');
+app.use('/api/users', users);
 
+app.use(express.static(path.join(__dirname, '../build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build'))
+})
 
-// Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true})
-// Start the API server
-  .then(() => app.listen(PORT, function() {
-    console.log(`🌎  ==> API Server now listening on PORT ${PORT}  !`);}))
-  .catch((error) => console.log(error.message));
-
-mongoose.set("useFindAndModify", false);
-
-
-
-
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+    console.log(`Server started on port ${port}`);
+});
