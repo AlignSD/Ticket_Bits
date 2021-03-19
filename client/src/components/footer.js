@@ -1,8 +1,36 @@
 import React from "react";
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 
+const useStyles = makeStyles({
+  logo: {
+      height: 200
+       },
+  grid:{
+      height: 75
+  },
+  chain:{
+    color: '#ffffff',
+    fontSize: "18px",
+    marginLeft: "10px"
+  },
+  button:{
+    height: 50
+  },
+  footer:{
+    opacity: 100,
+    position: "fixed",
+    bottom: 0,
+    width: "100%"
+  }
 
-const Footer = () => (
+})
+
+
+function Footer() {
+  const classes = useStyles();
+  return(
+    <div className={classes.footer}>
   <footer className="bg-dark p-3 text-center">
     <div className="logo" />
     <p>
@@ -12,7 +40,8 @@ const Footer = () => (
       </a>
     </p>
   </footer>
-);
+  </div>
+)};
 
 
 export default Footer;
