@@ -55,7 +55,8 @@ export default function LayoutTextFields(props) {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root}  style={{position: 'absolute',
+    zIndex: 1}}>
       <div className={classes.containerSm}>
             Basic Event Info
       <form autoComplete="off" noValidate  onSubmit = {(event) => { event.preventDefault();

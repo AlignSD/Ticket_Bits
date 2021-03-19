@@ -24,6 +24,10 @@ import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
 import Event from './abis/Event.json'
 import EventFactory from './abis/EventFactory.json'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Matrix from "../src/components/MatrixRain"
+import zIndex from "@material-ui/core/styles/zIndex";
+
 
 
 const App = () => {
@@ -121,6 +125,33 @@ const App = () => {
         });
     }
   }
+  const useStyles = makeStyles({
+    logo: {
+        height: 100
+         },
+    grid:{
+        height: 75
+    },
+    chain:{
+      color: '#ffffff',
+      fontSize: "18px",
+      marginLeft: "10px"
+    },
+    button:{
+      height: 50
+    },
+    rain:{
+      zIndex: -1,
+      opacity: "10"
+    },
+    absolute:{
+      position: "absolute",
+      zIndex: 10
+
+    },
+
+  
+  })
 
   // *****Purchase ticket function*****
   function purchaseTicket(id, price) {
@@ -146,23 +177,26 @@ const App = () => {
   //   console.log('statusCode:', response && response.statusCode); 
   //   console.log('body:', body);
   // });
-
+  const classes = useStyles();
   if (isLoading) {
     return <Loading/>;
   }
 
+
   return (
- 
+ <>
+ <NavBar className={classes.absolute}/>
     <div id="app" style={{height: "100%"}} className="d-flex flex-column h-100">
-      <NavBar/>
-      <div className="container flex-grow-1">
+
+    
+      <div className="container flex-grow-1 " style={{position: "relative"}}>
         <Switch>
-          <Route exact path="/home" component={Home}/>
-            <ProtectedRoute exact path="/coinbaseAPI" component={CoinbaseAPI} />
-            <ProtectedRoute exact path="/profile" component={UserProfile} />
-            <ProtectedRoute exact path="/external-api" component={ExternalApi} />
-            <ProtectedRoute exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
-            <ProtectedRoute exact path='/CreateEvent'><CreateEvent
+          <Route  exact path="/home" component={Home}/>
+            <ProtectedRoute  exact path="/coinbaseAPI"><CoinbaseAPI/></ProtectedRoute>
+            <ProtectedRoute  exact path="/profile" component={UserProfile} />
+            <ProtectedRoute  exact path="/external-api" component={ExternalApi} />
+            <ProtectedRoute  exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
+            <ProtectedRoute  exact path='/CreateEvent'><CreateEvent
                                                       eventModel = {eventModel}
                                                       setEventModel = {setEventModel}
             /></ProtectedRoute>
@@ -170,9 +204,12 @@ const App = () => {
             <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
             <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
         </Switch>
+        <Matrix className={classes.rain}>
+</Matrix>
       </div>
     <Footer />
   </div>
+  </>
   );
 };
 

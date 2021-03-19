@@ -9,10 +9,14 @@ import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles({
   root: {
-    background: "#686666"
+    background: "#686666",
   },
   container:{
-    background: "#686666"
+    background: "#686666",
+    position: 'sticky',
+    zIndex: 1,
+      opacity: 100,
+      top: 0,
   },
   grid1:{
     marginTop: 15

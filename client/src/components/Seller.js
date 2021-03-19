@@ -8,7 +8,8 @@ class Seller extends Component {
   render() {
     console.log(this.props);
     return (
-      <div id="content">
+      <div id="content"  style={{position: 'absolute',
+      zIndex: 1}}>
         <h1 style={{color: "white"}}>Add Ticket</h1>
         <form onSubmit={(event) => {
           event.preventDefault()
