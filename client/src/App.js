@@ -6,6 +6,7 @@ import Loading from "./components/loading";
 import Footer from "./components/footer";
 import Buyer from './components/Buyer'
 import Seller from './components/Seller'
+import LandingPage from "./views/landingpage"
 // import NavBar from "./components/NavBar";
 import TicketMarketPlace from './components/TicketMarketPlace';
 import Home from "./views/home";
@@ -23,6 +24,7 @@ import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
 import Event from './abis/Event.json'
 import EventFactory from './abis/EventFactory.json'
+
 
 const App = () => {
   let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel, setEvent, eventState, eventFactoryState, setEventFactory} = useContext(TicketsContext)
@@ -155,10 +157,10 @@ const App = () => {
       <NavBar/>
       <div className="container flex-grow-1">
         <Switch>
-          <Route path="/" exact component={Home} />
-            <ProtectedRoute path="/coinbaseAPI" component={CoinbaseAPI} />
-            <ProtectedRoute path="/profile" component={UserProfile} />
-            <ProtectedRoute path="/external-api" component={ExternalApi} />
+          <Route exact path="/home" component={Home}/>
+            <ProtectedRoute exact path="/coinbaseAPI" component={CoinbaseAPI} />
+            <ProtectedRoute exact path="/profile" component={UserProfile} />
+            <ProtectedRoute exact path="/external-api" component={ExternalApi} />
             <ProtectedRoute exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
             <ProtectedRoute exact path='/CreateEvent'><CreateEvent
                                                       eventModel = {eventModel}
