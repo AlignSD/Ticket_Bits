@@ -3,6 +3,7 @@ import React from "react";
 import Button from '@material-ui/core/Button';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
+import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Popper from '@material-ui/core/Popper';
 // import MenuItem from '@material-ui/core/MenuItem';
@@ -16,10 +17,22 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    background: "#686666"
   },
   paper: {
     marginRight: theme.spacing(2),
   },
+  dropcolor:{
+    color: "#000000",
+    
+    
+  },
+  pop:{
+    width: "150%"
+  },
+  popItem:{
+    paddingleft: "0 5px"
+  }
 }));
 
 function MainNav(props){
@@ -59,72 +72,6 @@ function MainNav(props){
   }, [open]);
 
   return(
-  // <div className="navbar-nav mr-auto">
-  //   <NavLink
-  //     to="/"
-  //     exact
-  //     className="nav-link"
-  //     activeClassName="router-link-exact-active"
-  //   >
-  //     Home
-  //   </NavLink>
-  //   <NavLink
-  //     to="/coinbaseAPI"
-  //     exact
-  //     className="nav-link"
-  //     activeClassName="router-link-exact-active"
-  //   >
-  //     CoinbaseAPI
-  //   </NavLink> 
-  //   <NavLink
-  //     to="/profile"
-  //     exact
-  //     className="nav-link"
-  //     activeClassName="router-link-exact-active"
-  //   >
-  //     Profile
-  //   </NavLink>
-  //   <NavLink
-  //     to="/TicketMarketPlace"
-  //     exact
-  //     className="nav-link"
-  //     activeClassName="router-link-exact-active"
-  //   >
-  //     Ticket Marketplace
-  //   </NavLink>
-  //   <NavLink
-  //     to="/CreateEvent"
-  //     exact
-  //     className="nav-link"
-  //     activeClassName="router-link-exact-active"
-  //   >
-  //     Create Event
-  //   </NavLink>
-  //   <NavLink
-  //     to="/Checkout"
-  //     exact
-  //     className="nav-link"
-  //     activeClassName="router-link-exact-active"
-  //   >
-  //     CheckOut
-  //   </NavLink>
-  //   <NavLink
-  //     to="/Buyer"
-  //     exact
-  //     className="nav-link"
-  //     activeClassName="router-link-exact-active"
-  //   >
-  //     Buyer
-  //   </NavLink>
-  //   <NavLink
-  //     to="/Seller"
-  //     exact
-  //     className="nav-link"
-  //     activeClassName="router-link-exact-active"
-  //   >
-  //     Seller
-  //   </NavLink>
-  // </div>
   <div className={classes.root}>
 
       <div>
@@ -142,36 +89,47 @@ function MainNav(props){
               {...TransitionProps}
               style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
             >
-              <Paper>
+              <Paper className={classes.pop}>
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <Grid className={classes.popitem}>
                     <NavLink
+                      className={classes.dropcolor}
                       to="/Buyer"
                       exact
-                      className="nav-link"
+                      style={{paddingLeft: 10}}
                       activeClassName="router-link-exact-active"
                       onClick={handleClose}
                     >
-                      Buyer
+                        Buyer
                     </NavLink>
+                    </Grid>
+                    <br></br>
+                    <Grid>
                     <NavLink
                       to="/Seller"
                       exact
-                      className="nav-link"
+                      className={classes.dropcolor}
                       activeClassName="router-link-exact-active"
                       onClick={handleClose}
+                      style={{paddingLeft: 10}}
                     >
-                      Seller
+                       Seller
                     </NavLink>
+                    </Grid>
+                    <br></br>
+                    <Grid>
                     <NavLink
-                      to="/TicketFeed"
+                      to="/TicketMarketPlace"
                       exact
-                      className="nav-link"
+                      className={classes.dropcolor}
                       activeClassName="router-link-exact-active"
                       onClick={handleClose}
+                      style={{paddingLeft: 10}}
                     >
                       Ticket Feed
                     </NavLink>
+                    </Grid>
                   </MenuList>
                 </ClickAwayListener>
               </Paper>

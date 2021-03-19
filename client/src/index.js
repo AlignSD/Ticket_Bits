@@ -9,11 +9,8 @@ import Auth0ProviderWithHistory from "./auth/auth0-provider-with-history";
 import TicketsContextProvider from './utils/TicketsContext'
 import LandingPage from "./views/landingpage"
 import {Route, Switch} from "react-router-dom"
-import ScriptTag from "react-script-tag"
-import Matrix from "../src/views/matrixRain"
 ReactDOM.render(
     <Router>
-      <ScriptTag type="text/javascript" src={Matrix}/>
       <Auth0ProviderWithHistory>
       <TicketsContextProvider>
       <Switch>

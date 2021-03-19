@@ -1,23 +1,43 @@
 
 import React, {useState} from "react";
-
 import MainNav from "./main-nav";
 import AuthNav from "./auth-nav";
+import { makeStyles } from '@material-ui/core/styles';
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+
+
+const useStyles = makeStyles({
+  root: {
+    background: "#686666"
+  },
+  container:{
+    background: "#686666"
+  },
+  grid1:{
+    marginTop: 15
+  }
+
+});
 
 function NavBar(props){
+  const classes = useStyles();
  
 
   return (
-    <div className="nav-container mb-3">
-      <nav className="navbar navbar-expand-md navbar-light bg-primary">
-        <div className="container">
-          <div className="navbar-brand logo" />
+    <Container maxWidth="false" className={classes.container}>
+      <nav className={classes.root}>  
+          <div className="row">
+          <Grid wrap-xs-nowrap container direction="row">
+            <Grid className={classes.grid1} item xs={6}>
           <MainNav
           props={props} />
+          </Grid>
           <AuthNav />
-        </div>
+          </Grid>
+          </div>
       </nav>
-    </div>
+    </Container>
   )};
 
 
