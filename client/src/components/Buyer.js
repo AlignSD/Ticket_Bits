@@ -8,7 +8,8 @@ class Buyer extends Component {
     
     console.log(this.props);
     return (
-      <div id="content">
+      <div id="content" style={{position: 'absolute',
+      zIndex: 1}}>
         <h2 style={{color: "white"}}>Buy Ticket</h2>
         <table className="table text-white">
           <thead>

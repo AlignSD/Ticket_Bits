@@ -7,6 +7,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import "./landingpage.css"
 import "./home.css"
 import ScriptTag from "react-script-tag"
+import Matrix from "../components/MatrixRain"
 const useStyles = makeStyles({
   logo: {
       height: 100
@@ -21,6 +22,10 @@ const useStyles = makeStyles({
   },
   button:{
     height: 50
+  },
+  rain:{
+    zIndex: 10,
+    opacity: "10"
   }
 
 })
@@ -35,6 +40,7 @@ return(
   <Fragment>
   
   <Container>
+   
   <Grid className={classes.logo}item xs={12}spacing={5} justify="center" alignItems="center" direction="row"/>
   <Grid container spacing={5} justify="center" alignItems="center" direction="row">
   <Grid item xs={3}/>
@@ -45,8 +51,10 @@ return(
   </Grid>
   
   <Grid  className={classes.chain}><p className="font-face"></p></Grid>
-  
+ 
   </Container>
+  <Matrix className={classes.rain}>
+  </Matrix>
   </Fragment>
 )};
 

@@ -88,7 +88,8 @@ function TicketMarketPlace() {
 
   return (
 
-        <div>
+        <div  style={{position: 'absolute',
+        zIndex: 1}}> 
 
           <div className={classes.marginAutoContainer}>
           
