@@ -24,6 +24,7 @@ import Marketplace from './abis/Marketplace.json'
 import Event from './abis/Event.json'
 import EventFactory from './abis/EventFactory.json'
 
+
 const App = () => {
   let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel, setEvent, eventState, eventFactoryState, setEventFactory} = useContext(TicketsContext)
 
