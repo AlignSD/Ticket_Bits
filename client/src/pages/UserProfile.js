@@ -34,10 +34,10 @@ const useStyles = makeStyles((theme) => ({
 export default function LayoutTextFields() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const classes = useStyles();
+
+  // mongo states
   const [users, setUsers] = useState(null);
-
-
-	const [username, setUsername] = useState("");
+  const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	useEffect(() => {
 		axios
@@ -47,6 +47,7 @@ export default function LayoutTextFields() {
 
 	}, []);
 
+  // submit fields to mongodb
   function submitForm() {
 		if (username === "") {
 			alert("Please fill the username field");
@@ -75,7 +76,7 @@ export default function LayoutTextFields() {
   return (
     isAuthenticated && (
       <>
-      
+      {/* form section is what sends values to mongodb */}
       <form onSubmit={submitForm}>
 				<input
 					onChange={(e) => setUsername(e.target.value)}
