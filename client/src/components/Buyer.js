@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
-
+const useStyles = makeStyles({
+    contained:{
+      backgroundColor: "#ffffff",
+      marginTop: 50,
+      zIndex: 1
+    }
+})
 // Loads buyer page thru ticketmarketplace
-class Buyer extends Component {
-
-  render() {
+function Buyer(props) {
     
-    console.log(this.props);
+  const classes = useStyles();
+    console.log(props);
     return (
-      <div id="content" style={{position: 'absolute',
-      zIndex: 1}}>
-        <h2 style={{color: "white"}}>Buy Ticket</h2>
-        <table className="table text-white">
+      <Grid container className={classes.contained} alignItems="center" >
+        <Grid item xs={12}>
+      <div id="content" style={{zIndex: 1,
+      backgroundColor: "white"}}>
+        <h2 style={{color: "black"}}>Buy Ticket</h2>
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -22,8 +31,9 @@ class Buyer extends Component {
             </tr>
           </thead>
           <tbody id="ticketList">
-            { this.props.tickets.map((ticket, key) => {
+            { props.tickets.map((ticket, key) => {
               return(
+                <Grid container>
                 <tr key={key}>
                   <th scope="row">{ticket.id.toString()}</th>
                   <td>{ticket.name}</td>
@@ -35,7 +45,7 @@ class Buyer extends Component {
                       name={ticket.id}
                       value={ticket.price} 
                         onClick={(event) => {
-                          this.props.purchaseTicket(event.target.name, event.target.value)
+                          props.purchaseTicket(event.target.name, event.target.value)
                         } }
                       >
                         Buy
@@ -44,13 +54,16 @@ class Buyer extends Component {
                     }
                     </td>
                 </tr>
+                </Grid>
               )
             })}
           </tbody>
         </table>
       </div>
+      
+      </Grid>
+      </Grid>
     );
   }
-}
 
 export default Buyer;

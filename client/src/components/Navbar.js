@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   container:{
     background: "#686666",
     position: 'sticky',
-    zIndex: 1,
+    zIndex: 5,
       opacity: 100,
       top: 0,
   },

@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from 'axios'
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
   btnMargin: {
     margin: theme.spacing(1),
   },
+  contained:{
+    backgroundColor: "#ffffff",
+    marginTop: 50,
+    zIndex: 1
+  }
 }));
 
 export default function LayoutTextFields() {
@@ -75,7 +81,7 @@ export default function LayoutTextFields() {
   }
   return (
     isAuthenticated && (
-      <>
+      <Grid className={classes.contained}>
       {/* form section is what sends values to mongodb */}
       <form onSubmit={submitForm}>
 				<input
@@ -91,7 +97,7 @@ export default function LayoutTextFields() {
 				<input type="submit" />
 			</form>
     <div className={classes.root}>
-      <div className={classes.containerSm}>
+      <div >
         <form>
         <div>
           <Typography gutterBottom variant="h4" component="h2">
@@ -256,7 +262,7 @@ export default function LayoutTextFields() {
         </Button>
       </div>
     </div>
-    </>
+    </Grid>
     )
   );
 }

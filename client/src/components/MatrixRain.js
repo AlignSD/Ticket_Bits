@@ -11,7 +11,8 @@ const MatrixRain = () => {
             left: 0,
             right: 0,
             bottom: 0,
-            background: "#000000"
+            background: "#000000",
+            opacity: "40%"
         }}>
             {new Array(streamCount).fill().map(_ =>(<RainStream/>))}
             
