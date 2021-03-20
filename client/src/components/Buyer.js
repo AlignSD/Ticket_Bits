@@ -6,7 +6,8 @@ const useStyles = makeStyles({
     contained:{
       backgroundColor: "#ffffff",
       marginTop: 50,
-      zIndex: 1
+      zIndex: 1,
+      padding: 20
     }
 })
 // Loads buyer page thru ticketmarketplace

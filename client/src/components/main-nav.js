@@ -75,6 +75,9 @@ function MainNav(props){
   <div className={classes.root}>
 
       <div>
+      <Button href="/Home">
+          <span style={{ color: `white` }}>Home</span>
+        </Button>
         <Button
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
@@ -129,6 +132,7 @@ function MainNav(props){
                     >
                       Ticket Feed
                     </NavLink>
+                    
                     </Grid>
                   </MenuList>
                 </ClickAwayListener>
@@ -142,6 +146,7 @@ function MainNav(props){
         <Button href="/EventDetails">
           <span style={{ color: `white` }}>Event Details</span>
         </Button>
+
       </div>
     </div>
   )
