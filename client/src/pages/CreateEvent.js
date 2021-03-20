@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -6,7 +6,8 @@ import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import {TicketsContext} from '../utils/TicketsContext'
 import Grid from '@material-ui/core/Grid';
-import web3 from 'web3'
+import web3 from 'web3';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -65,9 +66,61 @@ export default function LayoutTextFields(props) {
   const createEventModel = [modelName.name , modelStart.start , modelEnd.end , modelAmount.amount , modelPrice.price , modelSummary.summary, modelVenue.venue]
   // .then()eventModel.methods.createEvent(createModelsState), console.log(eventModel.methods), console.log(createModelsState)}
   // eventModel.methods.createEvent(createModelsState); console.log(createModelsState)}
+   // mongo states
+   const [events, setEvents] = useState({
+    eventName: "",
+    eventStarts: 0,
+    eventEnds: 0,
+    ticketAmount: 0,
+    ticketPrice: 0,
+    summary: "",
+    venueName: "",
+    organizer: "",
+    eventType: "",
+    category: ""
+   });
+  
+
   function toTimestamp(date) {
     return new Date(date).valueOf();
   }
+
+  useEffect(() => {
+		axios
+			.get("/api/events")
+			.then((events) => setEvents(events))
+      
+			.catch((err) => console.log(err));
+      console.log(events, "events log");
+
+	}, []);
+
+  function submitForm() { 
+		
+    console.log(events, "events")
+		axios
+			.post("/api/events", {
+				eventName: events.eventName,
+        eventStarts: events.eventStarts,
+        eventEnds: events.eventEnds,
+        ticketAmount: events.ticketAmount, 
+        ticketPrice: events.ticketPrice, 
+        summary: events.summary,
+        venueName: events.venueName,
+        organizer: events.organizer,
+        eventType: events.eventType,
+        category: events.category
+			})
+			.then(function () {
+				alert("Event created successfully");
+				window.location.reload();
+			})
+			.catch(function () {
+				alert("Could not create Event. Please try again");
+			});
+
+	}
+  
 
   return (
     <Grid className={classes.contained}>
@@ -75,7 +128,7 @@ export default function LayoutTextFields(props) {
     zIndex: 1}}>
       <div className={classes.form}>
            
-      <form autoComplete="off" noValidate  onSubmit = {(event) => { event.preventDefault();
+      <form autoComplete="off" noValidate  onSubmit = { (event) => { event.preventDefault();
           const name = modelName;
           const start = modelStart;
           const end = modelEnd;
@@ -84,20 +137,21 @@ export default function LayoutTextFields(props) {
           const priceStr = parseInt(price)
           const summary = modelSummary;
           const location = modelVenue;
-          console.log(name, start, end, totalTickets, price, summary,location,"look at price here")
+          // console.log(name, start, end, totalTickets, price, summary,location,"look at price here")
           
-          const eventCheck = eventModel.methods.createEvent(name, start, end, totalTickets, price, summary,location).send({ from: account })
-          .once("receipt", (receipt) => {
-            console.log(eventCheck, "event check")
-            setLoading({ loading: false });
-          })}}
+          // const eventCheck = eventModel.methods.createEvent(name, start, end, totalTickets, price, summary,location).send({ from: account })
+          // .once("receipt", (receipt) => {
+          //   console.log(eventCheck, "event check")
+          //   setLoading({ loading: false });
+          
+  }}
           >
 
         <div style={{backgroundColor: "transparent"}}>
           <Typography gutterBottom variant="h4" component="h2">
             Basic Event Info
           </Typography>
-          <Button size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
+          <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
           CREATE EVENT
         </Button>
           <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
@@ -105,25 +159,25 @@ export default function LayoutTextFields(props) {
             details that highlight what makes it unique.
           </Typography>
           <TextField name= "Event Name" className="outlined-margin-none" id="EventName" label="Event Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelName({name: e.target.value})}
+            onChange ={(e) => setEvents({...events, eventName: e.target.value})}
           />
            <TextField className="outlined-margin-none" id="eventStart" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelStart({start: parseInt(e.target.value, 0)})}
+            onChange = {(e) => setEvents({...events,eventStarts: e.target.value})}
           />
           <TextField className="outlined-margin-none" id="eventEnd" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelEnd({end: parseInt(e.target.value, 0)})}
+            onChange = {(e) => setEvents({...events,eventEnds: e.target.value})}
           />
            <TextField className="outlined-margin-none" id="totalTickets" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelAmount({amount: parseInt(e.target.value, 0)})}
+            onChange = {(e) => setEvents({...events,ticketAmount: e.target.value})}
           />
           <TextField className="outlined-margin-none" id="price" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelPrice({price: parseInt(e.target.value, 0)})}
+            onChange = {(e) => setEvents({...events,ticketPrice: e.target.value})}
           />
           <TextField className="outlined-margin-none" id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} multiline variant="outlined"
-            onChange = {(e)=> setModelSummary({summary: e.target.value})}
+            onChange = {(e) => setEvents({...events,summary: e.target.value})}
           />
           <TextField className="outlined-margin-none" id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
-            onChange = {(e)=> setModelVenue({venue: e.target.value})} 
+            onChange = {(e) => setEvents({...events,organizer: e.target.value})}
           />
           <TextField id="outlined-full-width" label="Organizer *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
           <TextField id="outlined-margin-none" label="Event Type *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />

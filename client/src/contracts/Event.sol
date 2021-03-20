@@ -1,12 +1,10 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.4.22 <0.8.0;
 
 import "./ERC721Full.sol";
 
-
-
 /** @title Event */
 contract Event is ERC721Full {
-
     string public name;
     uint256 public startDate;
     uint256 private ticketId;
@@ -14,17 +12,26 @@ contract Event is ERC721Full {
     uint256 public available;
     string public location;
     // uint8 private MAX_PURCHASE = 5;
-    string public  description;
+    string public description;
     // string public imageHash;
     bool private canceled;
-    uint public ticketPrice;
-    address payable public  owner;
-   
-    event TicketPurchased(address purchaser, uint quanntity, uint date, address indexed indexedPurchased );
-    event TicketTransfered(address _from, address _to, uint _tokenId);
-    event PaymentCollected(address _event, address _organizer, uint _balance );
-    // event TicketRufended(address _event, address _requestedBy, uint _ticketId, uint _ticketPrice);
+    uint256 public ticketPrice;
+    address payable public owner;
 
+    event TicketPurchased(
+        address purchaser,
+        uint256 quanntity,
+        uint256 date,
+        address indexed indexedPurchased
+    );
+    event TicketTransfered(address _from, address _to, uint256 _tokenId);
+    event PaymentCollected(
+        address _event,
+        address _organizer,
+        uint256 _balance
+    );
+
+    // event TicketRufended(address _event, address _requestedBy, uint _ticketId, uint _ticketPrice);
 
     /**@dev created new instance of Event
     @param _organizer account address of event organizer creating the event 
@@ -37,16 +44,16 @@ contract Event is ERC721Full {
     @param _ticketPrice ticket price in wei
     */
 
-    constructor(address payable _organizer, 
-    string memory _name, 
-    uint _start, 
-    uint _end,
-    string memory _description,  
-    string memory _location,
-    uint supply, 
-    uint _ticketPrice
-    ) ERC721Full(_name, "CRYPTICKS") public {
-
+    constructor(
+        address payable _organizer,
+        string memory _name,
+        uint256 _start,
+        uint256 _end,
+        string memory _description,
+        string memory _location,
+        uint256 supply,
+        uint256 _ticketPrice
+    ) public ERC721Full(_name, "CRYPTICKS") {
         name = _name;
         startDate = _start;
         endDate = _end;
@@ -55,38 +62,39 @@ contract Event is ERC721Full {
         description = _description;
         owner = _organizer;
         location = _location;
-
     }
-
-
 
     /**
     @dev allows user to purchase ticket for the event
     @param quantity total amount of ticket the user wishes to purchase maximum amount is 5
     */
-    function purchaseTicket(uint quantity) public payable {
+    function purchaseTicket(uint256 quantity) public payable {
         // require(quantity <= MAX_PURCHASE, "can not purchase more than 5 ticket at once");
-        require(available  >= quantity, "not enough ticket quantity available!!!");
-        require(msg.value >= ticketPrice.mul(quantity), "not enough money sent");
-        
-        for(uint8 i = 0; i < quantity; i++) {
+        require(
+            available >= quantity,
+            "not enough ticket quantity available!!!"
+        );
+        require(
+            msg.value >= ticketPrice.mul(quantity),
+            "not enough money sent"
+        );
+
+        for (uint8 i = 0; i < quantity; i++) {
             ticketId++;
             available--;
-            _mint(msg.sender,ticketId);
+            _mint(msg.sender, ticketId);
         }
 
         emit TicketPurchased(msg.sender, quantity, now, msg.sender);
     }
 
-
-
-//     /**
-//     @dev allows users to upload image of the event
-//     @param _imageHash image hash stored o IPFS
-//      */
-//     function setImage(string memory _imageHash) public {
-//    imageHash = _imageHash;
-//     }
+    //     /**
+    //     @dev allows users to upload image of the event
+    //     @param _imageHash image hash stored o IPFS
+    //      */
+    //     function setImage(string memory _imageHash) public {
+    //    imageHash = _imageHash;
+    //     }
 
     /**
     
@@ -94,12 +102,11 @@ contract Event is ERC721Full {
     @param _to address of the reciever 
     @param _tokenId id of the ticket to be transfered
     */
-    function transferTicket(address _to, uint _tokenId) public {
+    function transferTicket(address _to, uint256 _tokenId) public {
         require(address(0) != _to, "invalid address provided");
         transferFrom(msg.sender, _to, _tokenId);
         emit TicketTransfered(msg.sender, _to, _tokenId);
     }
-
 
     /**
     
@@ -108,47 +115,54 @@ contract Event is ERC721Full {
     @param _tokenId id of the ticket to be validated
     @return x boolean value holding the result 
     */
-    function isTicketValid(address _owner, uint _tokenId) onlyOwner public  returns(bool) {
-        if(ownerOf(_tokenId) == _owner) {
+    function isTicketValid(address _owner, uint256 _tokenId)
+        public
+        onlyOwner
+        returns (bool)
+    {
+        if (ownerOf(_tokenId) == _owner) {
             _burn(_tokenId);
             return true;
-        }  else {
+        } else {
             return false;
         }
     }
-
 
     /**
     
     @dev allows event organizers to cancel events they have created 
     */
 
-  function cancelEvent() onlyOwner public {
-     // require(now > startDate, "can not cancel event after it has started");
-      canceled = true;
-  }
+    function cancelEvent() public onlyOwner {
+        // require(now > startDate, "can not cancel event after it has started");
+        canceled = true;
+    }
 
-  /**
+    /**
   
   
   @dev returns tickets array owned by a given user
   @param _owner address of the required 
   @return x arrays of ticket id owned by user
   */
-    function getOwnersTicket(address _owner) public view returns(uint[] memory) {
+    function getOwnersTicket(address _owner)
+        public
+        view
+        returns (uint256[] memory)
+    {
         return _tokensOfOwner(_owner);
     }
-    
+
     /**
     
     @dev lets event organizer get ether collected for tickets sold for the event
      */
 
-    function collectPayment() onlyOwner public {
-      // require(now > endDate && !canceled, "can not collect payment before the event is over");
+    function collectPayment() public onlyOwner {
+        // require(now > endDate && !canceled, "can not collect payment before the event is over");
         //owner.transfer(address(this).balance);
         selfdestruct(msg.sender);
-       emit PaymentCollected(address(this), msg.sender, address(this).balance );
+        emit PaymentCollected(address(this), msg.sender, address(this).balance);
     }
 
     /**
@@ -169,8 +183,8 @@ contract Event is ERC721Full {
     @dev lets users check if the event is canceled or not
     @return true or false
      */
-    
-    function isCanceled() public view returns(bool) {
+
+    function isCanceled() public view returns (bool) {
         return canceled;
     }
 
@@ -178,9 +192,11 @@ contract Event is ERC721Full {
     
     @dev modifier that checked if current request is made by the event owner 
      */
-      modifier onlyOwner {
-        require(msg.sender == owner, "only event owner is allowed to perform this action");
+    modifier onlyOwner {
+        require(
+            msg.sender == owner,
+            "only event owner is allowed to perform this action"
+        );
         _;
     }
-
 }
