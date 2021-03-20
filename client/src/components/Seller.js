@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 
 // Event host sells tickets thru Seller component
 // could be converted into a functional component if bored
-class Seller extends Component {
+const useStyles = makeStyles({
+  contained:{
+    backgroundColor: "#ffffff",
+    marginTop: 50,
+  }
+})
+function Seller(props) {
+  const classes = useStyles();
+    console.log(props);
 
-  render() {
-    console.log(this.props);
     return (
-      <div id="content"  style={{position: 'absolute',
-      zIndex: 1}}>
+      <Grid container className={classes.contained} alignItems="center" >
+      <Grid item xs={12}>
+      {/* <div id="content"  style={{zIndex: 1}}>
         <h1 style={{color: "white"}}>Add Ticket</h1>
         <form onSubmit={(event) => {
           event.preventDefault()
@@ -22,7 +31,7 @@ class Seller extends Component {
               style={{widith: "30%"}}
               id="ticketName"
               type="text"
-              ref={(input) => { this.ticketName = input }}
+              ref={(input) => { props.ticketName = input }}
               className="form"
               placeholder="Ticket Name"
               required />
@@ -40,9 +49,11 @@ class Seller extends Component {
           <button type="submit" className="btn btn-primary">Add Ticket</button>
         </form>
         <p>&nbsp;</p>
-      </div>
+      </div> */}
+      </Grid>
+      </Grid>
     );
   }
-}
+
 
 export default Seller;

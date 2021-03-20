@@ -6,6 +6,7 @@ import Loading from "./components/loading";
 import Footer from "./components/footer";
 import Buyer from './components/Buyer'
 import Seller from './components/Seller'
+import Grid from "@material-ui/core/Grid";
 import LandingPage from "./views/landingpage"
 // import NavBar from "./components/NavBar";
 import TicketMarketPlace from './components/TicketMarketPlace';
@@ -191,6 +192,7 @@ const App = () => {
 
     
       <div className="container flex-grow-1 " style={{position: "relative"}}>
+        <Grid container >
         <Switch>
           <Route  exact path="/home" component={Home}/>
             <ProtectedRoute  exact path="/coinbaseAPI"><CoinbaseAPI/></ProtectedRoute>
@@ -205,6 +207,7 @@ const App = () => {
             <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
             <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
         </Switch>
+        </Grid>
         <Matrix className={classes.rain}>
 </Matrix>
       </div>

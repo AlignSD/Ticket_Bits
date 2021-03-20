@@ -21,7 +21,9 @@ const useStyles = makeStyles({
     opacity: 100,
     position: "fixed",
     bottom: 0,
-    width: "100%"
+    width: "100%",
+    zIndex: 5, 
+    height: 40
   }
 
 })

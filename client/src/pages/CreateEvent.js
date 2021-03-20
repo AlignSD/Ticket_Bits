@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import {TicketsContext} from '../utils/TicketsContext'
+import Grid from '@material-ui/core/Grid';
 import web3 from 'web3'
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +32,15 @@ const useStyles = makeStyles((theme) => ({
   btnMargin: {
     margin: theme.spacing(1),
   },
+  contained:{
+    backgroundColor: "#ffffff",
+    marginTop: 50,
+    zIndex: 1
+  },
+  form: {
+    padding: 25,
+
+  }
 }));
 
 export default function LayoutTextFields(props) {
@@ -55,10 +65,11 @@ export default function LayoutTextFields(props) {
   }
 
   return (
+    <Grid className={classes.contained}>
     <div className={classes.root}  style={{position: 'absolute',
     zIndex: 1}}>
-      <div className={classes.containerSm}>
-            Basic Event Info
+      <div className={classes.form}>
+           
       <form autoComplete="off" noValidate  onSubmit = {(event) => { event.preventDefault();
           const name = modelName;
           const start = modelStart;
@@ -77,7 +88,7 @@ export default function LayoutTextFields(props) {
           })}}
           >
 
-        <div>
+        <div style={{backgroundColor: "transparent"}}>
           <Typography gutterBottom variant="h4" component="h2">
             Basic Event Info
           </Typography>
@@ -177,5 +188,6 @@ export default function LayoutTextFields(props) {
         </form>
       </div>
     </div>
+    </Grid>
   );
 }
