@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "2rem",
   },
   paper: {
     padding: theme.spacing(2),
@@ -38,10 +37,15 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: 1.5,
   },
   contained:{
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 6,
     marginTop: 50,
-    zIndex: 1, 
-    padding: 20
+    marginRight: "auto",
+    marginBottom: 50,
+    marginLeft: "auto",
+    height: 715,
+    padding: 20,
+    zIndex: 1
   }
 }));
 
