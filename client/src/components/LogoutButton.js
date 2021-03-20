@@ -46,7 +46,7 @@ const LogoutButton = () => {
     </Button>
     <IconButton edge="start" className={classes.iconButton}
     >
-    <a href="/" style={{ color: `white` }}>
+    <a href="/profile" style={{ color: `white` }}>
       <AccountCircleIcon fontSize="medium" />
       <span style={{ fontSize: 14 }}>{user.nickname}</span>
     </a>

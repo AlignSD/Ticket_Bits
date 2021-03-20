@@ -68,7 +68,7 @@ const useStyles = makeStyles({
 function LandingPage() {
     const classes = useStyles();
     return(
-    <Container>
+    <Container alignCont>
     <Grid className={classes.logo}item xs={12}spacing={5} justify="center" alignItems="center" direction="row"/>
     <Grid container spacing={5} justify="center" alignItems="center" direction="row">
     <Grid item xs={3}/>
