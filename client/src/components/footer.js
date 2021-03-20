@@ -19,11 +19,10 @@ const useStyles = makeStyles({
   },
   footer:{
     opacity: 100,
-    position: "fixed",
+    position: "sticky",
     bottom: 0,
     width: "100%",
     zIndex: 5, 
-    height: 40
   }
 
 })
