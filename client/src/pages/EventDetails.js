@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "../components/Card";
 import { makeStyles } from "@material-ui/core/styles";
 // import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
@@ -9,6 +8,10 @@ import Grid from "@material-ui/core/Grid";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    backgroundColor: "white",
+    display: "flex",
+    flexWrap: "wrap",
+    marginTop: "2rem",
   },
   paper: {
     padding: theme.spacing(2),
@@ -17,6 +20,12 @@ const useStyles = makeStyles((theme) => ({
   },
   btnMargin: {
     marginTop: 20,
+    color: "#ffffff",
+    backgroundColor: "#000000",
+    '&:hover': {
+      backgroundColor: '#3d4c65',
+      boxShadow: 'black',
+    }
   },
   eventName: {
     marginBottom: 10,
@@ -27,14 +36,22 @@ const useStyles = makeStyles((theme) => ({
   },
   eventInfo: {
     lineHeight: 1.5,
+  },
+  contained:{
+    backgroundColor: "#ffffff",
+    marginTop: 50,
+    zIndex: 1, 
+    padding: 20
   }
 }));
+
+
 
 export default function EventDetails() {
   const classes = useStyles();
 
   return (
-    <div className="container">
+    <div className={classes.contained}>
       <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5}>
@@ -85,7 +102,6 @@ export default function EventDetails() {
             <Button
           size="large"
           variant="contained"
-          color="primary"
           className={classes.btnMargin}
         >
           Buy Ticket
@@ -93,20 +109,6 @@ export default function EventDetails() {
           </Grid>
         </Grid>
         <hr />
-        <Typography variant="h4" className={classes.title}>
-          Other Events You May Like
-        </Typography>
-        <Grid container spacing={3}>
-          <Grid item xs={12} sm={4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <Card />
-          </Grid>
-        </Grid>
       </div>
     </div>
   );

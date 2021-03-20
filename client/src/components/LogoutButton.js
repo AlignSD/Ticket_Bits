@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme) => ({
   },
   logOut:{
     color: "#ffffff",
-    backgroundColor: "#000000"
+    backgroundColor: "#000000",
+    '&:hover': {
+      backgroundColor: '#3d4c65',
+      boxShadow: 'black',
+    }
   }
 }));
 

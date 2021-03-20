@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Button from "@material-ui/core/Button";
+
 
 
 // Event host sells tickets thru Seller component
@@ -9,7 +11,21 @@ const useStyles = makeStyles({
   contained:{
     backgroundColor: "#ffffff",
     marginTop: 50,
-  }
+    zIndex: 1,
+    padding: 20
+  },
+  btnMargin: {
+    marginTop: 20,
+    color: "#ffffff",
+    backgroundColor: "#000000",
+    '&:hover': {
+      backgroundColor: '#3d4c65',
+      boxShadow: 'black',
+    }
+  
+
+  },
+  
 })
 function Seller(props) {
   const classes = useStyles();
@@ -18,8 +34,8 @@ function Seller(props) {
     return (
       <Grid container className={classes.contained} alignItems="center" >
       <Grid item xs={12}>
-      {/* <div id="content"  style={{zIndex: 1}}>
-        <h1 style={{color: "white"}}>Add Ticket</h1>
+      <div id="content"  style={{zIndex: 1}}>
+        <h1 style={{color: "black"}}>Add Ticket</h1>
         <form onSubmit={(event) => {
           event.preventDefault()
           const name = this.ticketName.value
@@ -31,7 +47,7 @@ function Seller(props) {
               style={{widith: "30%"}}
               id="ticketName"
               type="text"
-              ref={(input) => { props.ticketName = input }}
+              ref={(input) => { props.tickets.ticketName = input }}
               className="form"
               placeholder="Ticket Name"
               required />
@@ -41,15 +57,15 @@ function Seller(props) {
               style={{widith: "30%"}}
               id="ticketPrice"
               type="text"
-              ref={(input) => { this.ticketPrice = input }}
+              ref={(input) => { props.tickets.ticketPrice = input }}
               className="form"
               placeholder="Ticket Price"
               required />
           </div>
-          <button type="submit" className="btn btn-primary">Add Ticket</button>
+          <Button type="submit" className={classes.btnMargin}>Add Ticket</Button>
         </form>
         <p>&nbsp;</p>
-      </div> */}
+      </div>
       </Grid>
       </Grid>
     );

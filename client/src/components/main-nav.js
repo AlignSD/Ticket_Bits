@@ -139,6 +139,9 @@ function MainNav(props){
         <Button href="/CreateEvent">
           <span style={{ color: `white` }}>Create Event</span>
         </Button>
+        <Button href="/EventDetails">
+          <span style={{ color: `white` }}>Event Details</span>
+        </Button>
       </div>
     </div>
   )

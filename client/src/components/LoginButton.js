@@ -24,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
   },
   logIn:{
     color: "#000000",
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
+    '&:hover': {
+      backgroundColor: '#3d4c65',
+      boxShadow: 'black',
+    }
   }
 }));
 
