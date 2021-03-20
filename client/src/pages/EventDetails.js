@@ -3,6 +3,7 @@ import Card from "../components/Card";
 import { makeStyles } from "@material-ui/core/styles";
 // import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
@@ -14,9 +15,22 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
+  btnMargin: {
+    marginTop: 20,
+  },
+  eventName: {
+    marginBottom: 10,
+  },
+  eventLocation: {
+    opacity: 0.54,
+    marginBottom: 10,
+  },
+  eventInfo: {
+    lineHeight: 1.5,
+  }
 }));
 
-export default function FullWidthGrid() {
+export default function EventDetails() {
   const classes = useStyles();
 
   return (
@@ -25,24 +39,33 @@ export default function FullWidthGrid() {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={5}>
             <img
-              src="https://ra.co/images/events/flyer/2020/1/cz-0110-1362019-back.jpg"
+              src="https://images.discotech.me/artists/8afa7b3a-6d68-467c-805d-04b538dee1d1.jpg"
               alt=""
               className="img-fluid"
             />
           </Grid>
           <Grid item xs={12} sm={7}>
-            <Typography variant="h4" className={classes.title}>
-              Event Name
+            <Typography variant="h3" className={classes.eventName}>
+            <strong>WET Pool Party featuring Tortured Soul</strong>
             </Typography>
-            <Typography variant="h5" className={classes.title}>
-              Event Location
+            <Typography variant="h5" className={classes.eventLocation}>
+              Palomar Hotel, San Diego
             </Typography>
-            <Typography variant="h6" className={classes.title}>
-              Event Date/Time
+            <Typography variant="body1" className={classes.eventInfo}>
+            <strong>Start:</strong> 03/27/2021 at 12:00pm
+            </Typography>
+            <Typography variant="body1" className={classes.eventInfo}>
+            <strong>End:</strong> 03/27/2021 at 10:00pm
+            </Typography>
+            <Typography variant="body1" className={classes.eventInfo}>
+            <strong>Available Tickets:</strong> 300
+            </Typography>
+            <Typography variant="body1" className={classes.eventInfo}>
+            <strong>Ticket Price:</strong> $25
             </Typography>
             <hr />
             <Typography
-              variant="body2"
+              variant="body1"
               color="textSecondary"
               component="p"
               className={classes.paragraphText}
@@ -59,6 +82,14 @@ export default function FullWidthGrid() {
               cerebro. Nescio brains an Undead zombies. Sicut malus putrid
               voodoo horror. Nigh tofth eliv ingdead.
             </Typography>
+            <Button
+          size="large"
+          variant="contained"
+          color="primary"
+          className={classes.btnMargin}
+        >
+          Buy Ticket
+        </Button>
           </Grid>
         </Grid>
         <hr />
