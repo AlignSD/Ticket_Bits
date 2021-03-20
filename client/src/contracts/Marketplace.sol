@@ -1,32 +1,33 @@
-pragma solidity ^0.5.0;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.4.22 <0.8.0;
 
 import "./Event.sol";
 
 contract Marketplace {
-    string public name; 
-    uint public ticketCount = 0;
-    mapping(uint => Ticket) public tickets;
+    string public name;
+    uint256 public ticketCount = 0;
+    mapping(uint256 => Ticket) public tickets;
 
     struct Ticket {
-        uint id;
+        uint256 id;
         string name;
-        uint price;
+        uint256 price;
         address payable owner;
         bool purchased;
     }
 
-    event TicketCreated (
-        uint id,
+    event TicketCreated(
+        uint256 id,
         string name,
-        uint price,
+        uint256 price,
         address payable owner,
         bool purchased
     );
 
     event TicketPurchased(
-        uint id,
+        uint256 id,
         string name,
-        uint price,
+        uint256 price,
         address payable owner,
         bool purchased
     );
@@ -35,21 +36,27 @@ contract Marketplace {
         name = "Marketplace";
     }
 
-    function createTicket(string memory _name, uint _price) public {
+    function createTicket(string memory _name, uint256 _price) public {
         //Require a valid name
         require(bytes(_name).length > 0);
         // Reuire a valid price
         require(_price > 0);
         // Make sure parameters are correct
         // Increment Ticket count
-        ticketCount ++;
+        ticketCount++;
         //Create the ticket
-        tickets[ticketCount] = Ticket(ticketCount, _name, _price, msg.sender, false);
+        tickets[ticketCount] = Ticket(
+            ticketCount,
+            _name,
+            _price,
+            msg.sender,
+            false
+        );
         //Trigger an event
         emit TicketCreated(ticketCount, _name, _price, msg.sender, false);
     }
 
-    function purchaseTicket(uint _id) public payable {
+    function purchaseTicket(uint256 _id) public payable {
         // Fetch the product
         Ticket memory _ticket = tickets[_id];
         // Fetch the owner
@@ -71,6 +78,12 @@ contract Marketplace {
         // Pay the seller by sending them Ether
         address(_seller).transfer(msg.value);
         //Trigger an event
-         emit TicketPurchased(ticketCount, _ticket.name, _ticket.price, msg.sender, true);
+        emit TicketPurchased(
+            ticketCount,
+            _ticket.name,
+            _ticket.price,
+            msg.sender,
+            true
+        );
     }
 }
