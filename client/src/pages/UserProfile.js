@@ -19,20 +19,31 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     width: "25ch",
   },
-  containerSm: {
-    width: "60ch",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
+  // containerSm: {
+  //   width: "60ch",
+  //   marginLeft: "auto",
+  //   marginRight: "auto",
+  // },
   paragraphText: {
-    marginBottom: "3vh",
+    marginBottom: "2rem",
   },
   btnMargin: {
     margin: theme.spacing(1),
+    color: "#ffffff",
+    backgroundColor: "#000000",
+    '&:hover': {
+      backgroundColor: '#3d4c65',
+      boxShadow: 'black',
+    }
   },
   contained:{
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FFFFFF",
+    borderRadius: 6,
     marginTop: 50,
+    marginRight: "auto",
+    marginBottom: 50,
+    marginLeft: "auto",
+    padding: 20,
     zIndex: 1
   }
 }));
@@ -96,172 +107,172 @@ export default function LayoutTextFields() {
 				/>
 				<input type="submit" />
 			</form>
-    <div className={classes.root}>
-      <div >
-        <form>
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Your Profile
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
+      <div className={classes.root}>
+        <div >
+          <form>
+          <div>
+            <Typography gutterBottom variant="h4" component="h2">
+              Your Profile
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+              <strong>Username:</strong> {user.name}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+              <strong>Email:</strong> {user.name}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+              <strong>First Name:</strong> XXXXXX
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+              <strong>Last Name:</strong> XXXXXX
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+              <strong>Street Address:</strong> XXXXXX
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+              <strong>City/Town:</strong> XXXXXX
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+              <strong>State:</strong> XXXXXX
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+              <strong>Zip Code:</strong> XXXXXX
+            </Typography>
+          </div>
+          </form>
+          <hr />
+          <div>
+            <Typography gutterBottom variant="h4" component="h2">
+              Edit Profile
+            </Typography>
+            <TextField
+              id="outlined-margin-none"
+              label="First Name"
+              style={{ padding: 6 }}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-margin-none"
+              label="Last Name"
+              style={{ padding: 6 }}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-margin-none"
+              label="Email"
+              style={{ padding: 6 }}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            />
+          </div>
+          <hr />
+          <div>
+            <Typography gutterBottom variant="h4" component="h2">
+              Edit Address
+            </Typography>
+            <TextField
+              id="outlined-margin-none"
+              label="Street Address"
+              style={{ padding: 6 }}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-margin-none"
+              label="City/Town"
+              style={{ padding: 6 }}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-margin-none"
+              label="State"
+              style={{ padding: 6 }}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            />
+            <TextField
+              id="outlined-margin-none"
+              label="Zip Code"
+              style={{ padding: 6 }}
+              margin="normal"
+              InputLabelProps={{
+                shrink: true,
+              }}
+              variant="outlined"
+            />
+          </div>
+          <hr />
+          <Button
+            size="large"
+            variant="contained"
+            color="primary"
+            className={classes.btnMargin}
           >
-            Username: {user.name}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
-            Email: {user.name}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
-            First Name: XXXXXX
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
-            Last Name: XXXXXX
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
-            Street Address: XXXXXX
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
-            City/Town: XXXXXX
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
-            State: XXXXXX
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-            className={classes.paragraphText}
-          >
-            Zip Code: XXXXXX
-          </Typography>
+            UPDATE PROFILE
+          </Button>
         </div>
-        </form>
-        <hr />
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Edit Profile
-          </Typography>
-          <TextField
-            id="outlined-margin-none"
-            label="First Name"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Last Name"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Email"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-        </div>
-        <hr />
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Edit Address
-          </Typography>
-          <TextField
-            id="outlined-margin-none"
-            label="Street Address"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="City/Town"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="State"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-          <TextField
-            id="outlined-margin-none"
-            label="Zip Code"
-            style={{ padding: 6 }}
-            margin="normal"
-            InputLabelProps={{
-              shrink: true,
-            }}
-            variant="outlined"
-          />
-        </div>
-        <hr />
-        <Button
-          size="large"
-          variant="contained"
-          color="primary"
-          className={classes.btnMargin}
-        >
-          UPDATE PROFILE
-        </Button>
       </div>
-    </div>
     </Grid>
     )
   );
