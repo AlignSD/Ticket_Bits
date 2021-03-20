@@ -27,6 +27,7 @@ import Event from './abis/Event.json'
 import EventFactory from './abis/EventFactory.json'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Matrix from "../src/components/MatrixRain"
+import EventDetails from './pages/EventDetails'
 import zIndex from "@material-ui/core/styles/zIndex";
 
 
@@ -203,6 +204,7 @@ const App = () => {
                                                       eventModel = {eventModel}
                                                       setEventModel = {setEventModel}
             /></ProtectedRoute>
+            <ProtectedRoute exact path='/EventDetails' component={EventDetails}></ProtectedRoute>
             <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
             <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
             <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>

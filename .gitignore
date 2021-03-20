@@ -104,3 +104,6 @@ dist
 .tern-port
 
 # Migrations and contracts
+
+# misc
+.DS_Store
