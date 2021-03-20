@@ -30,8 +30,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "3vh",
   },
   btnMargin: {
-    margin: theme.spacing(1),
-  },
+    marginTop: 20,
+    color: "#ffffff",
+    backgroundColor: "#000000",
+    '&:hover': {
+      backgroundColor: '#3d4c65',
+      boxShadow: 'black',
+    }},
   contained:{
     backgroundColor: "#ffffff",
     marginTop: 50,
