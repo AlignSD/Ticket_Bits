@@ -1,0 +1,150 @@
+pragma solidity >=0.6.0 <0.8.0;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+
+
+/** @title Event */
+contract Event is ERC721 {
+
+      uint id;
+      string eventName;
+      uint start;
+      uint end;
+      uint supply;
+      uint ticketPrice;
+      string description;
+      string location;
+      bool soldout;
+      bool canceled;
+      address payable owner;
+      uint private ticketId;
+      bool purchased;
+   
+    event TicketPurchased(uint id, string eventName, uint start, uint end, uint supply, uint ticketPrice, string description, string location, address purchaser, uint quantity, uint date);
+    event TicketTransfered(address _from, address _to, uint _tokenId, uint id, string eventName, uint start, uint end, uint supply, uint ticketPrice, string description, string location);
+    event PaymentCollected(address _event, address _organizer, uint _balance );
+    
+
+
+    // /**@dev created new instance of Event
+    // @param _organizer account address of event organizer creating the event 
+    // @param _name title of the event
+    // @param _start start date of event given in unix timestamp
+    // @param _end end date of event provided in unix timestamp
+    // @param _description extra description of the event
+    // @param _location event location
+    // @param supply available tickets for sell to the event
+    // @param _ticketPrice ticket price in wei
+    // */
+      
+
+    constructor(address payable _organizer, 
+    string memory _name, 
+    uint _start, 
+    uint _end,
+    uint _supply, 
+    uint _ticketPrice,
+    string memory _description,  
+    string memory _location
+    ) ERC721(eventName, "CRYPTKS") {
+
+        eventName = _name;
+        start = _start;
+        end = _end;
+        supply = _supply;
+        ticketPrice = _ticketPrice;
+        description = _description;
+        location = _location;
+        owner = _organizer;
+
+    }
+
+
+
+    // /**
+    // @dev allows user to purchase ticket for the event
+    // @param quantity total amount of ticket the user wishes to purchase maximum amount is 5
+    // */
+    function purchaseTicket(uint quantity) public payable {
+        require(supply  >= quantity, "not enough ticket quantity available!!!");
+        require(msg.value >= ticketPrice * quantity, "not enough money sent");
+        
+        for(uint8 i = 0; i < quantity; i++) {
+            ticketId++;
+            supply--;
+            _mint(msg.sender, ticketId);
+        }
+
+        emit TicketPurchased( id, eventName, start, end, supply, ticketPrice, description, location, msg.sender, quantity, block.timestamp);
+    }
+
+
+    // /**
+    
+    // @dev allow ticket holders to transfer ownership of there ticket to other users
+    // @param _to address of the reciever 
+    // @param _tokenId id of the ticket to be transfered
+    // */
+    function transferTicket(address _to, uint _tokenId) public {
+        require(address(0) != _to, "invalid address provided");
+        transferFrom(msg.sender, _to, _tokenId);
+        emit TicketTransfered(msg.sender, _to, _tokenId, id, eventName, start, end, supply, ticketPrice, description, location);
+    }
+
+
+    // /**
+    
+    // @dev validated if a given ticket id is owned by the given user 
+    // @param _owner address of the owner of ticket to be validated
+    // @param _tokenId id of the ticket to be validated
+    // @return x boolean value holding the result 
+    // */
+    function isTicketValid(address _owner, uint _tokenId) onlyOwner public  returns(bool) {
+        if(ownerOf(_tokenId) == _owner) {
+            _burn(_tokenId);
+            return true;
+        }  else {
+            return false;
+        }
+    }
+
+
+//   /**
+  
+  
+//   @dev returns tickets array owned by a given user
+//   @param _owner address of the required 
+//   @return x arrays of ticket id owned by user
+//   */
+    // function getOwnersTicket(address _owner) public view returns(uint256[] memory) {
+    //     uint256 index;
+    //     tokenByIndex(index);
+    //     uint256[] memory ownersTickets;
+    //     ownersTickets[tokenOfOwnerByIndex(_owner, index)];
+    //     return ownersTickets;
+        
+    // }
+    mapping(address => mapping(uint256 => uint256)) private _ownedTokens;
+
+    function getOwnersTicket(address _owner, uint256 index) public view virtual returns (uint256) {
+        require(index < ERC721.balanceOf(owner), "ERC721Enumerable: owner index out of bounds");
+        return _ownedTokens[owner][index];
+    }
+    // /**
+    
+    // @dev lets event organizer get ether collected for tickets sold for the event
+    //  */
+
+    function collectPayment() onlyOwner public {
+
+        selfdestruct(msg.sender);
+       emit PaymentCollected(address(this), msg.sender, address(this).balance );
+    }
+
+      modifier onlyOwner {
+        require(msg.sender == owner, "only event owner is allowed to perform this action");
+        _;
+    }
+
+}

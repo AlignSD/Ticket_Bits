@@ -18,14 +18,14 @@ import CoinbaseAPI from "./CoinbaseAPI";
 import CreateEvent from "./pages/CreateEvent"
 import UserProfile from "./pages/UserProfile"
 import Paypal from "./components/Paypal"
-import TicketsContextProvider from "./utils/TicketsContext"
 import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
 import Event from './abis/Event.json'
 import EventFactory from './abis/EventFactory.json'
 
 const App = () => {
-  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel, setEvent, eventState, eventFactoryState, setEventFactory} = useContext(TicketsContext)
+
+  let {account, tickets, loading, userType, paypalState, marketplaceState, inputName, inputStart, inputEnd, inputSupply, inputDescription, inputTicketPrice, inputLocation, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel, setEvent, eventState, eventFactoryState, setEventFactory, setInputName, setInputStart, setInputEnd, setInputSupply,setInputTicketPrice, setInputDescription, setInputLocation} = useContext(TicketsContext)
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -54,6 +54,7 @@ const App = () => {
     const web3 = window.web3;
     // Load account
     const accounts = await web3.eth.getAccounts()
+    console.log(accounts);
     let accountNum = accounts[0]
     // Change account state to equal accountNum
     setAccountName((account = accountNum))
@@ -79,21 +80,32 @@ const App = () => {
       setMarket((marketplaceState = marketplace))
       setEvent((eventState = event))
       setEventFactory((eventFactoryState = eventfactory))
+      console.log(eventFactoryState)
       const ticketCount = await marketplace.methods.ticketCount().call()
       console.log(marketplace.methods, "marketplacemethods")
       loadTickets(ticketCount, marketplace);
       // const eventList = await eventfactory.methods.getDeployedEvents().call()
       // console.log(eventList)
+
       
-      
-      setEventModel((eventModel = eventfactory))
-      console.log(eventModel)
-      
+      // setEventModel((eventModel = eventfactory))
       
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
     }  
   }
+
+//   const transaction = {
+//     name: "Test event",
+//     start: "555555555",
+//     end:"666666666",
+//     supply: 200,
+//     ticketPrice: 1,
+//     description: "event description",
+//     location: "addis ababa"
+// };
+// let result = createEvent(transaction.name, transaction.start, transaction.end, transaction.supply, transaction.ticketPrice, transaction.description, transaction.location);
+//  console.log(result); 
 
   // async getEventById(id)
 
@@ -133,6 +145,18 @@ const App = () => {
         });
     }
   }
+
+//  function createEvent (inputName, inputStart, inputEnd, inputSupply, inputTicketPrice, inputDescription, inputLocation) {
+//     if (eventFactoryState) {
+//       eventFactoryState.methods
+//       .createEvent(inputName, inputStart, inputEnd, inputSupply, inputTicketPrice, inputDescription, inputLocation)
+//       .send({ from: account })
+//       .once("receipt", (receipt) => {
+//         setLoading({ loading: false });
+//       }); 
+//     }
+//   }
+
   const { isLoading } = useAuth0();
 
   // const apiKey = '3bb54333680d7672149c11bb6d783ccfe95329ecf2f5a7df443e0d323ea3db25';

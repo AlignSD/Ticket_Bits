@@ -47,9 +47,9 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
             assert.equal(event.purchased, false, 'purchased is correct')
 
 
-            //FAILURES: Product must have a name
+            //FAILURES: Ticket must have a name
             await  await marketplace.createTicket('', web3.utils.toWei('1', 'Ether'), { from: seller}).should.be.rejected;
-            //FAILURES: Product must have a price
+            //FAILURES: Ticket must have a price
             await  await marketplace.createTicket('Crssd', 0, { from: seller}).should.be.rejected;
         })
 

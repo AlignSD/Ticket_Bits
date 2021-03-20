@@ -6,6 +6,9 @@ import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import {TicketsContext} from '../utils/TicketsContext'
 import web3 from 'web3'
+import eventFactoryArtifact from "../abis/EventFactory.json"
+import eventArtifact from "../abis/Event.json"
+
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -35,45 +38,96 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LayoutTextFields(props) {
   
-  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel} = useContext(TicketsContext)
-  const classes = useStyles();
-  // console.log(eventModel.methods.createEvent("test", 1, 1, 1, 1,"test","test2"))
-  // console.log(eventModel.methods.)
-  const [modelName, setModelName] = useState("")
-  const [modelStart, setModelStart] = useState(0)
-  const [modelEnd, setModelEnd] = useState(0)
-  const [modelAmount, setModelAmount] = useState(0)
-  const [modelPrice, setModelPrice] = useState(0)
-  const [modelSummary, setModelSummary] = useState("")
-  const [modelVenue, setModelVenue] = useState("")
+  
+  let {account, tickets, loading, userType, paypalState, marketplaceState, eventFactoryState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, setEventFactory} = useContext(TicketsContext)
 
-  const createEventModel = [modelName.name , modelStart.start , modelEnd.end , modelAmount.amount , modelPrice.price , modelSummary.summary, modelVenue.venue]
-  // .then()eventModel.methods.createEvent(createModelsState), console.log(eventModel.methods), console.log(createModelsState)}
-  // eventModel.methods.createEvent(createModelsState); console.log(createModelsState)}
-  function toTimestamp(date) {
-    return new Date(date).valueOf();
+  const classes = useStyles();
+  const [inputName, setInputName] = useState("")
+  const [inputStart, setInputStart] = useState("")
+  const [inputEnd, setInputEnd] = useState("")
+  const [inputSupply, setInputSupply] = useState(0)
+  const [inputTicketPrice, setInputTicketPrice] = useState(0)
+  const [inputDescription, setInputDescription] = useState("")
+  const [inputLocation, setInputLocation] = useState("")
+  const [eventList, setEventList] = useState([])
+
+  // let id = "";
+  let event;
+
+  let eventModel = {
+    id: 0,
+    name: "",
+    location: "",
+    startDate: "",
+    endDate: "",
+    description: "",
+    ticketPrice: 0,
+    availableTickets: 0,
+    eventTicketId: []
   }
+
+
+  async function getEventID () {
+    event = await eventFactoryState.;
+    console.log(event)
+  }
+
+  async function createEvent () {
+    if (eventFactoryState) {
+      console.log(eventFactoryState, "eventFactoryState")
+
+      console.log(eventFactoryState.methods
+    .createEvent(inputName, inputStart, inputEnd, inputSupply, inputTicketPrice, inputDescription, inputLocation), "createEvent func")
+
+     const eventsList = await eventFactoryState.methods.createEvent(
+       inputName, 
+       inputStart, 
+       inputEnd, 
+       inputSupply, 
+       web3.utils.toWei(inputTicketPrice, "ether"), 
+       inputDescription, 
+       inputLocation)
+       .send({ from: account }
+        );
+
+        return eventsList
+      
+    }
+  }
+
+  async function getEventList() {
+    const eventCount = await eventFactoryState.methods.deployedEvents()
+    let eventArr = [];
+    for (var i = 1; i <= eventCount; i++){
+    let events = await eventFactoryState.methods.deployedEvents(i).call();
+    eventArr.push(events)
+    }
+    setEventList(eventArr)
+  }
+
 
   return (
     <div className={classes.root}>
       <div className={classes.containerSm}>
+      {/* {console.log(eventList)} */}
             Basic Event Info
       <form autoComplete="off" noValidate  onSubmit = {(event) => { event.preventDefault();
-          const name = modelName;
-          const start = modelStart;
-          const end = modelEnd;
-          const totalTickets = modelAmount;
-          const price = modelPrice;
-          const priceStr = parseInt(price)
-          const summary = modelSummary;
-          const location = modelVenue;
-          console.log(name, start, end, totalTickets, price, summary,location,"look at price here")
-          
-          const eventCheck = eventModel.methods.createEvent(name, start, end, totalTickets, price, summary,location).send({ from: account })
-          .once("receipt", (receipt) => {
-            console.log(eventCheck, "event check")
-            setLoading({ loading: false });
-          })}}
+      console.log(inputName);
+      console.log(inputStart);
+      console.log(inputEnd);
+      console.log(inputSupply);
+      console.log(inputTicketPrice);
+      console.log(inputDescription);
+      console.log(inputLocation);
+        createEvent();
+        getEventList();  
+          // const eventCheck = eventModel.methods.createEvent(name, start, end, totalTickets, price, summary,location).send({ from: account })
+          // .once("receipt", (receipt) => {
+          //   console.log(eventCheck, "event check")
+          //   setLoading({ loading: false });
+          // })
+        }
+        }
           >
 
         <div>
@@ -87,26 +141,26 @@ export default function LayoutTextFields(props) {
             Name your event and tell the event-goers why they should come. Add
             details that highlight what makes it unique.
           </Typography>
-          <TextField name= "Event Name" className="outlined-margin-none" id="EventName" label="Event Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelName({name: e.target.value})}
+          <TextField name= "Event Name" className="outlined-margin-none" id="EventName" label="Event Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
+            onChange = {(e)=> setInputName(e.target.value)}
           />
-           <TextField className="outlined-margin-none" id="eventStart" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelStart({start: parseInt(e.target.value, 0)})}
+           <TextField className="outlined-margin-none" id="eventStart" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
+            onChange = {(e)=> setInputStart(e.target.value)}
           />
-          <TextField className="outlined-margin-none" id="eventEnd" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelEnd({end: parseInt(e.target.value, 0)})}
+          <TextField className="outlined-margin-none" id="eventEnd" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined" 
+            onChange = {(e)=> setInputEnd(e.target.value)}
           />
-           <TextField className="outlined-margin-none" id="totalTickets" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelAmount({amount: parseInt(e.target.value, 0)})}
+           <TextField className="outlined-margin-none" id="totalTickets" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
+            onChange = {(e)=> setInputSupply(e.target.value)}
           />
-          <TextField className="outlined-margin-none" id="price" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelPrice({price: parseInt(e.target.value, 0)})}
+          <TextField className="outlined-margin-none" id="price" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
+            onChange = {(e)=> setInputTicketPrice(e.target.value)}
           />
-          <TextField className="outlined-margin-none" id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} multiline variant="outlined"
-            onChange = {(e)=> setModelSummary({summary: e.target.value})}
+          <TextField className="outlined-margin-none" id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} multiline variant="outlined" 
+            onChange = {(e)=> setInputDescription(e.target.value)}
           />
-          <TextField className="outlined-margin-none" id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
-            onChange = {(e)=> setModelVenue({venue: e.target.value})} 
+          <TextField className="outlined-margin-none" id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"  
+            onChange = {(e)=> setInputLocation(e.target.value)} 
           />
           <TextField id="outlined-full-width" label="Organizer *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
           <TextField id="outlined-margin-none" label="Event Type *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity >=0.6.0 <0.8.0;
 
 import "./Event.sol";
 
@@ -7,17 +7,17 @@ import "./Event.sol";
 contract EventFactory {
 
 
-        /**
-        @dev created and deployed new event and saves it in the event list array
-        @param _name title of the event to be created 
-        @param start start date of event in unix timestamp
-        @param end end date of event in unix timestamp 
-        @param supply total supply of event ticket available for the event
-        @param ticketPrice price of single ticket price in wei
-        @param description description of the event 
-        @param location location of the event
-        @return emits eveneCreated log
-        */
+        // /**
+        // @dev created and deployed new event and saves it in the event list array
+        // @param _name title of the event to be created 
+        // @param start start date of event in unix timestamp
+        // @param end end date of event in unix timestamp 
+        // @param supply total supply of event ticket available for the event
+        // @param ticketPrice price of single ticket price in wei
+        // @param description description of the event 
+        // @param location location of the event
+        // @return emits eveneCreated log
+        // */
     bool private halted;
     address private owner;
 
@@ -35,6 +35,7 @@ contract EventFactory {
 
     }
 
+    
     /**
     @dev returns list of event addresses
     @return deployedEvents array of event address */

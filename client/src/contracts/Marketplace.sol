@@ -1,6 +1,6 @@
-pragma solidity ^0.5.0;
+pragma solidity >=0.6.0 <0.8.0;
 
-import "./Event.sol";
+// import "./Event.sol";
 
 contract Marketplace {
     string public name; 
@@ -50,7 +50,7 @@ contract Marketplace {
     }
 
     function purchaseTicket(uint _id) public payable {
-        // Fetch the product
+        // Fetch the ticket
         Ticket memory _ticket = tickets[_id];
         // Fetch the owner
         address payable _seller = _ticket.owner;
@@ -69,7 +69,7 @@ contract Marketplace {
         // Update the product
         tickets[_id] = _ticket;
         // Pay the seller by sending them Ether
-        address(_seller).transfer(msg.value);
+        (_seller).transfer(msg.value);
         //Trigger an event
          emit TicketPurchased(ticketCount, _ticket.name, _ticket.price, msg.sender, true);
     }

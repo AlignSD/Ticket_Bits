@@ -1,0 +1,97 @@
+pragma solidity >=0.6.0 <0.8.0;
+pragma experimental ABIEncoderV2;
+pragma experimental SMTChecker;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "./Event.sol";
+
+/**
+@title Event factory */
+contract EventFactory {
+
+
+        // /**
+        // @dev created and deployed new event and saves it in the event list array
+        // @param _name title of the event to be created 
+        // @param start start date of event in unix timestamp
+        // @param end end date of event in unix timestamp 
+        // @param supply total supply of event ticket available for the event
+        // @param ticketPrice price of single ticket price in wei
+        // @param description description of the event 
+        // @param location location of the event
+        // @return emits eveneCreated log
+        // */
+
+    address private owner;
+    string public name;
+    uint public eventCount = 0;
+    mapping(uint => Event) public events;
+    
+    struct Event {
+      uint id;
+      string _name;
+      uint start;
+      uint end;
+      uint supply;
+      uint _ticketPrice;
+      string description;
+      string location;
+      address payable owner;
+    }
+
+    event EventCreated (
+      uint id,
+      string name,
+      uint start,
+      uint end,
+      uint supply,
+      uint ticketPrice,
+      string description,
+      string location,
+      address payable owner
+    );
+
+    constructor() public {
+        name = "Eventfactory";
+    }
+
+    // Event[] public deployedEvents;
+    // event eventCreated(Event _address, string _name, uint _ticketPrice, string location, string start, string end, uint supply, string description);
+
+
+
+    function createEvent(string memory _name, uint _start, uint _end,  uint _supply, uint _ticketPrice, string memory _description, string memory _location) public  {
+        //Require a valid name
+        require(bytes(_name).length > 0);
+        //Require a valid ticketPrice
+        require(_ticketPrice > 0);
+        //Require Valid Start Date
+        require(_start >= block.timestamp);
+        //Require Valid End Date
+        require(_end >= block.timestamp);
+        //Require Valid Supply of Tickets
+        require(_supply > 0);
+        //Require Valid Ticket Price
+        require(_ticketPrice > 0);
+        //Require Description
+        require(bytes(_description).length > 0);
+        //Require Location
+        require(bytes(_location).length > 0);
+        eventCount ++;
+        // Create the event
+        events[eventCount] = Event(eventCount, _name, _start, _end, _supply, _ticketPrice, _description, _location, msg.sender);
+        //Trigger an event
+        emit EventCreated(eventCount, _name, _start, _end, _supply, _ticketPrice, _description, _location, msg.sender);
+
+    }
+
+//     /**
+//     @dev returns list of event addresses
+//     @return deployedEvents array of event address */
+//    function getDeployedEvents() public view returns(Event[] memory) {
+        
+//     }
+
+    
+    
+}

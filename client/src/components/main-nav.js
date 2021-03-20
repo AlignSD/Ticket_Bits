@@ -6,8 +6,7 @@ import React from "react";
 
 // MainNav links are visible to all users
 
-function MainNav(props){
-  console.log(props)
+function MainNav(){
 
   return(
   <div className="navbar-nav mr-auto">

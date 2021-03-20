@@ -1,6 +1,13 @@
+import { assert } from "chai"
+
 const EventFactory = artifacts.require("EventFactory");
 let catchRevert = require("./execptionHelper.test").catchRevert;
-const assert = require("assert");
+
+
+require('chai')
+    .use(require('chai-as-promised'))
+    .should()
+
 
 contract("EventFactory", function(accounts) {
   let eventFactory;

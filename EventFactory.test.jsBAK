@@ -1,0 +1,111 @@
+import { assert } from "chai"
+
+const EventFactory = artifacts.require("EventFactory");
+
+require('chai')
+    .use(require('chai-as-promised'))
+    .should()
+
+contract("EventFactory", function(deployer, eventHost, buyer) {
+  let eventFactory;
+
+
+  beforeEach(async () => {
+    eventFactory = await EventFactory.deployed()
+  })
+
+describe('deployment', async() => {
+    it('deploys successfully', async () => {
+        const address = await eventFactory.address
+        assert.notEqual(address, 0x0)
+        assert.notEqual(address, '')
+        assert.notEqual(address, null)
+        assert.notEqual(address, undefined)
+    })
+
+    it('has a name', async () => {
+        const name = await eventFactory.name()
+        assert.equal(name, 'Eventfactory')
+    })
+ })
+
+describe('events', async () => {
+  let result, eventCount
+
+  before(async () => {
+    result = await eventFactory.createTicket('Test Event', 555555555, 666666666, web3.utils.toWei('1', 'Ether'), 1, "event description", "San Diego", { from: eventHost});
+    eventCount = await eventFactory.createEvent();
+  })
+
+  it("should create event successfuly", async () => {
+    const transaction = await eventFactory.createEvent(
+      "Test event",
+      555555555,
+      666666666,
+      web3.utils.toWei('200', 'Ether'),
+      1,
+      "event description",
+      "San Diego",
+      { from: eventHost }
+    );
+      // var result = await eventFactory.getDeployedEvents();
+
+    // assert.equal(1, result.length, "there should be two events created");
+
+    const { logs } = transaction;
+
+    // test if event created event is emited
+
+    assert.equal(logs.length, 1, "there should be only 1 event emited");
+    const log = logs[0];
+    assert.equal(
+      log.event,
+      "eventCreated",
+      "emited event value should be eventCreated"
+    );
+  })
+    
+    it('creates events', async () => {
+      //SUCCESS
+      assert.equal(eventCount, 1);
+      const event = result.logs[0].args;
+      assert.equal(event.id.toNumber(), eventCount.toNumber(), 'id is correct')
+      assert.equal(event.name, 'Test Event', "is correct")
+      assert.equal(event.ticketPrice, web3.utils.toWei('200', 'Ether'), 'is correct')
+      assert.equal(event.supply, 1, 'is correct')
+      assert.equal(event.description, 'event description', 'is correct')
+      assert.equal(event.location, 'San Diego', 'is correct')
+      assert.equal(event.owner, eventHost, 'is correct')
+    
+      //FAILURES: Event must have a name
+      await  await eventFactory.createTicket('', 555555555, 666666666, web3.utils.toWei('1', 'Ether'), 1, "event description", "San Diego", { from: eventHost}).should.be.rejected;
+      //FAILURES: Events must have a Start Date
+      await  await eventFactory.createTicket('Crssd', '', 666666666, web3.utils.toWei('1', 'Ether'), 1, "event description", "San Diego", { from: eventHost}).should.be.rejected;
+      //FAILURES: Events must have a End Date
+      await  await eventFactory.createTicket('Crssd', 555555555, '', web3.utils.toWei('1', 'Ether'), 1, "event description", "San Diego", { from: eventHost}).should.be.rejected;
+      //FAILURES: Events must have a Ticket Price
+      await  await eventFactory.createTicket('Crssd', 555555555, 666666666, 0,  1, "event description", "San Diego", { from: eventHost}).should.be.rejected;
+      //FAILURES: Events must have a Ticket Supply
+      await  await eventFactory.createTicket('Crssd', 555555555, 666666666, web3.utils.toWei('1', 'Ether'), 0, "event description", "San Diego", { from: eventHost}).should.be.rejected;
+      //FAILURES: Events must have a description
+      await  await eventFactory.createTicket('Crssd', 555555555, 666666666, web3.utils.toWei('1', 'Ether'), 1, '', "San Diego", { from: eventHost}).should.be.rejected;
+      //FAILURES: Tickets must have a Location
+      await  await eventFactory.createTicket('Crssd', 555555555, 666666666, web3.utils.toWei('1', 'Ether'), 1, "event description", '', { from: eventHost}).should.be.rejected;
+    })
+
+
+  it ('list events', async() => {
+    const eventList = await eventFactory.events(eventCount)
+    assert.equal(eventList.id.toNumber(), eventCount.toNumber(), 'id is correct')
+    assert.equal(eventList.name, 'Test Event', "is correct")
+    assert.equal(eventList.ticketPrice, web3.utils.toWei('200', 'Ether'), 'is correct')
+    assert.equal(eventList.supply, 1, 'is correct')
+    assert.equal(eventList.description, 'event description', 'is correct')
+    assert.equal(eventList.location, 'San Diego', 'is correct')
+    assert.equal(eventList.owner, eventHost, 'is correct')
+    assert.equal(eventList.soldout, false, 'event is not sold out')
+  })
+  
+});
+
+})

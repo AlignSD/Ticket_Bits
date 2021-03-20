@@ -14,24 +14,31 @@ const TicketsContextProvider = (props) => {
     isCheckout: false,
   });
 
+  const [inputName, setInputName] = useState("")
+  const [inputStart, setInputStart] = useState("")
+  const [inputEnd, setInputEnd] = useState("")
+  const [inputSupply, setInputSupply] = useState(0)
+  const [inputTicketPrice, setInputTicketPrice] = useState(0)
+  const [inputDescription, setInputDescription] = useState("")
+  const [inputLocation, setInputLocation] = useState("")
+
   const [marketplaceState, setMarket] = useState();
   const [eventState, setEvent] = useState('');
   const [eventFactoryState, setEventFactory] = useState('');
   const [openPopup, setOpenPopup] = useState(false)
 
   const [eventModel, setEventModel] = useState({
-    id: 0,
     name: "",
-    location: "",
-    startDate: 0,
-    endDate: 0,
-    description: "",
+    start: "",
+    end: "",
+    supply: 0,
     ticketPrice: 0,
-    availableTickets: 0
+    description: "",
+    location: ""
   })
 
   return(
-    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, eventState, eventFactoryState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, setEvent, setEventFactory, eventModel, setEventModel}}>
+    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, eventState, eventFactoryState, inputName, inputStart, inputEnd, inputSupply, inputDescription, inputTicketPrice, inputLocation, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, setEvent, setEventFactory, setInputName, setInputStart, setInputEnd, setInputSupply,setInputTicketPrice, setInputDescription, setInputLocation}}>
         {props.children}
         </TicketsContext.Provider>
   )
