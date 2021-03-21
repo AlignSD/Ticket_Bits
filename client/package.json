@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "test": "mocha --exit --recursive --timeout 1000000000000"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
   "description": "An Ethereum Ticket Marketplace",
   "homepage": "https://ticket-bits.herokuapp.com/",
@@ -43,13 +47,6 @@
     "truffle": "^5.2.3",
     "validator": "^13.5.2",
     "web3": "^1.0.0-beta.55"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"

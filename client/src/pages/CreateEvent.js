@@ -125,26 +125,6 @@ export default function LayoutTextFields(props) {
   
 
   return (
-<<<<<<< HEAD
-    <div className={classes.root}>
-      <div className={classes.containerSm}>
-            Basic Event Info
-      <form autoComplete="off" noValidate  onSubmit = {(event) => { event.preventDefault();
-          // let name = modelName;
-          // let start = modelStart;
-          // let end = modelEnd;
-          // let totalTickets = modelAmount;
-          // let price = modelPrice;
-          // // const priceStr = parseInt(price)
-          // const summary = modelSummary;
-          // let location = modelVenue;
-          // console.log(name, start, end, totalTickets, price, summary,location,"look at price here")
-          
-          const eventCheck = eventModel.methods.createEvent(modelName, (modelStart).toString, (modelEnd).toString, modelAmount, modelPrice, modelSummary, modelVenue).send({ from: account })
-          console.log(eventCheck, "event check")
-        }
-        }
-=======
     <Grid >
     <div className={classes.contained}  style={{position: 'absolute',
     zIndex: 1}}>
@@ -167,7 +147,6 @@ export default function LayoutTextFields(props) {
           //   setLoading({ loading: false });
           
   }}
->>>>>>> d789d502f30bac8d094d5f0db9934aa8ab582179
           >
 
         <div style={{backgroundColor: "transparent"}} >
@@ -182,18 +161,6 @@ export default function LayoutTextFields(props) {
             onChange ={(e) => setEvents({...events, eventName: e.target.value})}
           />
            <TextField className="outlined-margin-none" id="eventStart" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-<<<<<<< HEAD
-            onChange = {(e)=> setModelStart({start: (e.target.value)})}
-          />
-          <TextField className="outlined-margin-none" id="eventEnd" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelEnd({end: (e.target.value)})}
-          />
-           <TextField className="outlined-margin-none" id="totalTickets" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelAmount({amount: (e.target.value)})}
-          />
-          <TextField className="outlined-margin-none" id="price" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelPrice({price: (e.target.value)})}
-=======
             onChange = {(e) => setEvents({...events,eventStarts: e.target.value})}
           />
           <TextField className="outlined-margin-none" id="eventEnd" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
@@ -204,7 +171,6 @@ export default function LayoutTextFields(props) {
           />
           <TextField className="outlined-margin-none" id="price" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
             onChange = {(e) => setEvents({...events,ticketPrice: e.target.value})}
->>>>>>> d789d502f30bac8d094d5f0db9934aa8ab582179
           />
           <TextField className="outlined-margin-none" id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} multiline variant="outlined"
             onChange = {(e) => setEvents({...events,summary: e.target.value})}

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -33,6 +33,11 @@ const useStyles = makeStyles({
   },
 });
 function Seller(props) {
+
+  const [input, setInput] = useState({
+    name: "",
+    prce: ''
+  })
   const classes = useStyles();
   console.log(props);
 
@@ -46,12 +51,11 @@ function Seller(props) {
               <form
                 onSubmit={(event) => {
                   event.preventDefault();
-                  const name = this.ticketName.value;
+                  const name = input.name;
                   const price = window.web3.utils.toWei(
-                    this.ticketPrice.value.toString(),
-                    "Ether"
-                  );
-                  this.props.createTicket(name, price);
+                    input.price,
+                    "Ether");
+                  props.createTicket(name, price);
                 }}
               >
                 <div className="form-group mr-sm-2">
@@ -59,12 +63,10 @@ function Seller(props) {
                     style={{ widith: "30%" }}
                     id="ticketName"
                     type="text"
-                    ref={(input) => {
-                      props.tickets.ticketName = input;
-                    }}
                     className="form"
                     placeholder="Ticket Name"
                     required
+                    onChange={(e) => setInput({...input, name: e.target.value})}
                   />
                 </div>
                 <div className="form-group mr-sm-2">
@@ -72,12 +74,10 @@ function Seller(props) {
                     style={{ widith: "30%" }}
                     id="ticketPrice"
                     type="text"
-                    ref={(input) => {
-                      props.tickets.ticketPrice = input;
-                    }}
                     className="form"
                     placeholder="Ticket Price"
                     required
+                    onChange={(e) => setInput({...input, price: e.target.value})}
                   />
                 </div>
                 <Button type="submit" className={classes.btnMargin}>
