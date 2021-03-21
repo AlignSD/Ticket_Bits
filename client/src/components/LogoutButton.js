@@ -1,9 +1,6 @@
 import React from "react";
-import { Button, IconButton, makeStyles, Toolbar } from "@material-ui/core";
+import { IconButton, makeStyles, Toolbar } from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { useAuth0 } from "@auth0/auth0-react";
-import UserProfile from "../pages/UserProfile"
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Grow from '@material-ui/core/Grow';
 import Grid from '@material-ui/core/Grid';
@@ -12,8 +9,7 @@ import Popper from '@material-ui/core/Popper';
 // import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import ProfilePopUp from "../components/profilePopUp";
-import PayPal from "../components/Paypal"
-import CheckoutButton from "../components/CheckoutButton"
+import CheckoutButton from "../components/CheckoutButton";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,21 +49,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const LogoutButton = () => {
-
-  const [open, setOpen] = React.useState(false);
+const [open, setOpen] = React.useState(false);
 const anchorRef = React.useRef(null);
-
 const handleToggle = () => {
   setOpen((prevOpen) => !prevOpen);
 };
-
 const handleClose = (event) => {
   if (anchorRef.current && anchorRef.current.contains(event.target)) {
     return;
   }
-
   setOpen(false);
 };
 
@@ -88,7 +79,6 @@ React.useEffect(() => {
   prevOpen.current = open;
 }, [open]);
 
-  const { logout, user } = useAuth0();
   const classes = useStyles();
   return (
 

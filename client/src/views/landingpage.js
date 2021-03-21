@@ -1,12 +1,10 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 import CrypticLogo from "../images/CrypticLogo.png";
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import "./landingpage.css"
-import App from "../App"
-import { Route } from "react-router-dom";
 
 const BootstrapButton = withStyles({
     root: {
@@ -62,7 +60,6 @@ const useStyles = makeStyles({
     button:{
       height: 50
     }
-
 })
 
 function LandingPage() {
@@ -85,8 +82,5 @@ function LandingPage() {
     <Grid  className={classes.chain}><p className="font-face">The Chain</p></Grid>
     </Grid>
     </Container>
-    
-    
     )};
-  
-  export default LandingPage;
+ export default LandingPage;

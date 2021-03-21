@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
+import React, {  useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 // Event host sells tickets thru Seller component
@@ -33,13 +33,11 @@ const useStyles = makeStyles({
   },
 });
 function Seller(props) {
-
   const [input, setInput] = useState({
     name: "",
     prce: ''
   })
   const classes = useStyles();
-  console.log(props);
 
   return (
     <div className={classes.contained}>
@@ -92,5 +90,4 @@ function Seller(props) {
     </div>
   );
 }
-
 export default Seller;

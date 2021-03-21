@@ -1,10 +1,6 @@
 import React from "react";
-import { Button, IconButton, makeStyles, Toolbar } from "@material-ui/core";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Button, makeStyles, Toolbar } from "@material-ui/core";
 import { useAuth0 } from "@auth0/auth0-react";
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,19 +36,15 @@ function LoginButton(){
 
   return (
     <div className={classes.root}>
-      
-        <Toolbar>
-          
-          <Button 
+      <Toolbar>
+        <Button 
             color="inherit"
             onClick={() => loginWithRedirect()}
             variant="contained"
           >
             Login
-          </Button>
-
-        </Toolbar>
-      
+        </Button>
+      </Toolbar>
     </div>
   );
 };
