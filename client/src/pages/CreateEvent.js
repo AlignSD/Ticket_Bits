@@ -38,15 +38,17 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: '#3d4c65',
       boxShadow: 'black',
     }},
-  contained:{
-    backgroundColor: "#ffffff",
-    marginTop: 50,
-    zIndex: 1
-  },
-  form: {
-    padding: 25,
-
-  }
+    contained: {
+      backgroundColor: "#FFFFFF",
+      borderRadius: 6,
+      marginTop: 50,
+      marginRight: "auto",
+      marginBottom: 150,
+      marginLeft: "auto",
+      padding: 20,
+      width: "100%",
+      zIndex: 1,
+    },
 }));
 
 export default function LayoutTextFields(props) {
@@ -123,12 +125,12 @@ export default function LayoutTextFields(props) {
   
 
   return (
-    <Grid className={classes.contained}>
-    <div className={classes.root}  style={{position: 'absolute',
+    <Grid >
+    <div className={classes.contained}  style={{position: 'absolute',
     zIndex: 1}}>
-      <div className={classes.form}>
+      <div>
            
-      <form autoComplete="off" noValidate  onSubmit = { (event) => { event.preventDefault();
+      <form  autoComplete="off" noValidate  onSubmit = { (event) => { event.preventDefault();
           const name = modelName;
           const start = modelStart;
           const end = modelEnd;
@@ -147,13 +149,10 @@ export default function LayoutTextFields(props) {
   }}
           >
 
-        <div style={{backgroundColor: "transparent"}}>
+        <div style={{backgroundColor: "transparent"}} >
           <Typography gutterBottom variant="h4" component="h2">
-            Basic Event Info
+            Create Event
           </Typography>
-          <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
-          CREATE EVENT
-        </Button>
           <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
             Name your event and tell the event-goers why they should come. Add
             details that highlight what makes it unique.
@@ -179,74 +178,14 @@ export default function LayoutTextFields(props) {
           <TextField className="outlined-margin-none" id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
             onChange = {(e) => setEvents({...events,organizer: e.target.value})}
           />
-          <TextField id="outlined-full-width" label="Organizer *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="Event Type *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-margin-none" label="Category *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-margin-none" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-        </div>
-        <hr />
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Event Location
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
-            Help people in the area discover your event and let attendees know
-            where to show up.
-          </Typography>
-          <TextField id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }}  fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-full-width" label="Address *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-full-width" label="City *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="State *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="Zip Code *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-        </div>
-        <hr />
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Date &amp; Time
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
-            Tell event-goers when your event starts and ends so they can make
-            plans to attend.
-          </Typography>
-          <TextField id="outlined-margin-none" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-margin-none" label="Start Time *" placeholder="00:00" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-margin-none" label="End Time *" placeholder="00:00" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-        </div>
-        <hr />
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Event Description
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
-            Add more details to your event like your schedule, sponsors, or
-            featured guests.
-          </Typography>
-          <TextField id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" multiline/>
-        </div>
-        <hr />
-          <Typography gutterBottom variant="h4" component="h2">
-            Event Image
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}
-          >
-            Upload your event flyer or photo.
-          </Typography>
-          <input accept="image/*" className={classes.input} id="contained-button-file" multiple type="file"
-          />
-          <label htmlFor="contained-button-file">
-          <Button variant="contained" color="primary" component="span">
-            Upload
-          </Button>
-        </label>
-        <hr />
-         <Button size="large" variant="contained" className={classes.btnMargin}>
-          CANCEL
+                    <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
+          CREATE EVENT
         </Button>
+        </div>
         </form>
-      </div>
-    </div>
-    </Grid>
+        </div>
+        </div>
+        </Grid>
+         
   );
 }

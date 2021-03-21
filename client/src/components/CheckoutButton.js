@@ -13,7 +13,6 @@ import Popper from '@material-ui/core/Popper';
 import MenuList from '@material-ui/core/MenuList';
 import ProfilePopUp from "../components/profilePopUp";
 import PayPal from "../components/Paypal"
-import CheckoutButton from "../components/CheckoutButton"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const LogoutButton = () => {
+const CheckoutButton = () => {
 
   const [open, setOpen] = React.useState(false);
 const anchorRef = React.useRef(null);
@@ -94,17 +93,15 @@ React.useEffect(() => {
 
     <div className={classes.root}>
       <Toolbar>
-    <IconButton
-          edge="start" className={classes.iconButton}
-          ref={anchorRef}
-          aria-controls={open ? 'menu-list-grow' : undefined}
+  <IconButton edge="start" className={classes.iconButton}
+  ref={anchorRef}
+  aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
-          onClick={handleToggle}
-        >
-          <AccountCircleIcon/>
-          <span style={{ color: `white` }}>Profile</span>
-        </IconButton>
-    <IconButton edge="start" className={classes.iconButton}
+          onClick={handleToggle}>
+      <ShoppingCartIcon fontSize="medium" />
+      <span style={{ fontSize: 14 }}>CHECKOUT</span>
+  </IconButton>
+  <IconButton edge="start" className={classes.iconButton}
     >
          <Popper open={open} placement="bottom" role={undefined} transition disablePortal style={{top: "10%", right: "5%", left: "75%", width: "20%"}}>
           {({ TransitionProps, placement }) => (
@@ -116,7 +113,7 @@ React.useEffect(() => {
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <Grid className={classes.popitem}>
-                      <ProfilePopUp className={classes.popper}/>
+                      <PayPal className={classes.popper}/>
                     </Grid>
                   </MenuList>
                 </ClickAwayListener>
@@ -126,11 +123,9 @@ React.useEffect(() => {
           </Popper>
          
   </IconButton>
-
-  <CheckoutButton/>
   </Toolbar>
   </div>
   );
 };
 
-export default LogoutButton;
+export default CheckoutButton;

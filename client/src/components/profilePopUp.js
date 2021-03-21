@@ -40,9 +40,10 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
     padding: 20,
-    zIndex: 1
+    zIndex: 1,
   },
   logOut:{
+      margin: "5px",
     color: "#ffffff",
     backgroundColor: "#000000",
     '&:hover': {
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LayoutTextFields() {
     const { logout } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const [dataUser, getUser] = useState([]);
   const classes = useStyles();
 
   // mongo states
@@ -61,12 +63,24 @@ export default function LayoutTextFields() {
   const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	useEffect(() => {
+        // getUserInfo();
 		axios
 			.get("/api/users")
 			.then((users) => setUsers(users))
 			.catch((err) => console.log(err));
 
 	}, []);
+
+    // function getUserInfo(){
+    //     console.log("test test")
+    //    axios
+    //    .findOne("/api/users")
+    //    .then( res =>{
+    //      const dataUser = res.data;
+    //      console.log(dataUser);
+    //      setEmail(dataUser)
+    //    })
+    //   } 
 
   // submit fields to mongodb
   function submitForm() {
@@ -167,7 +181,7 @@ export default function LayoutTextFields() {
             </Typography>
           </div>
           <hr />
-          <div>
+          <Grid>
           <Button
     className={classes.logOut}
     color="inherit"
@@ -178,7 +192,16 @@ export default function LayoutTextFields() {
           returnTo: window.location.origin,})}>
       Log Out
     </Button>
-        </div>
+    <Button
+    className={classes.logOut}
+    color="inherit"
+    variant="contained"
+    
+      onClick={() =>
+       window.location = "/profile"}>
+      Edit Info
+    </Button>
+    </Grid>
         
     </Grid>
     )

@@ -213,8 +213,9 @@ const App = () => {
         <Matrix className={classes.rain}>
 </Matrix>
       </div>
-    <Footer />
+    
   </div>
+  <Footer />
   </>
   );
 };

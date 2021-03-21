@@ -1,67 +1,70 @@
-import React, {useRef, useState, useEffect, useContext} from "react";
-import {TicketsContext} from '../utils/TicketsContext'
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useContext,
+  makeStyles,
+} from "react";
+import { TicketsContext } from "../utils/TicketsContext";
+import Grid from "@material-ui/core/Grid";
 
-export default function Paypal(){
-    const {tickets} = useContext(TicketsContext)
-    console.log(tickets)
-    const ticketName = tickets[0].name
-    const ticketValue = tickets[0].price
+export default function Paypal() {
+  const { tickets } = useContext(TicketsContext);
+  console.log(tickets);
+  const ticketName = tickets[0].name;
+  const ticketValue = tickets[0].price;
 
-    const [paidFor, setPaidFor] = useState(false);
-    const [error, setError] = useState(null);
-    const paypalRef = useRef();
-        
+  const [paidFor, setPaidFor] = useState(false);
+  const [error, setError] = useState(null);
+  const paypalRef = useRef();
 
-    useEffect(() => {
-        window.paypal
-            .Buttons({
-                createOrder: (data, actions) => {
-                    return actions.order.create({
-                        purchase_units: [{
-                            description: 'Ticket Bits Checkout',
-                            amount: {
-                                currency_code: 'USD',
-                                value: {ticketValue},
-                            }
-                        }]
-                    });
+  useEffect(() => {
+      console.log(tickets)
+
+    window.paypal
+      .Buttons({
+        createOrder: (actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                description: "Ticket Bits Checkout",
+                amount: {
+                  currency_code: "USD",
+                  value: { value: tickets[0].price },
                 },
-                onApprove: async (data, actions) => {
-                    const order = await actions.order.capture();
-                    setPaidFor(true);
-                    console.log('ORDER', order);
-                },
-                onError: err => {
-                    setError(err);
-                    console.error('ERROR', err);
-                },
-            })
-            .render(paypalRef.current);
-    }, []);
+              },
+            ],
+          });
+        },
+        onApprove: async (data, actions) => {
+          const order = await actions.order.capture();
+          setPaidFor(true);
+          console.log("ORDER", order);
+        },
+        onError: (err) => {
+          setError(err);
+          console.error("ERROR", err);
+        },
+      })
+      .render(paypalRef.current);
+  }, []);
 
-    if (paidFor) {
-        return (
-            <div>
-                Thanks for making the purchase.
-            </div>
-        )
-    }
+  if (paidFor) {
+    return <div>Thanks for making the purchase.</div>;
+  }
 
-    if (error) {
-        return (
-            <div>
-                Error in processing order. Please Retry again
-            </div>
-        )
-    }
+  if (error) {
+    return <div>Error in processing order. Please Retry again</div>;
+  }
 
-    return (
-        <div>
-            <h1>This is a Test</h1>
-            <div>{ticketName}</div>
-            <div>{ticketValue}</div>
-            <div ref={paypalRef} />
-        </div>
-    )
+  return (
+    <Grid style={{ marginLeft: "10px", marginRight: "10px" }}>
+      <div>
+        <h1>Shopping Cart</h1>
+        <div>{ticketName}</div>
+        <div>{ticketValue}</div>
+        <div ref={paypalRef} />
+      </div>
+    </Grid>
+  );
 }
-

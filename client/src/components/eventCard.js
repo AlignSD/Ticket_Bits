@@ -45,17 +45,16 @@ const useStyles = makeStyles((theme) => ({
       marginRight: "auto",
       marginBottom: 50,
       marginLeft: "auto",
-      height: 715,
+      height: "33.33%",
       padding: 20,
       zIndex: 1
     },
     overall:{
         borderRadius: 6,
-        marginTop: 50,
         marginRight: "auto",
         marginBottom: 50,
         marginLeft: "auto",
-        height: 715,
+        height: "33.33%",
         padding: 20,
         zIndex: 1
 
@@ -113,6 +112,10 @@ const useStyles = makeStyles((theme) => ({
                 <strong>Description:</strong>
                 {events.summary}
               </Typography>
+              <Grid container>
+                <Grid xs={4}></Grid>
+                <Grid xs={4}></Grid>
+              <Grid item xs={4} alignContent={'flex-end'} alignItems={'flex-end'}>
               <Button
             size="large"
             variant="contained"
@@ -120,6 +123,8 @@ const useStyles = makeStyles((theme) => ({
           >
             Buy Ticket
           </Button>
+          </Grid>
+            </Grid>
             </Grid>
           </Grid>
           <hr />

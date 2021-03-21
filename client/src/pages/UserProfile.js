@@ -1,18 +1,17 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from 'axios'
-import Grid from '@material-ui/core/Grid';
+import axios from "axios";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "white",
+    flexGrow: 1,
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "2rem",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -31,21 +30,22 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     color: "#ffffff",
     backgroundColor: "#000000",
-    '&:hover': {
-      backgroundColor: '#3d4c65',
-      boxShadow: 'black',
-    }
+    "&:hover": {
+      backgroundColor: "#3d4c65",
+      boxShadow: "black",
+    },
   },
-  contained:{
+  contained: {
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
     marginTop: 50,
     marginRight: "auto",
-    marginBottom: 50,
+    marginBottom: 150,
     marginLeft: "auto",
     padding: 20,
-    zIndex: 1
-  }
+    width: "100%",
+    zIndex: 1,
+  },
 }));
 
 export default function LayoutTextFields() {
@@ -107,80 +107,6 @@ export default function LayoutTextFields() {
   return (
     isAuthenticated && (
       <Grid className={classes.contained}>
-      <div className={classes.root}>
-        <div >
-          <form>
-          <div>
-            <Typography gutterBottom variant="h4" component="h2">
-              Your Profile
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Username:</strong> {user.nickname}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Email:</strong> {user.name}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>First Name:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Last Name:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Street Address:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>City/Town:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>State:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Zip Code:</strong> XXXXXX
-            </Typography>
-          </div>
-          </form>
-          <hr />
           <form>
           <div>
             <Typography gutterBottom variant="h4" component="h2">
@@ -219,69 +145,14 @@ export default function LayoutTextFields() {
               variant="outlined"
               onChange={(e) => setUserProfile({...userProfile, username: e.target.value})}
             />
-            <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
-          Edit Profile
-        </Button>
           </div>
           </form>
           <hr />
-          <div>
-            <Typography gutterBottom variant="h4" component="h2">
-              Edit Address
-            </Typography>
-            <TextField
-              id="outlined-margin-none"
-              label="Street Address"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="City/Town"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="State"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="Zip Code"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-          </div>
           <hr />
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            className={classes.btnMargin}
-          >
+          <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
             UPDATE PROFILE
           </Button>
-        </div>
-      </div>
-    </Grid>
+      </Grid>
     )
   );
 }

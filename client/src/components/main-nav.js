@@ -19,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     background: "#686666"
   },
-  paper: {
-    marginLeft: theme.spacing(2),
-  },
   dropcolor:{
     color: "#000000",
     
