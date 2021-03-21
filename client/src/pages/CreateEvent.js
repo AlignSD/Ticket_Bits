@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "3vh",
   },
   btnMargin: {
+    marginBottom: 20,
     marginTop: 20,
     color: "#ffffff",
     backgroundColor: "#000000",
@@ -38,14 +39,18 @@ const useStyles = makeStyles((theme) => ({
     contained: {
       backgroundColor: "#FFFFFF",
       borderRadius: 6,
-      marginTop: 50,
+      marginTop: "2%",
       marginRight: "auto",
-      marginBottom: 150,
+      marginBottom: "15%",
       marginLeft: "auto",
-      padding: 20,
+      paddingTop: "20px",
+      paddingRight: "20px",
+      paddingLeft: "20px",
       width: "100%",
       zIndex: 1,
-    },
+      position: 'absolute'
+    }
+   
 }));
 
 export default function LayoutTextFields(props) {
@@ -101,9 +106,7 @@ export default function LayoutTextFields(props) {
     );
 	}
   return (
-    <Grid >
-    <div className={classes.contained}  style={{position: 'absolute',
-    zIndex: 1}}>
+    <Grid className={classes.contained}  >
       <div>
            
       <form  autoComplete="off" noValidate  onSubmit = { (event) => { event.preventDefault();
@@ -112,10 +115,6 @@ export default function LayoutTextFields(props) {
         <div style={{backgroundColor: "transparent"}} >
           <Typography gutterBottom variant="h4" component="h2">
             Create Event
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
-            Name your event and tell the event-goers why they should come. Add
-            details that highlight what makes it unique.
           </Typography>
           <TextField name= "Event Name" className="outlined-margin-none" id="EventName" label="Event Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
             onChange ={(e) => setEvents({...events, eventName: e.target.value})}
@@ -143,7 +142,6 @@ export default function LayoutTextFields(props) {
         </Button>
         </div>
         </form>
-        </div>
         </div>
         </Grid>
          

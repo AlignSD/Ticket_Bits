@@ -37,16 +37,19 @@ function Home() {
       <Grid
         className={classes.logo}
         item
-        xs={12}
+        
       />
       <Grid container justify="center" alignItems="center" direction="row">
-        <Grid item xs={4} />
         <Grid
           className={classes.contained}
-          item
-          xs={6}
+          container
+          alignItems="center"
+          justify="center"
+          xs={12}
         >
+          <Grid item>
           <img src={CrypticLogo} alt="cryptic logo"></img>
+          </Grid>
         </Grid>
         <Grid item xs={3} />
       </Grid>

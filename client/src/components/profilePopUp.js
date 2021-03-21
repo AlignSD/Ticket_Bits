@@ -19,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
     width: "25ch",
   },
   paragraphText: {
-    marginBottom: "2rem",
+    color: "black",
+    marginLeft: "10px",
   },
   btnMargin: {
     margin: theme.spacing(1),
@@ -33,11 +34,9 @@ const useStyles = makeStyles((theme) => ({
   contained:{
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
-    padding: 20,
     zIndex: 1,
   },
   logOut:{
-      margin: "5px",
     color: "#ffffff",
     backgroundColor: "#000000",
     '&:hover': {
@@ -59,6 +58,15 @@ export default function LayoutTextFields() {
     firstName: '',
     lastName: '',
   })
+  function authLoadProfile() {
+    axios
+          .post("/api/users", {
+              username: user.nickname,
+              email: user.email,
+      firstName: userProfile.firstName,
+      lastName: userProfile.lastName,
+          })
+  }
 
   function userProfileInfo() {
     axios
@@ -78,6 +86,7 @@ export default function LayoutTextFields() {
 
 	useEffect(() => {
     userProfileInfo()
+    authLoadProfile()
   }, []);
   
   if (isLoading) {
@@ -86,9 +95,16 @@ export default function LayoutTextFields() {
   return (
     isAuthenticated && (
       <Grid className={classes.contained}>
-          <div>
-            <Typography gutterBottom variant="h4" component="h2">
-              Your Profile
+         
+              <Grid item>
+            <Typography
+            
+              variant="h5"
+              color="textSecondary"
+              component="p"
+              className={classes.paragraphText}
+            >
+            {userProfile.username}
             </Typography>
             <Typography
               variant="body2"
@@ -96,67 +112,12 @@ export default function LayoutTextFields() {
               component="p"
               className={classes.paragraphText}
             >
-              <strong>Username:</strong> {userProfile.username}
+            {userProfile.email}
             </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Email:</strong> {userProfile.email}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>First Name:</strong> {userProfile.firstName}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Last Name:</strong> {userProfile.lastName}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Street Address:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>City/Town:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>State:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Zip Code:</strong> XXXXXX
-            </Typography>
-          </div>
-          <hr />
-          <Grid>
+            </Grid>
+        
+          <Grid >
+              <Grid>
           <Button
     className={classes.logOut}
     color="inherit"
@@ -167,6 +128,9 @@ export default function LayoutTextFields() {
           returnTo: window.location.origin,})}>
       Log Out
     </Button>
+    </Grid>
+    <br></br>
+    <Grid>
     <Button
     className={classes.logOut}
     color="inherit"
@@ -176,6 +140,7 @@ export default function LayoutTextFields() {
        window.location = "/profile"}>
       Edit Info
     </Button>
+    </Grid>
     </Grid>
         
     </Grid>
