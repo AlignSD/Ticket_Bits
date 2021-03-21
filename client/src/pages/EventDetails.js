@@ -54,8 +54,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
 export default function EventDetails() {
   const [events, setEvents] = useState([]);
   getEventInfo()
@@ -69,15 +67,10 @@ export default function EventDetails() {
       console.log(events);
       setEvents(events)
     })
-  
-  } 
- 
+   } 
 
-  
-  return(
-
+ return(
     <EventCard
     events={events}/>
-  
   )
 }
