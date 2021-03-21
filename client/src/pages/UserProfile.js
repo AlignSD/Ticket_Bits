@@ -53,60 +53,60 @@ export default function LayoutTextFields() {
   const classes = useStyles();
 
   // mongo states
-  const [users, setUsers] = useState(null);
-  const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	useEffect(() => {
-		axios
-			.get("/api/users")
-			.then((users) => setUsers(users))
-			.catch((err) => console.log(err));
+  const [userProfile, setUserProfile] = useState({
+    users: null,
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    
 
+  })
+  console.log(userProfile.username);
+  console.log(userProfile.users);
+  // const [users, setUsers] = useState(null);
+  // const [username, setUsername] = useState("");
+	// const [email, setEmail] = useState("");
+  // const [firstName, setFirstName ] = useState("");
+	// const [lastName, setLastName] = useState("");
+	useEffect(() => {
+    axios
+			.get("/api/users")
+			.then((users) => setUserProfile(...userProfile, users))
+			.catch((err) => console.log(err));
+      authLoadProfile()
 	}, []);
 
+  function authLoadProfile() {
+    
+      if(user.email === null){
+      axios
+			.post("/api/users", {
+				username: user.nickname,
+				email: user.email,
+        firstName: userProfile.firstName,
+        lastName: userProfile.lastName,
+			})
+    } else {
+      return;
+    }
+  }
   // submit fields to mongodb
   function submitForm() {
-		if (username === "") {
-			alert("Please fill the username field");
-			return;
-		}
-		if (email === "") {
-			alert("Please fill the email field");
-			return;
-		}
 		axios
-			.post("/api/users", {
-				username: username,
-				email: email,
+			.put("/api/users/:id", {
+				username: userProfile.username,
+				email: user.email,
+        firstName: userProfile.firstName,
+        lastName: userProfile.lastName,
 			})
-			.then(function () {
-				alert("Account created successfully");
-				window.location.reload();
-			})
-			.catch(function () {
-				alert("Could not creat account. Please try again");
-			});
-	}
+    }
   if (isLoading) {
     return <div>Loading ...</div>;
   }
   return (
     isAuthenticated && (
       <Grid className={classes.contained}>
-      {/* form section is what sends values to mongodb */}
-      <form onSubmit={submitForm}>
-				<input
-					onChange={(e) => setUsername(e.target.value)}
-					type="text"
-					placeholder="Enter your username"
-				/>
-				<input
-					onChange={(e) => setEmail(e.target.value)}
-					type="text"
-					placeholder="Enter your email address"
-				/>
-				<input type="submit" />
-			</form>
       <div className={classes.root}>
         <div >
           <form>
@@ -181,6 +181,7 @@ export default function LayoutTextFields() {
           </div>
           </form>
           <hr />
+          <form>
           <div>
             <Typography gutterBottom variant="h4" component="h2">
               Edit Profile
@@ -194,6 +195,7 @@ export default function LayoutTextFields() {
                 shrink: true,
               }}
               variant="outlined"
+              onChange={(e) => setUserProfile({...userProfile, firstName: e.target.value})}
             />
             <TextField
               id="outlined-margin-none"
@@ -204,18 +206,24 @@ export default function LayoutTextFields() {
                 shrink: true,
               }}
               variant="outlined"
+              onChange={(e) => setUserProfile({...userProfile, lastName: e.target.value})}
             />
             <TextField
               id="outlined-margin-none"
-              label="Email"
+              label="Username"
               style={{ padding: 6 }}
               margin="normal"
               InputLabelProps={{
                 shrink: true,
               }}
               variant="outlined"
+              onChange={(e) => setUserProfile({...userProfile, username: e.target.value})}
             />
+            <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
+          Edit Profile
+        </Button>
           </div>
+          </form>
           <hr />
           <div>
             <Typography gutterBottom variant="h4" component="h2">
