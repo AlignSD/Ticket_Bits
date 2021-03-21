@@ -1,5 +1,9 @@
 // SPDX-License-Identifier: MIT
+<<<<<<< HEAD
 pragma solidity ^0.5.0
+=======
+pragma solidity ^0.5.0;
+>>>>>>> 1b8a9f7027757604ba7693b77ce1ea6fc4f1843a
 
 contract Migrations {
     address public owner;
