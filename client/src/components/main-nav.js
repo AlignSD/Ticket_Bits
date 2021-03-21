@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#686666"
   },
   paper: {
-    marginRight: theme.spacing(2),
+    marginLeft: theme.spacing(2),
   },
   dropcolor:{
     color: "#000000",

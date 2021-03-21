@@ -3,10 +3,23 @@ import { Button, IconButton, makeStyles, Toolbar } from "@material-ui/core";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { useAuth0 } from "@auth0/auth0-react";
+import UserProfile from "../pages/UserProfile"
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
+// import MenuItem from '@material-ui/core/MenuItem';
+import MenuList from '@material-ui/core/MenuList';
+import ProfilePopUp from "../components/profilePopUp"
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    display: 'flex',
     flexGrow: 1,
+  },
+  paper: {
+    marginRight: theme.spacing(2),
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -27,33 +40,85 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: '#3d4c65',
       boxShadow: 'black',
+    },
+    popItem:{
+      paddingleft: "0 5px"
     }
   }
 }));
 
+
 const LogoutButton = () => {
+
+  const [open, setOpen] = React.useState(false);
+const anchorRef = React.useRef(null);
+
+const handleToggle = () => {
+  setOpen((prevOpen) => !prevOpen);
+};
+
+const handleClose = (event) => {
+  if (anchorRef.current && anchorRef.current.contains(event.target)) {
+    return;
+  }
+
+  setOpen(false);
+};
+
+function handleListKeyDown(event) {
+  if (event.key === 'Tab') {
+    event.preventDefault();
+    setOpen(false);
+  }
+}
+
+// return focus to the button when we transitioned from !open -> open
+const prevOpen = React.useRef(open);
+React.useEffect(() => {
+  if (prevOpen.current === true && open === false) {
+    anchorRef.current.focus();
+  }
+
+  prevOpen.current = open;
+}, [open]);
+
   const { logout, user } = useAuth0();
   const classes = useStyles();
   return (
 
     <div className={classes.root}>
       <Toolbar>
-    <Button
-    className={classes.logOut}
-    color="inherit"
-    variant="contained"
-    
-      onClick={() =>
-        logout({
-          returnTo: window.location.origin,})}>
-      Log Out
-    </Button>
+    <IconButton
+          edge="start" className={classes.iconButton}
+          ref={anchorRef}
+          aria-controls={open ? 'menu-list-grow' : undefined}
+          aria-haspopup="true"
+          onClick={handleToggle}
+        >
+          <AccountCircleIcon/>
+          <span style={{ color: `white` }}>Profile</span>
+        </IconButton>
     <IconButton edge="start" className={classes.iconButton}
     >
-    <a href="/profile" style={{ color: `white` }}>
-      <AccountCircleIcon fontSize="medium" />
-      <span style={{ fontSize: 14 }}>{user.nickname}</span>
-    </a>
+         <Popper open={open} placement="bottom" role={undefined} transition disablePortal style={{top: "10%", right: "5%", left: "60%"}}>
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{  }}
+            >
+              <Paper className={classes.pop}>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
+                    <Grid className={classes.popitem}>
+                      <ProfilePopUp/>
+                    </Grid>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+          </Popper>
+         
   </IconButton>
 
   <IconButton edge="start" className={classes.iconButton}>

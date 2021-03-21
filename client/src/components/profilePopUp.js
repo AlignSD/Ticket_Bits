@@ -39,16 +39,20 @@ const useStyles = makeStyles((theme) => ({
   contained:{
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
-    marginTop: 50,
-    marginRight: "auto",
-    marginBottom: 50,
-    marginLeft: "auto",
     padding: 20,
     zIndex: 1
-  }
-}));
+  },
+  logOut:{
+    color: "#ffffff",
+    backgroundColor: "#000000",
+    '&:hover': {
+      backgroundColor: '#3d4c65',
+      boxShadow: 'black',
+    },
+}}));
 
 export default function LayoutTextFields() {
+    const { logout } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
   const classes = useStyles();
 
@@ -93,23 +97,6 @@ export default function LayoutTextFields() {
   return (
     isAuthenticated && (
       <Grid className={classes.contained}>
-      {/* form section is what sends values to mongodb */}
-      <form onSubmit={submitForm}>
-				<input
-					onChange={(e) => setUsername(e.target.value)}
-					type="text"
-					placeholder="Enter your username"
-				/>
-				<input
-					onChange={(e) => setEmail(e.target.value)}
-					type="text"
-					placeholder="Enter your email address"
-				/>
-				<input type="submit" />
-			</form>
-      <div className={classes.root}>
-        <div >
-          <form>
           <div>
             <Typography gutterBottom variant="h4" component="h2">
               Your Profile
@@ -179,100 +166,20 @@ export default function LayoutTextFields() {
               <strong>Zip Code:</strong> XXXXXX
             </Typography>
           </div>
-          </form>
           <hr />
           <div>
-            <Typography gutterBottom variant="h4" component="h2">
-              Edit Profile
-            </Typography>
-            <TextField
-              id="outlined-margin-none"
-              label="First Name"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="Last Name"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="Email"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-          </div>
-          <hr />
-          <div>
-            <Typography gutterBottom variant="h4" component="h2">
-              Edit Address
-            </Typography>
-            <TextField
-              id="outlined-margin-none"
-              label="Street Address"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="City/Town"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="State"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="Zip Code"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-          </div>
-          <hr />
           <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            className={classes.btnMargin}
-          >
-            UPDATE PROFILE
-          </Button>
+    className={classes.logOut}
+    color="inherit"
+    variant="contained"
+    
+      onClick={() =>
+        logout({
+          returnTo: window.location.origin,})}>
+      Log Out
+    </Button>
         </div>
-      </div>
+        
     </Grid>
     )
   );
