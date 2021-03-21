@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.22 <0.8.0;
+pragma solidity ^0.5.0
 
 /*
  * @dev Provides information about the current execution context, including the
@@ -14,7 +14,7 @@ pragma solidity >=0.4.22 <0.8.0;
 abstract contract Context {
     // Empty internal constructor, to prevent people from mistakenly deploying
     // an instance of this contract, which should be used via inheritance.
-    constructor() {}
+    constructor() public {}
 
     // solhint-disable-previous-line no-empty-blocks
 
