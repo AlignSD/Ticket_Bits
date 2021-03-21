@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import useInterval from 'react-useinterval';
 
-const VALID_CHARS = "#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
+const VALID_CHARS = "#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";
 const STREAM_MUT = 0.02;
 
 const MIN_STREAM_SIZE = 15;
@@ -83,7 +83,7 @@ const RainStream = () => {
             userSelect: 'none',
             testShadow: '0px 0px 8px rgba(32, 194, 14, 0.8)',
             fontSize: 30
-        }}>{stream.map((char, index) => (<a style={{marginTop: 6, 
+        }}>{stream.map((char, index) => (<a href key={index} style={{marginTop: 6, 
         color: index === stream.length - 1 ? '#ffffff' : undefined,
         opacity: index < 6 ? 0.1 + index * 0.15 :1,
         textShadow: index === stream.length -1

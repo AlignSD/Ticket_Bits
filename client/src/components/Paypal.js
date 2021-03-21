@@ -3,7 +3,6 @@ import React, {
   useState,
   useEffect,
   useContext,
-  makeStyles,
 } from "react";
 import { TicketsContext } from "../utils/TicketsContext";
 import Grid from "@material-ui/core/Grid";

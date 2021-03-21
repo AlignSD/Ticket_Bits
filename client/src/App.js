@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
@@ -7,34 +7,23 @@ import Footer from "./components/footer";
 import Buyer from './components/Buyer'
 import Seller from './components/Seller'
 import Grid from "@material-ui/core/Grid";
-import LandingPage from "./views/landingpage"
-// import NavBar from "./components/NavBar";
 import TicketMarketPlace from './components/TicketMarketPlace';
 import Home from "./views/home";
 import Web3 from 'web3'
-import Profile from "./views/profile";
 import ExternalApi from "./views/external-api";
 import ProtectedRoute from "./auth/protected-route";
 import CoinbaseAPI from "./CoinbaseAPI";
-// import Popup from './components/Popup'
 import CreateEvent from "./pages/CreateEvent"
 import UserProfile from "./pages/UserProfile"
 import Paypal from "./components/Paypal"
-import TicketsContextProvider from "./utils/TicketsContext"
 import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
-// import Event from './abis/Event.json'
-// import EventFactory from './abis/EventFactory.json'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Matrix from "../src/components/MatrixRain"
 import EventDetails from './pages/EventDetails'
-import zIndex from "@material-ui/core/styles/zIndex";
-
-
-
 
 const App = () => {
-  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel, setEvent, eventState, eventFactoryState, setEventFactory} = useContext(TicketsContext)
+  let {account, tickets, loading, userType, marketplaceState, setAccountName, setTickets, setLoading, setMarket,eventModel, setEventModel} = useContext(TicketsContext)
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -77,19 +66,13 @@ const App = () => {
       // Set marketplace state and load items into shop
       setMarket((marketplaceState = marketplace))
       const ticketCount = await marketplace.methods.ticketCount().call()
-      console.log(marketplace.methods, "marketplacemethods")
       loadTickets(ticketCount, marketplace);
       // const eventList = await eventfactory.methods.getDeployedEvents().call()
       // console.log(eventList)
-      
-      
-      
     } else {
       window.alert('Marketplace contract not deployed to detected network.')
     }  
   }
-
-  // async getEventById(id)
 
   async function loadTickets(ticketCount, marketplace) {
     // We're pushing ticketarr into ticket to update the state when needed
@@ -170,13 +153,10 @@ const App = () => {
     return <Loading/>;
   }
 
-
   return (
  <>
  <NavBar className={classes.absolute}/>
     <div id="app" style={{height: "100%"}} className="d-flex flex-column h-100">
-
-    
       <div className="container flex-grow-1 " style={{position: "relative"}}>
         <Grid container >
         <Switch>
@@ -196,10 +176,9 @@ const App = () => {
         </Switch>
         </Grid>
         <Matrix className={classes.rain}>
-</Matrix>
+      </Matrix>
       </div>
-    
-  </div>
+    </div>
   <Footer />
   </>
   );

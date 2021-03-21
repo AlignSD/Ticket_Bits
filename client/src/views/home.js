@@ -1,10 +1,9 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import CrypticLogo from "../images/CrypticLogo.png";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import "./landingpage.css";
 import "./home.css";
-import ScriptTag from "react-script-tag";
 
 const useStyles = makeStyles({
   logo: {
@@ -34,15 +33,11 @@ const useStyles = makeStyles({
 function Home() {
   const classes = useStyles();
   return (
-    <Grid spacing={5} justify="center" alignItems="center">
+    <Grid container spacing={5} justify="center" alignItems="center">
       <Grid
         className={classes.logo}
         item
         xs={12}
-        spacing={5}
-        justify="center"
-        alignItems="center"
-        direction="row"
       />
       <Grid container justify="center" alignItems="center" direction="row">
         <Grid item xs={4} />
@@ -50,8 +45,6 @@ function Home() {
           className={classes.contained}
           item
           xs={6}
-          justify="center"
-          alignItems="center"
         >
           <img src={CrypticLogo} alt="cryptic logo"></img>
         </Grid>
