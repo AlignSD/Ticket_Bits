@@ -1,34 +1,46 @@
   
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.5.0;
+
+
 contract Marketplace {
     string public name;
     uint256 public ticketCount = 0;
     mapping(uint256 => Ticket) public tickets;
+
+
     struct Ticket {
         uint256 id;
+        string imgHash;
         string name;
         uint256 price;
-        string date;
+        string startDate;
         string location;
         string description;
         address payable owner;
         bool purchased;
     }
+
       event TicketCreated(
         uint256 id,
+        string imgHash,
         string name,
         uint256 price,
-        string date,
+        string startDate,
         string location,
         string description,
         address payable owner,
         bool purchased
     );
+
     event TicketPurchased(
         uint256 id,
+        string imgHash,
         string name,
         uint256 price,
+        string startDate,
+        string location,
+        string description,
         address payable owner,
         bool purchased
     );
@@ -36,13 +48,17 @@ contract Marketplace {
         name = "Marketplace";
     }
 
-    function createTicket(string memory _name, uint256 _price, string memory _date, string memory _location, string memory _description) public {
+    function createTicket(string memory _imgHash, string memory _name, uint256 _price, string memory _startDate, string memory _location, string memory _description) public {
+        //Validate uploader address exists
+        require(msg.sender!=address(0)); 
+        //Validate hash exists
+        require(bytes(_imgHash).length > 0);
         //Require a valid name
         require(bytes(_name).length > 0);
         // Reuire a valid price
         require(_price > 0);
         // Require valid date
-        require(bytes(_date).length > 0);
+        require(bytes(_startDate).length > 0);
         // Require a valid location
         require(bytes(_location).length > 0);
         // Require a valid description
@@ -53,17 +69,20 @@ contract Marketplace {
         //Create the ticket
         tickets[ticketCount] = Ticket(
             ticketCount,
+            _imgHash,
             _name,
             _price,
-            _date,
+            _startDate,
             _location,
             _description,
             msg.sender,
             false
         );
         //Trigger an event
-        emit TicketCreated(ticketCount, _name, _price, _date, _location, _description, msg.sender, false);
+        emit TicketCreated(ticketCount, _imgHash, _name, _price, _startDate, _location, _description, msg.sender, false);
     }
+
+
     function purchaseTicket(uint256 _id) public payable {
         // Fetch the product
         Ticket memory _ticket = tickets[_id];
@@ -88,8 +107,12 @@ contract Marketplace {
         //Trigger an event
         emit TicketPurchased(
             ticketCount,
+            _ticket.imgHash,
             _ticket.name,
             _ticket.price,
+            _ticket.startDate,
+            _ticket.location,
+            _ticket.description,
             msg.sender,
             true
         );
