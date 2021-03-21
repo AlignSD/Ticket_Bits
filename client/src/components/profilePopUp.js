@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 export default function LayoutTextFields() {
     const { logout } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log(user)
   const classes = useStyles();
 
   // mongo states
@@ -59,13 +60,28 @@ export default function LayoutTextFields() {
     lastName: '',
   })
   function authLoadProfile() {
-    axios
-          .post("/api/users", {
-              username: user.nickname,
-              email: user.email,
-      firstName: userProfile.firstName,
-      lastName: userProfile.lastName,
-          })
+    console.log(user.email)
+    setUserProfile({...userProfile, 
+      username: user.nickname,
+      email: user.email
+    })
+    if(userProfile.email === null){
+      setUserProfile({...userProfile, 
+        username: user.nickname,
+        email: user.email
+
+        
+      })
+        axios
+              .post("/api/users", {
+                  username: userProfile.nickname,
+                  email: userProfile.email,
+          firstName: userProfile.firstName,
+          lastName: userProfile.lastName,
+              })
+      } else {
+        return;
+      }
   }
 
   function userProfileInfo() {
@@ -85,8 +101,9 @@ export default function LayoutTextFields() {
     }
 
 	useEffect(() => {
-    userProfileInfo()
     authLoadProfile()
+    userProfileInfo()
+    
   }, []);
   
   if (isLoading) {

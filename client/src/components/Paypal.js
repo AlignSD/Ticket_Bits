@@ -9,10 +9,15 @@ import Grid from "@material-ui/core/Grid";
 
 export default function Paypal() {
   const { tickets } = useContext(TicketsContext);
-  console.log(tickets);
+  const convertTickets =  window.web3.utils.fromWei(
+    tickets[0].price.toString(),
+    "Ether"
+  )
+  console.log(convertTickets)
   const ticketName = tickets[0].name;
   const ticketValue = tickets[0].price;
-
+  console.log(ticketName)
+  console.log(ticketValue)
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
   const paypalRef = useRef();
@@ -29,7 +34,7 @@ export default function Paypal() {
                 description: "Ticket Bits Checkout",
                 amount: {
                   currency_code: "USD",
-                  value: { value: tickets[0].price },
+                  value: convertTickets ,
                 },
               },
             ],
@@ -61,8 +66,8 @@ export default function Paypal() {
       <div>
         <h1>Shopping Cart</h1>
         <div>{ticketName}</div>
-        <div>{ticketValue}</div>
-        <div ref={paypalRef} />
+        <div>{convertTickets}</div>
+        <div ref={paypalRef}  />
       </div>
     </Grid>
   );

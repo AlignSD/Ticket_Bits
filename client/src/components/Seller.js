@@ -33,9 +33,11 @@ const useStyles = makeStyles({
   },
 });
 function Seller(props) {
+  console.log(props)
   const [input, setInput] = useState({
     name: "",
-    prce: ''
+    prce: '',
+    total: ''
   })
   const classes = useStyles();
 
@@ -50,10 +52,12 @@ function Seller(props) {
                 onSubmit={(event) => {
                   event.preventDefault();
                   const name = input.name;
+                  const total = input.total;
                   const price = window.web3.utils.toWei(
                     input.price,
                     "Ether");
                   props.createTicket(name, price);
+                  props.createTotalTickets(total, name, price)
                 }}
               >
                 <div className="form-group mr-sm-2">
@@ -76,6 +80,17 @@ function Seller(props) {
                     placeholder="Ticket Price"
                     required
                     onChange={(e) => setInput({...input, price: e.target.value})}
+                  />
+                  </div>
+                  <div>
+                  <input
+                    style={{ widith: "30%" }}
+                    id="totalTickets"
+                    type="text"
+                    className="form"
+                    placeholder="Ticket Amount"
+                    required
+                    onChange={(e) => setInput({...input, total: e.target.value})}
                   />
                 </div>
                 <Button type="submit" className={classes.btnMargin}>

@@ -85,7 +85,19 @@ const App = () => {
     setTickets(ticketArr)
     setLoading((loading = false))
   } 
+
+  function createTotalTickets(total, name, price){
+    console.log(total)
+    console.log(name)
+    console.log(price)
+    console.log("totaltick")
+    var i
+    for(i=0; i<total; i++){
+      createTicket(name, price);
+    }
+  }
   function createTicket(name, price) {
+    console.log("ticket Test")
     if (marketplaceState) {
       setLoading({ loading: true })
       marketplaceState.methods
@@ -168,11 +180,13 @@ const App = () => {
             <ProtectedRoute  exact path='/CreateEvent'><CreateEvent
                                                       eventModel = {eventModel}
                                                       setEventModel = {setEventModel}
+                                                      createTicket={createTicket}
+                                                      createTotalTickets={createTotalTickets}
             /></ProtectedRoute>
             <ProtectedRoute exact path='/EventDetails' component={EventDetails}></ProtectedRoute>
             <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
             <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
-            <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
+            <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} createTotalTickets={createTotalTickets} /></ProtectedRoute>
         </Switch>
         </Grid>
         <Matrix className={classes.rain}>
