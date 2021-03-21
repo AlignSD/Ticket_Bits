@@ -3,8 +3,9 @@ import { assert } from "chai"
 const Marketplace = artifacts.require('./Marketplace.sol')
 
 require('chai')
-    .use(require('chai-as-promised'))
+    .use(require('chai-as-promised', 'bn.js', 'bn-chai'))
     .should()
+    
 
 contract('Marketplace', ([deployer, seller, buyer]) => {
     let marketplace
@@ -30,10 +31,10 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
 
     describe('tickets', async() => {
        let result, ticketCount
-       
+
         before(async () => {
-            result = await marketplace.createTicket('Crssd', web3.utils.toWei('1', 'Ether'), { from: seller })
-            ticketCount = await marketplace.ticketCount()
+            result = await marketplace.createTicket('Crssd', web3.utils.toWei('1', 'Ether'), '3/20/21', 'San Diego', 'House Music', { from: seller })
+            ticketCount = await marketplace.ticketCount()  
         })
 
         it('creates tickets', async () => {
@@ -43,14 +44,23 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
             assert.equal(event.id.toNumber(), ticketCount.toNumber(), 'id is correct')
             assert.equal(event.name, 'Crssd', 'is correct')
             assert.equal(event.price, '1000000000000000000', 'is correct')
+            assert.equal(event.date, '3/20/21', 'is correct')
+            assert.equal(event.location, 'San Diego', 'is correct')
+            assert.equal(event.description, 'House Music', 'is correct')
             assert.equal(event.owner, seller, 'is correct')
             assert.equal(event.purchased, false, 'purchased is correct')
 
 
             //FAILURES: Product must have a name
-            await  await marketplace.createTicket('', web3.utils.toWei('1', 'Ether'), { from: seller}).should.be.rejected;
+            await  await marketplace.createTicket('', web3.utils.toWei('1', 'Ether'), '3/20/21', 'San Diego', 'House Music', { from: seller}).should.be.rejected;
             //FAILURES: Product must have a price
-            await  await marketplace.createTicket('Crssd', 0, { from: seller}).should.be.rejected;
+            await  await marketplace.createTicket('Crssd', 0, '3/20/21', 'San Diego', 'House Music', { from: seller}).should.be.rejected;
+            //FAILURES: Product must have a date
+            await  await marketplace.createTicket('Crssd', web3.utils.toWei('1', 'Ether'), '', 'San Diego', 'House Music', { from: seller}).should.be.rejected;
+            //FAILURES: Product must have a location
+            await  await marketplace.createTicket('Crssd', web3.utils.toWei('1', 'Ether'), '3/20/21', '', 'House Music', { from: seller}).should.be.rejected;
+            //FAILURES: Product must have a description
+            await  await marketplace.createTicket('Crssd', web3.utils.toWei('1', 'Ether'), '3/20/21', 'San Diego', '', { from: seller}).should.be.rejected;
         })
 
         it ('list tickets', async() => {
@@ -58,6 +68,9 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
             assert.equal(ticket.id.toNumber(), ticketCount.toNumber(), 'id is correct')
             assert.equal(ticket.name, 'Crssd', 'is correct')
             assert.equal(ticket.price, '1000000000000000000', 'is correct')
+            assert.equal(ticket.date, '3/20/21', 'is correct')
+            assert.equal(ticket.location, 'San Diego', 'is correct')
+            assert.equal(ticket.description, 'House Music', 'is correct')
             assert.equal(ticket.owner, seller, 'is correct')
             assert.equal(ticket.purchased, false, 'purchased is correct')
         })

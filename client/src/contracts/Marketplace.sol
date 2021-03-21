@@ -1,3 +1,4 @@
+  
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.5.0;
 contract Marketplace {
@@ -8,6 +9,9 @@ contract Marketplace {
         uint256 id;
         string name;
         uint256 price;
+        string date;
+        string location;
+        string description;
         address payable owner;
         bool purchased;
     }
@@ -15,6 +19,9 @@ contract Marketplace {
         uint256 id,
         string name,
         uint256 price,
+        string date,
+        string location,
+        string description,
         address payable owner,
         bool purchased
     );
@@ -28,12 +35,18 @@ contract Marketplace {
     constructor() public {
         name = "Marketplace";
     }
-    function createTicket(string memory _name, uint256 _price) public {
+
+    function createTicket(string memory _name, uint256 _price, string memory _date, string memory _location, string memory _description) public {
         //Require a valid name
         require(bytes(_name).length > 0);
         // Reuire a valid price
         require(_price > 0);
         // Require valid date
+        require(bytes(_date).length > 0);
+        // Require a valid location
+        require(bytes(_location).length > 0);
+        // Require a valid description
+        require(bytes(_description).length > 0);
         // Make sure parameters are correct
         // Increment Ticket count
         ticketCount++;
@@ -42,11 +55,14 @@ contract Marketplace {
             ticketCount,
             _name,
             _price,
+            _date,
+            _location,
+            _description,
             msg.sender,
             false
         );
         //Trigger an event
-        emit TicketCreated(ticketCount, _name, _price, msg.sender, false);
+        emit TicketCreated(ticketCount, _name, _price, _date, _location, _description, msg.sender, false);
     }
     function purchaseTicket(uint256 _id) public payable {
         // Fetch the product
