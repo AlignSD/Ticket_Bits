@@ -15,7 +15,6 @@ const MatrixRain = () => {
             opacity: "40%"
         }}>
             {new Array(streamCount).fill().map(_ =>(<RainStream/>))}
-            
         </div>
     )
 };

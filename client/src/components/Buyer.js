@@ -23,7 +23,6 @@ const useStyles = makeStyles({
 // Loads buyer page thru ticketmarketplace
 function Buyer(props) {
   const classes = useStyles();
-  console.log(props);
   return (
     <div className={classes.contained}>
       <div className={classes.root}>
