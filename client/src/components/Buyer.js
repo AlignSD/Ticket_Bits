@@ -25,13 +25,13 @@ function Buyer(props) {
   const classes = useStyles();
   console.log(props);
   return (
-    <div className={classes.contained}>
+    <Grid className={classes.contained}>
       <div className={classes.root}>
         <Grid container alignItems="center">
           <Grid item xs={12} sm={12}>
             <div id="content" style={{ zIndex: 1 }}>
               <h2 style={{ color: "black" }}>Buy Ticket</h2>
-              <table className="table">
+              <Table className="table">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -77,12 +77,12 @@ function Buyer(props) {
                     );
                   })}
                 </tbody>
-              </table>
+              </Table>
             </div>
           </Grid>
         </Grid>
       </div>
-    </div>
+    </Grid>
   );
 }
 
