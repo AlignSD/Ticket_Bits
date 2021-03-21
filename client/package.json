@@ -1,6 +1,14 @@
 {
   "name": "eth-ticket-exchange",
   "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
+  },
   "description": "An Ethereum Ticket Marketplace",
   "homepage": "https://ticket-bits.herokuapp.com/",
   "author": "",
@@ -38,14 +46,7 @@
     "react-useinterval": "^1.0.2",
     "truffle": "^5.2.3",
     "validator": "^13.5.2",
-    "web3": "^1.3.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
+    "web3": "^1.0.0-beta.55"
   },
   "eslintConfig": {
     "extends": "react-app"

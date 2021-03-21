@@ -105,4 +105,3 @@ contract('Marketplace', ([deployer, seller, buyer]) => {
     })
     
 })
-

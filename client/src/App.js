@@ -23,8 +23,8 @@ import Paypal from "./components/Paypal"
 import TicketsContextProvider from "./utils/TicketsContext"
 import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
-import Event from './abis/Event.json'
-import EventFactory from './abis/EventFactory.json'
+// import Event from './abis/Event.json'
+// import EventFactory from './abis/EventFactory.json'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Matrix from "../src/components/MatrixRain"
 import EventDetails from './pages/EventDetails'
@@ -74,29 +74,14 @@ const App = () => {
         Marketplace.abi,
         networkData.address,
       )
-      const event = new web3.eth.Contract(
-        Event.abi,
-        networkData.address,
-      )
-      console.log(event);
-      const eventfactory = new web3.eth.Contract(
-        EventFactory.abi,
-        networkData.address,
-      )
-      console.log(eventfactory);
       // Set marketplace state and load items into shop
       setMarket((marketplaceState = marketplace))
-      setEvent((eventState = event))
-      setEventFactory((eventFactoryState = eventfactory))
       const ticketCount = await marketplace.methods.ticketCount().call()
       console.log(marketplace.methods, "marketplacemethods")
       loadTickets(ticketCount, marketplace);
       // const eventList = await eventfactory.methods.getDeployedEvents().call()
       // console.log(eventList)
       
-      
-      setEventModel((eventModel = eventfactory))
-      console.log(eventModel)
       
       
     } else {
