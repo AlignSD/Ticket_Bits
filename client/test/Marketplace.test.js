@@ -132,7 +132,7 @@ contract('Marketplace', ([deployer, eventhost, eventbuyer, seller, buyer]) => {
        let result, ticketCount
        
         before(async () => {
-            result = await marketplace.addTicket('Crssd', web3.utils.toWei('1', 'Ether'), { from: seller })
+            result = await marketplace.addTicket('Crssd', web3.utils.toWei('1', 'Ether'), 'Water Front', 'Banging House Music Outside', 2, 3, { from: seller })
             ticketCount = await marketplace.ticketCount()
         })
 
@@ -147,6 +147,7 @@ contract('Marketplace', ([deployer, eventhost, eventbuyer, seller, buyer]) => {
             assert.equal(reevent.location, 'Waterfont Park', 'is correct')
             assert.equal(reevent.description, 'Banging House Music Outside', 'is correct')
             assert.equal(reevent.quanity, 2, 'is correct')
+            assert.equal(reevent.availableTickets, 3, 'is correct')
             assert.equal(reevent.owner, seller, 'is correct')
             assert.equal(reevent.purchased, false, 'purchased is correct')
 
@@ -166,6 +167,7 @@ contract('Marketplace', ([deployer, eventhost, eventbuyer, seller, buyer]) => {
             assert.equal(ticket.location, 'Waterfont Park', 'is correct')
             assert.equal(ticket.description, 'Banging House Music Outside', 'is correct')
             assert.equal(ticket.quanity, 2, 'is correct')
+            assert.equal(ticket.availableTickets, 3, "is correct")
             assert.equal(ticket.owner, seller, 'is correct')
             assert.equal(ticket.purchased, false, 'purchased is correct')
         })
@@ -174,7 +176,7 @@ contract('Marketplace', ([deployer, eventhost, eventbuyer, seller, buyer]) => {
             // Track the seller balance before purchase
             let oldSellerBalance
             oldSellerBalance = await web3.eth.getBalance(seller)
-            oldSellerBalance = new web3.utils.BN(oldSellerBalance)
+            oldSellerBalance = new web3.utils.isBN(oldSellerBalance)
 
             // SUCESS: Buyer makes purchase
             result = await marketplace.purchaseTicket(ticketCount, { from: buyer, value: web3.utils.toWei('1', 'Ether')})
