@@ -1,12 +1,9 @@
-import React, {useContext, useState, useEffect} from "react";
+import React, { useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
-import {TicketsContext} from '../utils/TicketsContext'
 import Grid from '@material-ui/core/Grid';
-import web3 from 'web3';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,22 +50,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LayoutTextFields(props) {
   
-  let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel} = useContext(TicketsContext)
   const classes = useStyles();
-  // console.log(eventModel.methods.createEvent("test", 1, 1, 1, 1,"test","test2"))
-  // console.log(eventModel.methods.)
-  const [modelName, setModelName] = useState("")
-  const [modelStart, setModelStart] = useState(0)
-  const [modelEnd, setModelEnd] = useState(0)
-  const [modelAmount, setModelAmount] = useState(0)
-  const [modelPrice, setModelPrice] = useState(0)
-  const [modelSummary, setModelSummary] = useState("")
-  const [modelVenue, setModelVenue] = useState("")
-
-  const createEventModel = [modelName.name , modelStart.start , modelEnd.end , modelAmount.amount , modelPrice.price , modelSummary.summary, modelVenue.venue]
-  // .then()eventModel.methods.createEvent(createModelsState), console.log(eventModel.methods), console.log(createModelsState)}
-  // eventModel.methods.createEvent(createModelsState); console.log(createModelsState)}
-   // mongo states
+  
    const [events, setEvents] = useState({
     eventName: "",
     eventStarts: 0,
@@ -81,11 +64,6 @@ export default function LayoutTextFields(props) {
     eventType: "",
     category: ""
    });
-  
-
-  function toTimestamp(date) {
-    return new Date(date).valueOf();
-  }
 
   useEffect(() => {
 		axios
@@ -119,11 +97,9 @@ export default function LayoutTextFields(props) {
 			})
 			.catch(function () {
 				alert("Could not create Event. Please try again");
-			});
-
+			}
+    );
 	}
-  
-
   return (
     <Grid >
     <div className={classes.contained}  style={{position: 'absolute',
@@ -131,24 +107,8 @@ export default function LayoutTextFields(props) {
       <div>
            
       <form  autoComplete="off" noValidate  onSubmit = { (event) => { event.preventDefault();
-          const name = modelName;
-          const start = modelStart;
-          const end = modelEnd;
-          const totalTickets = modelAmount;
-          const price = modelPrice;
-          const priceStr = parseInt(price)
-          const summary = modelSummary;
-          const location = modelVenue;
-          // console.log(name, start, end, totalTickets, price, summary,location,"look at price here")
-          
-          // const eventCheck = eventModel.methods.createEvent(name, start, end, totalTickets, price, summary,location).send({ from: account })
-          // .once("receipt", (receipt) => {
-          //   console.log(eventCheck, "event check")
-          //   setLoading({ loading: false });
-          
-  }}
+    }}
           >
-
         <div style={{backgroundColor: "transparent"}} >
           <Typography gutterBottom variant="h4" component="h2">
             Create Event

@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -19,11 +18,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     width: "25ch",
   },
-  // containerSm: {
-  //   width: "60ch",
-  //   marginLeft: "auto",
-  //   marginRight: "auto",
-  // },
   paragraphText: {
     marginBottom: "2rem",
   },
@@ -55,56 +49,37 @@ const useStyles = makeStyles((theme) => ({
 export default function LayoutTextFields() {
     const { logout } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
-  const [dataUser, getUser] = useState([]);
   const classes = useStyles();
 
   // mongo states
-  const [users, setUsers] = useState(null);
-  const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	useEffect(() => {
-        // getUserInfo();
-		axios
+  const [userProfile, setUserProfile] = useState({
+    users: null,
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+  })
+
+  function userProfileInfo() {
+    axios
 			.get("/api/users")
-			.then((users) => setUsers(users))
-			.catch((err) => console.log(err));
+			.then( res =>{
+        const users = res.data;
+        for (let i = 0; i < users.length; i++) {
+          let newUser;
+          if (users[i].email === user.email){
+            console.log(users[i].email, user.email);
+            newUser = users[i]
+              setUserProfile(newUser)
+          }
+        }
+      })
+    }
 
-	}, []);
-
-    // function getUserInfo(){
-    //     console.log("test test")
-    //    axios
-    //    .findOne("/api/users")
-    //    .then( res =>{
-    //      const dataUser = res.data;
-    //      console.log(dataUser);
-    //      setEmail(dataUser)
-    //    })
-    //   } 
-
-  // submit fields to mongodb
-  function submitForm() {
-		if (username === "") {
-			alert("Please fill the username field");
-			return;
-		}
-		if (email === "") {
-			alert("Please fill the email field");
-			return;
-		}
-		axios
-			.post("/api/users", {
-				username: username,
-				email: email,
-			})
-			.then(function () {
-				alert("Account created successfully");
-				window.location.reload();
-			})
-			.catch(function () {
-				alert("Could not creat account. Please try again");
-			});
-	}
+	useEffect(() => {
+    userProfileInfo()
+  }, []);
+  
   if (isLoading) {
     return <div>Loading ...</div>;
   }
@@ -121,7 +96,7 @@ export default function LayoutTextFields() {
               component="p"
               className={classes.paragraphText}
             >
-              <strong>Username:</strong> {user.nickname}
+              <strong>Username:</strong> {userProfile.username}
             </Typography>
             <Typography
               variant="body2"
@@ -129,7 +104,7 @@ export default function LayoutTextFields() {
               component="p"
               className={classes.paragraphText}
             >
-              <strong>Email:</strong> {user.name}
+              <strong>Email:</strong> {userProfile.email}
             </Typography>
             <Typography
               variant="body2"
@@ -137,7 +112,7 @@ export default function LayoutTextFields() {
               component="p"
               className={classes.paragraphText}
             >
-              <strong>First Name:</strong> XXXXXX
+              <strong>First Name:</strong> {userProfile.firstName}
             </Typography>
             <Typography
               variant="body2"
@@ -145,7 +120,7 @@ export default function LayoutTextFields() {
               component="p"
               className={classes.paragraphText}
             >
-              <strong>Last Name:</strong> XXXXXX
+              <strong>Last Name:</strong> {userProfile.lastName}
             </Typography>
             <Typography
               variant="body2"
