@@ -21,8 +21,6 @@ const useStyles = makeStyles((theme) => ({
   },
   dropcolor:{
     color: "#000000",
-    
-    
   },
   pop:{
     width: "150%"
@@ -33,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function MainNav(props){
-  console.log(props)
-
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);

@@ -1,11 +1,10 @@
 
-import React, {useState} from "react";
+import React from "react";
 import MainNav from "./main-nav";
 import AuthNav from "./auth-nav";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
-
 
 const useStyles = makeStyles({
   root: {
@@ -27,12 +26,11 @@ const useStyles = makeStyles({
 function NavBar(props){
   const classes = useStyles();
  
-
   return (
-    <Container maxWidth="false" className={classes.container}>
+    <Container maxWidth={false} className={classes.container}>
       <nav className={classes.root}>  
           <div className="row">
-          <Grid wrap-xs-nowrap container direction="row">
+          <Grid wrap-xs-nowrap="true" container direction="row">
             <Grid className={classes.grid1} item xs={6}>
           <MainNav
           props={props} />
@@ -43,6 +41,4 @@ function NavBar(props){
       </nav>
     </Container>
   )};
-
-
 export default NavBar;

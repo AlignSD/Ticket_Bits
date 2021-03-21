@@ -1,11 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-// import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import axios from 'axios';
-
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,19 +58,14 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-
   export default function eventCard(props){
-      console.log(props)
       const events = props.events
-       const classes = useStyles();
-       console.log(events)
-      
+      const classes = useStyles();
 
-
-       return(
+      return(
         <div className={classes.overall}>
             {events.map((events, index) => (
-                <div className={classes.contained}>
+                <div key={index} className={classes.contained}>
         <div key={index} className={classes.root}>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={5}>
@@ -112,10 +104,10 @@ const useStyles = makeStyles((theme) => ({
                 <strong>Description:</strong>
                 {events.summary}
               </Typography>
-              <Grid container>
-                <Grid xs={4}></Grid>
-                <Grid xs={4}></Grid>
-              <Grid item xs={4} alignContent={'flex-end'} alignItems={'flex-end'}>
+              <Grid container alignItems={'flex-end'}>
+                <Grid item xs={4}></Grid>
+                <Grid item xs={4}></Grid>
+              <Grid item xs={4}>
               <Button
             size="large"
             variant="contained"
@@ -132,6 +124,5 @@ const useStyles = makeStyles((theme) => ({
         </div>
             ))}
       </div>
-    
-       )
-  }
+  )
+}

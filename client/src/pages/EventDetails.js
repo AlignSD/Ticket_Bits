@@ -1,14 +1,7 @@
 import React, {useEffect, useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
-// import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import axios from 'axios';
 import EventCard from "../components/eventCard"
-
-
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,34 +46,26 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
 export default function EventDetails() {
   const [events, setEvents] = useState([]);
   useEffect(() => {
     getEventInfo()
 	}, []);
- 
-  console.log("test")
-   function getEventInfo(){
-     console.log("test test")
+
+  function getEventInfo(){
     axios
     .get("/api/events")
     .then( res =>{
       const events = res.data;
-      console.log(events);
       setEvents(events)
     })
-  
   } 
  
   const classes = useStyles();
   
   return(
-
     <EventCard
-    className={classes.contained}
-    events={events}/>
-  
+      className={classes.contained}
+      events={events}/>
   )
 }

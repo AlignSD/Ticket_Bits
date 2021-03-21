@@ -1,13 +1,10 @@
   
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.5.0;
-
-
 contract Marketplace {
     string public name;
     uint256 public ticketCount = 0;
     mapping(uint256 => Ticket) public tickets;
-
     struct Ticket {
         uint256 id;
         string name;
@@ -18,8 +15,7 @@ contract Marketplace {
         address payable owner;
         bool purchased;
     }
-
-    event TicketCreated(
+      event TicketCreated(
         uint256 id,
         string name,
         uint256 price,
@@ -29,7 +25,6 @@ contract Marketplace {
         address payable owner,
         bool purchased
     );
-
     event TicketPurchased(
         uint256 id,
         string name,
@@ -37,7 +32,6 @@ contract Marketplace {
         address payable owner,
         bool purchased
     );
-
     constructor() public {
         name = "Marketplace";
     }
@@ -70,7 +64,6 @@ contract Marketplace {
         //Trigger an event
         emit TicketCreated(ticketCount, _name, _price, _date, _location, _description, msg.sender, false);
     }
-
     function purchaseTicket(uint256 _id) public payable {
         // Fetch the product
         Ticket memory _ticket = tickets[_id];
