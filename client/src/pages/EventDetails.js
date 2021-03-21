@@ -44,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
   contained:{
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
-    marginTop: 50,
     marginRight: "auto",
     marginBottom: 50,
     marginLeft: "auto",
@@ -58,7 +57,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EventDetails() {
   const [events, setEvents] = useState([]);
-  getEventInfo()
+  useEffect(() => {
+    getEventInfo()
+	}, []);
+ 
   console.log("test")
    function getEventInfo(){
      console.log("test test")
@@ -72,11 +74,12 @@ export default function EventDetails() {
   
   } 
  
-
+  const classes = useStyles();
   
   return(
 
     <EventCard
+    className={classes.contained}
     events={events}/>
   
   )

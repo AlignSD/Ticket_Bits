@@ -9,11 +9,14 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 })
 router.post('/', (req, res) => {
-    const { name, email } = req.body;
+    const { username, email, firstName, lastName } = req.body;
     const newUser = new User({
         _id : req.body.id,
-        name: req.body.username,
-        email: email
+        username: username,
+        email: email,
+        firstName: firstName,
+        lastName: lastName
+
     })
     console.log(newUser, "newUser")
     newUser.save()
@@ -25,4 +28,26 @@ router.post('/', (req, res) => {
             "message": "Error creating account"
         }))
 })
+    router.put('/:id', (req, res) => {
+        console.log(req.params, "res")
+        User.findByIdAndUpdate(req.params.id,
+            {
+                _id : req.body.id,
+                userName: req.body.userName,
+                email: req.body.email,
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+            },  
+            function(err, response){
+                    if (err) {
+             res.send(err);
+            } else {
+                console.log(response);
+                console.log('user updated!');
+                res.redirect('/profile');
+                                }
+            });
+});
+    
+    
 module.exports = router 

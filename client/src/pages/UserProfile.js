@@ -1,18 +1,17 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { useAuth0 } from "@auth0/auth0-react";
-import axios from 'axios'
-import Grid from '@material-ui/core/Grid';
+import axios from "axios";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "white",
+    flexGrow: 1,
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "2rem",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -31,21 +30,22 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
     color: "#ffffff",
     backgroundColor: "#000000",
-    '&:hover': {
-      backgroundColor: '#3d4c65',
-      boxShadow: 'black',
-    }
+    "&:hover": {
+      backgroundColor: "#3d4c65",
+      boxShadow: "black",
+    },
   },
-  contained:{
+  contained: {
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
     marginTop: 50,
     marginRight: "auto",
-    marginBottom: 50,
+    marginBottom: 150,
     marginLeft: "auto",
     padding: 20,
-    zIndex: 1
-  }
+    width: "100%",
+    zIndex: 1,
+  },
 }));
 
 export default function LayoutTextFields() {
@@ -53,134 +53,61 @@ export default function LayoutTextFields() {
   const classes = useStyles();
 
   // mongo states
-  const [users, setUsers] = useState(null);
-  const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	useEffect(() => {
-		axios
-			.get("/api/users")
-			.then((users) => setUsers(users))
-			.catch((err) => console.log(err));
+  const [userProfile, setUserProfile] = useState({
+    users: null,
+    username: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    
 
+  })
+  console.log(userProfile.username);
+  console.log(userProfile.users);
+  // const [users, setUsers] = useState(null);
+  // const [username, setUsername] = useState("");
+	// const [email, setEmail] = useState("");
+  // const [firstName, setFirstName ] = useState("");
+	// const [lastName, setLastName] = useState("");
+	useEffect(() => {
+    axios
+			.get("/api/users")
+			.then((users) => setUserProfile(...userProfile, users))
+			.catch((err) => console.log(err));
+      authLoadProfile()
 	}, []);
 
+  function authLoadProfile() {
+    
+      if(user.email === null){
+      axios
+			.post("/api/users", {
+				username: user.nickname,
+				email: user.email,
+        firstName: userProfile.firstName,
+        lastName: userProfile.lastName,
+			})
+    } else {
+      return;
+    }
+  }
   // submit fields to mongodb
   function submitForm() {
-		if (username === "") {
-			alert("Please fill the username field");
-			return;
-		}
-		if (email === "") {
-			alert("Please fill the email field");
-			return;
-		}
 		axios
-			.post("/api/users", {
-				username: username,
-				email: email,
+			.put("/api/users/:id", {
+				username: userProfile.username,
+				email: user.email,
+        firstName: userProfile.firstName,
+        lastName: userProfile.lastName,
 			})
-			.then(function () {
-				alert("Account created successfully");
-				window.location.reload();
-			})
-			.catch(function () {
-				alert("Could not creat account. Please try again");
-			});
-	}
+    }
   if (isLoading) {
     return <div>Loading ...</div>;
   }
   return (
     isAuthenticated && (
       <Grid className={classes.contained}>
-      {/* form section is what sends values to mongodb */}
-      <form onSubmit={submitForm}>
-				<input
-					onChange={(e) => setUsername(e.target.value)}
-					type="text"
-					placeholder="Enter your username"
-				/>
-				<input
-					onChange={(e) => setEmail(e.target.value)}
-					type="text"
-					placeholder="Enter your email address"
-				/>
-				<input type="submit" />
-			</form>
-      <div className={classes.root}>
-        <div >
           <form>
-          <div>
-            <Typography gutterBottom variant="h4" component="h2">
-              Your Profile
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Username:</strong> {user.name}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Email:</strong> {user.name}
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>First Name:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Last Name:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Street Address:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>City/Town:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>State:</strong> XXXXXX
-            </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              className={classes.paragraphText}
-            >
-              <strong>Zip Code:</strong> XXXXXX
-            </Typography>
-          </div>
-          </form>
-          <hr />
           <div>
             <Typography gutterBottom variant="h4" component="h2">
               Edit Profile
@@ -194,6 +121,7 @@ export default function LayoutTextFields() {
                 shrink: true,
               }}
               variant="outlined"
+              onChange={(e) => setUserProfile({...userProfile, firstName: e.target.value})}
             />
             <TextField
               id="outlined-margin-none"
@@ -204,76 +132,27 @@ export default function LayoutTextFields() {
                 shrink: true,
               }}
               variant="outlined"
+              onChange={(e) => setUserProfile({...userProfile, lastName: e.target.value})}
             />
             <TextField
               id="outlined-margin-none"
-              label="Email"
+              label="Username"
               style={{ padding: 6 }}
               margin="normal"
               InputLabelProps={{
                 shrink: true,
               }}
               variant="outlined"
+              onChange={(e) => setUserProfile({...userProfile, username: e.target.value})}
             />
           </div>
+          </form>
           <hr />
-          <div>
-            <Typography gutterBottom variant="h4" component="h2">
-              Edit Address
-            </Typography>
-            <TextField
-              id="outlined-margin-none"
-              label="Street Address"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="City/Town"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="State"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-            <TextField
-              id="outlined-margin-none"
-              label="Zip Code"
-              style={{ padding: 6 }}
-              margin="normal"
-              InputLabelProps={{
-                shrink: true,
-              }}
-              variant="outlined"
-            />
-          </div>
           <hr />
-          <Button
-            size="large"
-            variant="contained"
-            color="primary"
-            className={classes.btnMargin}
-          >
+          <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
             UPDATE PROFILE
           </Button>
-        </div>
-      </div>
-    </Grid>
+      </Grid>
     )
   );
 }
