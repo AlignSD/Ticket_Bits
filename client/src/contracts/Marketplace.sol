@@ -4,6 +4,7 @@ pragma solidity ^0.5.0;
 
 contract Marketplace {
     string public name;
+    uint newAvailable;
     uint256 public ticketCount = 0;
     mapping(uint256 => Ticket) public tickets;
 
@@ -11,6 +12,11 @@ contract Marketplace {
         uint256 id;
         string name;
         uint256 price;
+        string date;
+        string location;
+        string description;
+        uint available;
+        uint quanity;
         address payable owner;
         bool purchased;
     }
@@ -19,6 +25,11 @@ contract Marketplace {
         uint256 id,
         string name,
         uint256 price,
+        string date,
+        string location,
+        string description,
+        uint available,
+        uint quantity,
         address payable owner,
         bool purchased
     );
@@ -35,24 +46,46 @@ contract Marketplace {
         name = "Marketplace";
     }
 
-    function createTicket(string memory _name, uint256 _price) public {
+    function createTicket(string memory _name, uint256 _price, string memory _date, string memory _location, string memory _description, uint _available, uint _quantity) public {
         //Require a valid name
         require(bytes(_name).length > 0);
         // Reuire a valid price
         require(_price > 0);
+        // Require valid date
+        require(bytes(_date).length > 0);
+        // Require a valid location
+        require(bytes(_location).length > 0);
+        // Require a valid description
+        require(bytes(_description).length > 0);
+        // Require a ticket or tickets to be available
+        require(_available > 0);
+        // Require a quanity for purchase
+        require(_quantity > 0);
+        //Require available tickets is >= to quantity
+        require(_available >= _quantity);
         // Make sure parameters are correct
         // Increment Ticket count
         ticketCount++;
+        // Subtract quantity from available tickets 
+        if( _available >= _quantity) {
+        newAvailable = _available - _quantity;
+        _available = newAvailable;
+        }
         //Create the ticket
         tickets[ticketCount] = Ticket(
             ticketCount,
             _name,
             _price,
+            _date,
+            _location,
+            _description,
+            _available,
+            _quantity,
             msg.sender,
             false
         );
         //Trigger an event
-        emit TicketCreated(ticketCount, _name, _price, msg.sender, false);
+        emit TicketCreated(ticketCount, _name, _price, _date, _location, _description, _available, _quantity, msg.sender, false);
     }
 
     function purchaseTicket(uint256 _id) public payable {
