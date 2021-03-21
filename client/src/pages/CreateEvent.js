@@ -1,11 +1,13 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState, useEffect} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import {TicketsContext} from '../utils/TicketsContext'
-import web3 from 'web3'
+import Grid from '@material-ui/core/Grid';
+import web3 from 'web3';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
    root: {
@@ -29,8 +31,24 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "3vh",
   },
   btnMargin: {
-    margin: theme.spacing(1),
-  },
+    marginTop: 20,
+    color: "#ffffff",
+    backgroundColor: "#000000",
+    '&:hover': {
+      backgroundColor: '#3d4c65',
+      boxShadow: 'black',
+    }},
+    contained: {
+      backgroundColor: "#FFFFFF",
+      borderRadius: 6,
+      marginTop: 50,
+      marginRight: "auto",
+      marginBottom: 150,
+      marginLeft: "auto",
+      padding: 20,
+      width: "100%",
+      zIndex: 1,
+    },
 }));
 
 export default function LayoutTextFields(props) {
@@ -50,11 +68,64 @@ export default function LayoutTextFields(props) {
   const createEventModel = [modelName.name , modelStart.start , modelEnd.end , modelAmount.amount , modelPrice.price , modelSummary.summary, modelVenue.venue]
   // .then()eventModel.methods.createEvent(createModelsState), console.log(eventModel.methods), console.log(createModelsState)}
   // eventModel.methods.createEvent(createModelsState); console.log(createModelsState)}
-  // function toTimestamp(date) {
-  //   return new Date(date).valueOf();
-  // }
+   // mongo states
+   const [events, setEvents] = useState({
+    eventName: "",
+    eventStarts: 0,
+    eventEnds: 0,
+    ticketAmount: 0,
+    ticketPrice: 0,
+    summary: "",
+    venueName: "",
+    organizer: "",
+    eventType: "",
+    category: ""
+   });
+  
+
+  function toTimestamp(date) {
+    return new Date(date).valueOf();
+  }
+
+  useEffect(() => {
+		axios
+			.get("/api/events")
+			.then((events) => setEvents(events))
+      
+			.catch((err) => console.log(err));
+      console.log(events, "events log");
+
+	}, []);
+
+  function submitForm() { 
+		
+    console.log(events, "events")
+		axios
+			.post("/api/events", {
+				eventName: events.eventName,
+        eventStarts: events.eventStarts,
+        eventEnds: events.eventEnds,
+        ticketAmount: events.ticketAmount, 
+        ticketPrice: events.ticketPrice, 
+        summary: events.summary,
+        venueName: events.venueName,
+        organizer: events.organizer,
+        eventType: events.eventType,
+        category: events.category
+			})
+			.then(function () {
+				alert("Event created successfully");
+				window.location.reload();
+			})
+			.catch(function () {
+				alert("Could not create Event. Please try again");
+			});
+
+	}
+  
 
   return (
+<<<<<<< HEAD
     <div className={classes.root}>
       <div className={classes.containerSm}>
             Basic Event Info
@@ -73,23 +144,45 @@ export default function LayoutTextFields(props) {
           console.log(eventCheck, "event check")
         }
         }
+=======
+    <Grid >
+    <div className={classes.contained}  style={{position: 'absolute',
+    zIndex: 1}}>
+      <div>
+           
+      <form  autoComplete="off" noValidate  onSubmit = { (event) => { event.preventDefault();
+          const name = modelName;
+          const start = modelStart;
+          const end = modelEnd;
+          const totalTickets = modelAmount;
+          const price = modelPrice;
+          const priceStr = parseInt(price)
+          const summary = modelSummary;
+          const location = modelVenue;
+          // console.log(name, start, end, totalTickets, price, summary,location,"look at price here")
+          
+          // const eventCheck = eventModel.methods.createEvent(name, start, end, totalTickets, price, summary,location).send({ from: account })
+          // .once("receipt", (receipt) => {
+          //   console.log(eventCheck, "event check")
+          //   setLoading({ loading: false });
+          
+  }}
+>>>>>>> d789d502f30bac8d094d5f0db9934aa8ab582179
           >
 
-        <div>
+        <div style={{backgroundColor: "transparent"}} >
           <Typography gutterBottom variant="h4" component="h2">
-            Basic Event Info
+            Create Event
           </Typography>
-          <Button size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
-          CREATE EVENT
-        </Button>
           <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
             Name your event and tell the event-goers why they should come. Add
             details that highlight what makes it unique.
           </Typography>
           <TextField name= "Event Name" className="outlined-margin-none" id="EventName" label="Event Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
-            onChange = {(e)=> setModelName({name: e.target.value})}
+            onChange ={(e) => setEvents({...events, eventName: e.target.value})}
           />
            <TextField className="outlined-margin-none" id="eventStart" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
+<<<<<<< HEAD
             onChange = {(e)=> setModelStart({start: (e.target.value)})}
           />
           <TextField className="outlined-margin-none" id="eventEnd" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
@@ -100,80 +193,33 @@ export default function LayoutTextFields(props) {
           />
           <TextField className="outlined-margin-none" id="price" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
             onChange = {(e)=> setModelPrice({price: (e.target.value)})}
+=======
+            onChange = {(e) => setEvents({...events,eventStarts: e.target.value})}
+          />
+          <TextField className="outlined-margin-none" id="eventEnd" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{  shrink: true, }} variant="outlined"
+            onChange = {(e) => setEvents({...events,eventEnds: e.target.value})}
+          />
+           <TextField className="outlined-margin-none" id="totalTickets" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
+            onChange = {(e) => setEvents({...events,ticketAmount: e.target.value})}
+          />
+          <TextField className="outlined-margin-none" id="price" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"
+            onChange = {(e) => setEvents({...events,ticketPrice: e.target.value})}
+>>>>>>> d789d502f30bac8d094d5f0db9934aa8ab582179
           />
           <TextField className="outlined-margin-none" id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} multiline variant="outlined"
-            onChange = {(e)=> setModelSummary({summary: e.target.value})}
+            onChange = {(e) => setEvents({...events,summary: e.target.value})}
           />
           <TextField className="outlined-margin-none" id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
-            onChange = {(e)=> setModelVenue({venue: e.target.value})} 
+            onChange = {(e) => setEvents({...events,organizer: e.target.value})}
           />
-          <TextField id="outlined-full-width" label="Organizer *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="Event Type *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-margin-none" label="Category *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-margin-none" label="Ticket Amount *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="Ticket Price (US dollars) *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-        </div>
-        <hr />
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Event Location
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
-            Help people in the area discover your event and let attendees know
-            where to show up.
-          </Typography>
-          <TextField id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }}  fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-full-width" label="Address *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-full-width" label="City *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="State *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="Zip Code *" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-        </div>
-        <hr />
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Date &amp; Time
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
-            Tell event-goers when your event starts and ends so they can make
-            plans to attend.
-          </Typography>
-          <TextField id="outlined-margin-none" label="Event Starts *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-margin-none" label="Start Time *" placeholder="00:00" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined"/>
-          <TextField id="outlined-margin-none" label="Event Ends *" placeholder="mm/dd/yyyy" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-          <TextField id="outlined-margin-none" label="End Time *" placeholder="00:00" style={{ padding: 6 }} margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" />
-        </div>
-        <hr />
-        <div>
-          <Typography gutterBottom variant="h4" component="h2">
-            Event Description
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}>
-            Add more details to your event like your schedule, sponsors, or
-            featured guests.
-          </Typography>
-          <TextField id="outlined-full-width" label="Summary *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" multiline/>
-        </div>
-        <hr />
-          <Typography gutterBottom variant="h4" component="h2">
-            Event Image
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p" className={classes.paragraphText}
-          >
-            Upload your event flyer or photo.
-          </Typography>
-          <input accept="image/*" className={classes.input} id="contained-button-file" multiple type="file"
-          />
-          <label htmlFor="contained-button-file">
-          <Button variant="contained" color="primary" component="span">
-            Upload
-          </Button>
-        </label>
-        <hr />
-         <Button size="large" variant="contained" className={classes.btnMargin}>
-          CANCEL
+                    <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
+          CREATE EVENT
         </Button>
+        </div>
         </form>
-      </div>
-    </div>
+        </div>
+        </div>
+        </Grid>
+         
   );
 }

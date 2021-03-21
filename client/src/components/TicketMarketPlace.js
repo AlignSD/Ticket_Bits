@@ -81,50 +81,18 @@ function TicketMarketPlace() {
     // checkCheckout();
     let result = null;
 
-    switch (userType) {
-      case "Buyer":
-        result = <Buyer tickets={tickets} purchaseTicket={purchaseTicket} />;
-        break;
-      case "Seller":
-        result = <Seller tickets={tickets} createTicket={createTicket} />;
-        break;
-      case "PaypalTest":
-        result = (
-          <PaypalTest tickets={tickets} purchaseTicket={purchaseTicket} />
-        );
-        break;
-        case "Paypal":
-        result = (
-          <Paypal tickets={tickets} purchaseTicket={purchaseTicket} />
-        );
-        break;
-      default:
-        userType = "";
-        result = <Main tickets={tickets} />;
-    }
+    
 
     return result;
   };
 
   return (
 
-        <div>
+        <div  style={{position: 'absolute',
+        zIndex: 1}}> 
 
           <div className={classes.marginAutoContainer}>
-          <Grid container item={true} xs={4} align-content-xs-center='true'>
-            <Grid item xs={4} className={classes.marginAutoContainer} >
-            <MyButton  onClick={ () => { setUserType("Buyer") }}>Buyer</MyButton>
-            </Grid>
-            <Grid item xs={4} className={classes.marginAutoContainer} >
-            <MyButton   onClick={ () => { setUserType("Seller") }}>Seller</MyButton>
-            </Grid>
-            <Grid item xs={4} className={classes.marginAutoContainer} >
-            <MyButton  onClick={ () => { setUserType("") }}>Ticket Feed</MyButton>
-            </Grid>
-            <Grid item xs={4} className={classes.marginAutoContainer} >
-            <MyButton  onClick={ () => { setOpenPopup(true) }}>Create Event</MyButton>
-            </Grid>
-          </Grid>
+          
           
           </div>
         <div className="row">

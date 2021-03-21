@@ -6,6 +6,8 @@ import Loading from "./components/loading";
 import Footer from "./components/footer";
 import Buyer from './components/Buyer'
 import Seller from './components/Seller'
+import Grid from "@material-ui/core/Grid";
+import LandingPage from "./views/landingpage"
 // import NavBar from "./components/NavBar";
 import TicketMarketPlace from './components/TicketMarketPlace';
 import Home from "./views/home";
@@ -23,6 +25,13 @@ import {TicketsContext} from '../src/utils/TicketsContext'
 import Marketplace from './abis/Marketplace.json'
 import Event from './abis/Event.json'
 import EventFactory from './abis/EventFactory.json'
+import { makeStyles, withStyles } from '@material-ui/core/styles';
+import Matrix from "../src/components/MatrixRain"
+import EventDetails from './pages/EventDetails'
+import zIndex from "@material-ui/core/styles/zIndex";
+
+
+
 
 const App = () => {
   let {account, tickets, loading, userType, paypalState, marketplaceState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, eventModel, setEventModel, setEvent, eventState, eventFactoryState, setEventFactory} = useContext(TicketsContext)
@@ -119,6 +128,33 @@ const App = () => {
         });
     }
   }
+  const useStyles = makeStyles({
+    logo: {
+        height: 100
+         },
+    grid:{
+        height: 75
+    },
+    chain:{
+      color: '#ffffff',
+      fontSize: "18px",
+      marginLeft: "10px"
+    },
+    button:{
+      height: 50
+    },
+    rain:{
+      zIndex: -1,
+      opacity: "10"
+    },
+    absolute:{
+      position: "absolute",
+      zIndex: 10
+
+    },
+
+  
+  })
 
   // *****Purchase ticket function*****
   function purchaseTicket(id, price) {
@@ -144,33 +180,43 @@ const App = () => {
   //   console.log('statusCode:', response && response.statusCode); 
   //   console.log('body:', body);
   // });
-
+  const classes = useStyles();
   if (isLoading) {
     return <Loading/>;
   }
 
+
   return (
- 
+ <>
+ <NavBar className={classes.absolute}/>
     <div id="app" style={{height: "100%"}} className="d-flex flex-column h-100">
-      <NavBar/>
-      <div className="container flex-grow-1">
+
+    
+      <div className="container flex-grow-1 " style={{position: "relative"}}>
+        <Grid container >
         <Switch>
-          <Route path="/" exact component={Home} />
-            <ProtectedRoute path="/coinbaseAPI" component={CoinbaseAPI} />
-            <ProtectedRoute path="/profile" component={UserProfile} />
-            <ProtectedRoute path="/external-api" component={ExternalApi} />
-            <ProtectedRoute exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
-            <ProtectedRoute exact path='/CreateEvent'><CreateEvent
+          <Route  exact path="/home" component={Home}/>
+            <ProtectedRoute  exact path="/coinbaseAPI"><CoinbaseAPI/></ProtectedRoute>
+            <ProtectedRoute  exact path="/profile" component={UserProfile} />
+            <ProtectedRoute  exact path="/external-api" component={ExternalApi} />
+            <ProtectedRoute  exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
+            <ProtectedRoute  exact path='/CreateEvent'><CreateEvent
                                                       eventModel = {eventModel}
                                                       setEventModel = {setEventModel}
             /></ProtectedRoute>
+            <ProtectedRoute exact path='/EventDetails' component={EventDetails}></ProtectedRoute>
             <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
             <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
             <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
         </Switch>
+        </Grid>
+        <Matrix className={classes.rain}>
+</Matrix>
       </div>
-    <Footer />
+    
   </div>
+  <Footer />
+  </>
   );
 };
 

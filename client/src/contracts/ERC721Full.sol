@@ -1,8 +1,6 @@
 // File: @openzeppelin/contracts/introspection/IERC165.sol
 
 pragma solidity ^0.5.0;
-pragma solidity ^0.5.0;
-
 
 /**
  * @dev Interface of the ERC165 standard, as defined in the
@@ -27,16 +25,25 @@ interface IERC165 {
 
 // File: @openzeppelin/contracts/token/ERC721/IERC721.sol
 
-
-
-
 /**
  * @dev Required interface of an ERC721 compliant contract.
  */
 contract IERC721 is IERC165 {
-    event Transfer(address indexed from, address indexed to, uint256 indexed tokenId);
-    event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId);
-    event ApprovalForAll(address indexed owner, address indexed operator, bool approved);
+    event Transfer(
+        address indexed from,
+        address indexed to,
+        uint256 indexed tokenId
+    );
+    event Approval(
+        address indexed owner,
+        address indexed approved,
+        uint256 indexed tokenId
+    );
+    event ApprovalForAll(
+        address indexed owner,
+        address indexed operator,
+        bool approved
+    );
 
     /**
      * @dev Returns the number of NFTs in `owner`'s account.
@@ -52,7 +59,7 @@ contract IERC721 is IERC165 {
      * @dev Transfers a specific NFT (`tokenId`) from one account (`from`) to
      * another (`to`).
      *
-     * 
+     *
      *
      * Requirements:
      * - `from`, `to` cannot be zero.
@@ -60,7 +67,12 @@ contract IERC721 is IERC165 {
      * - If the caller is not `from`, it must be have been allowed to move this
      * NFT by either `approve` or `setApproveForAll`.
      */
-    function safeTransferFrom(address from, address to, uint256 tokenId) public;
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public;
+
     /**
      * @dev Transfers a specific NFT (`tokenId`) from one account (`from`) to
      * another (`to`).
@@ -69,15 +81,32 @@ contract IERC721 is IERC165 {
      * - If the caller is not `from`, it must be approved to move this NFT by
      * either `approve` or `setApproveForAll`.
      */
-    function transferFrom(address from, address to, uint256 tokenId) public;
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public;
+
     function approve(address to, uint256 tokenId) public;
-    function getApproved(uint256 tokenId) public view returns (address operator);
+
+    function getApproved(uint256 tokenId)
+        public
+        view
+        returns (address operator);
 
     function setApprovalForAll(address operator, bool _approved) public;
-    function isApprovedForAll(address owner, address operator) public view returns (bool);
 
+    function isApprovedForAll(address owner, address operator)
+        public
+        view
+        returns (bool);
 
-    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory data) public;
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory data
+    ) public;
 }
 
 // File: @openzeppelin/contracts/token/ERC721/IERC721Receiver.sol
@@ -104,8 +133,12 @@ contract IERC721Receiver {
      * @param data Additional data with no specified format
      * @return bytes4 `bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"))`
      */
-    function onERC721Received(address operator, address from, uint256 tokenId, bytes memory data)
-    public returns (bytes4);
+    function onERC721Received(
+        address operator,
+        address from,
+        uint256 tokenId,
+        bytes memory data
+    ) public returns (bytes4);
 }
 
 // File: @openzeppelin/contracts/math/SafeMath.sol
@@ -243,7 +276,9 @@ library Address {
 
         uint256 size;
         // solhint-disable-next-line no-inline-assembly
-        assembly { size := extcodesize(account) }
+        assembly {
+            size := extcodesize(account)
+        }
         return size > 0;
     }
 }
@@ -251,7 +286,6 @@ library Address {
 // File: @openzeppelin/contracts/drafts/Counters.sol
 
 pragma solidity ^0.5.0;
-
 
 /**
  * @title Counters
@@ -291,7 +325,6 @@ library Counters {
 
 pragma solidity ^0.5.0;
 
-
 /**
  * @dev Implementation of the `IERC165` interface.
  *
@@ -309,7 +342,7 @@ contract ERC165 is IERC165 {
      */
     mapping(bytes4 => bool) private _supportedInterfaces;
 
-    constructor () internal {
+    constructor() internal {
         // Derived contracts need only register support for their own interfaces,
         // we register support for ERC165 itself here
         _registerInterface(_INTERFACE_ID_ERC165);
@@ -320,7 +353,11 @@ contract ERC165 is IERC165 {
      *
      * Time complexity O(1), guaranteed to always use less than 30 000 gas.
      */
-    function supportsInterface(bytes4 interfaceId) external view returns (bool) {
+    function supportsInterface(bytes4 interfaceId)
+        external
+        view
+        returns (bool)
+    {
         return _supportedInterfaces[interfaceId];
     }
 
@@ -345,12 +382,6 @@ contract ERC165 is IERC165 {
 
 pragma solidity ^0.5.0;
 
-
-
-
-
-
-
 /**
  * @title ERC721 Non-Fungible Token Standard basic implementation
  * @dev see https://eips.ethereum.org/EIPS/eip-721
@@ -365,16 +396,16 @@ contract ERC721 is ERC165, IERC721 {
     bytes4 private constant _ERC721_RECEIVED = 0x150b7a02;
 
     // Mapping from token ID to owner
-    mapping (uint256 => address) private _tokenOwner;
+    mapping(uint256 => address) private _tokenOwner;
 
     // Mapping from token ID to approved address
-    mapping (uint256 => address) private _tokenApprovals;
+    mapping(uint256 => address) private _tokenApprovals;
 
     // Mapping from owner to number of owned token
-    mapping (address => Counters.Counter) private _ownedTokensCount;
+    mapping(address => Counters.Counter) private _ownedTokensCount;
 
     // Mapping from owner to operator approvals
-    mapping (address => mapping (address => bool)) private _operatorApprovals;
+    mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     /*
      *     bytes4(keccak256('balanceOf(address)')) == 0x70a08231
@@ -392,7 +423,7 @@ contract ERC721 is ERC165, IERC721 {
      */
     bytes4 private constant _INTERFACE_ID_ERC721 = 0x80ac58cd;
 
-    constructor () public {
+    constructor() public {
         // register the supported interfaces to conform to ERC721 via ERC165
         _registerInterface(_INTERFACE_ID_ERC721);
     }
@@ -403,7 +434,10 @@ contract ERC721 is ERC165, IERC721 {
      * @return uint256 representing the amount owned by the passed address
      */
     function balanceOf(address owner) public view returns (uint256) {
-        require(owner != address(0), "ERC721: balance query for the zero address");
+        require(
+            owner != address(0),
+            "ERC721: balance query for the zero address"
+        );
 
         return _ownedTokensCount[owner].current();
     }
@@ -415,7 +449,10 @@ contract ERC721 is ERC165, IERC721 {
      */
     function ownerOf(uint256 tokenId) public view returns (address) {
         address owner = _tokenOwner[tokenId];
-        require(owner != address(0), "ERC721: owner query for nonexistent token");
+        require(
+            owner != address(0),
+            "ERC721: owner query for nonexistent token"
+        );
 
         return owner;
     }
@@ -432,7 +469,8 @@ contract ERC721 is ERC165, IERC721 {
         address owner = ownerOf(tokenId);
         require(to != owner, "ERC721: approval to current owner");
 
-        require(msg.sender == owner || isApprovedForAll(owner, msg.sender),
+        require(
+            msg.sender == owner || isApprovedForAll(owner, msg.sender),
             "ERC721: approve caller is not owner nor approved for all"
         );
 
@@ -447,7 +485,10 @@ contract ERC721 is ERC165, IERC721 {
      * @return address currently approved for the given token ID
      */
     function getApproved(uint256 tokenId) public view returns (address) {
-        require(_exists(tokenId), "ERC721: approved query for nonexistent token");
+        require(
+            _exists(tokenId),
+            "ERC721: approved query for nonexistent token"
+        );
 
         return _tokenApprovals[tokenId];
     }
@@ -471,7 +512,11 @@ contract ERC721 is ERC165, IERC721 {
      * @param operator operator address which you want to query the approval of
      * @return bool whether the given operator is approved by the given owner
      */
-    function isApprovedForAll(address owner, address operator) public view returns (bool) {
+    function isApprovedForAll(address owner, address operator)
+        public
+        view
+        returns (bool)
+    {
         return _operatorApprovals[owner][operator];
     }
 
@@ -483,9 +528,16 @@ contract ERC721 is ERC165, IERC721 {
      * @param to address to receive the ownership of the given token ID
      * @param tokenId uint256 ID of the token to be transferred
      */
-    function transferFrom(address from, address to, uint256 tokenId) public {
+    function transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public {
         //solhint-disable-next-line max-line-length
-        require(_isApprovedOrOwner(msg.sender, tokenId), "ERC721: transfer caller is not owner nor approved");
+        require(
+            _isApprovedOrOwner(msg.sender, tokenId),
+            "ERC721: transfer caller is not owner nor approved"
+        );
 
         _transferFrom(from, to, tokenId);
     }
@@ -501,7 +553,11 @@ contract ERC721 is ERC165, IERC721 {
      * @param to address to receive the ownership of the given token ID
      * @param tokenId uint256 ID of the token to be transferred
      */
-    function safeTransferFrom(address from, address to, uint256 tokenId) public {
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) public {
         safeTransferFrom(from, to, tokenId, "");
     }
 
@@ -517,9 +573,17 @@ contract ERC721 is ERC165, IERC721 {
      * @param tokenId uint256 ID of the token to be transferred
      * @param _data bytes data to send along with a safe transfer check
      */
-    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public {
+    function safeTransferFrom(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory _data
+    ) public {
         transferFrom(from, to, tokenId);
-        require(_checkOnERC721Received(from, to, tokenId, _data), "ERC721: transfer to non ERC721Receiver implementer");
+        require(
+            _checkOnERC721Received(from, to, tokenId, _data),
+            "ERC721: transfer to non ERC721Receiver implementer"
+        );
     }
 
     /**
@@ -539,10 +603,19 @@ contract ERC721 is ERC165, IERC721 {
      * @return bool whether the msg.sender is approved for the given token ID,
      * is an operator of the owner, or is the owner of the token
      */
-    function _isApprovedOrOwner(address spender, uint256 tokenId) internal view returns (bool) {
-        require(_exists(tokenId), "ERC721: operator query for nonexistent token");
+    function _isApprovedOrOwner(address spender, uint256 tokenId)
+        internal
+        view
+        returns (bool)
+    {
+        require(
+            _exists(tokenId),
+            "ERC721: operator query for nonexistent token"
+        );
         address owner = ownerOf(tokenId);
-        return (spender == owner || getApproved(tokenId) == spender || isApprovedForAll(owner, spender));
+        return (spender == owner ||
+            getApproved(tokenId) == spender ||
+            isApprovedForAll(owner, spender));
     }
 
     /**
@@ -569,7 +642,10 @@ contract ERC721 is ERC165, IERC721 {
      * @param tokenId uint256 ID of the token being burned
      */
     function _burn(address owner, uint256 tokenId) internal {
-        require(ownerOf(tokenId) == owner, "ERC721: burn of token that is not own");
+        require(
+            ownerOf(tokenId) == owner,
+            "ERC721: burn of token that is not own"
+        );
 
         _clearApproval(tokenId);
 
@@ -595,8 +671,15 @@ contract ERC721 is ERC165, IERC721 {
      * @param to address to receive the ownership of the given token ID
      * @param tokenId uint256 ID of the token to be transferred
      */
-    function _transferFrom(address from, address to, uint256 tokenId) internal {
-        require(ownerOf(tokenId) == from, "ERC721: transfer of token that is not own");
+    function _transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal {
+        require(
+            ownerOf(tokenId) == from,
+            "ERC721: transfer of token that is not own"
+        );
         require(to != address(0), "ERC721: transfer to the zero address");
 
         _clearApproval(tokenId);
@@ -620,14 +703,23 @@ contract ERC721 is ERC165, IERC721 {
      * @param _data bytes optional data to send along with the call
      * @return bool whether the call correctly returned the expected magic value
      */
-    function _checkOnERC721Received(address from, address to, uint256 tokenId, bytes memory _data)
-        internal returns (bool)
-    {
+    function _checkOnERC721Received(
+        address from,
+        address to,
+        uint256 tokenId,
+        bytes memory _data
+    ) internal returns (bool) {
         if (!to.isContract()) {
             return true;
         }
 
-        bytes4 retval = IERC721Receiver(to).onERC721Received(msg.sender, from, tokenId, _data);
+        bytes4 retval =
+            IERC721Receiver(to).onERC721Received(
+                msg.sender,
+                from,
+                tokenId,
+                _data
+            );
         return (retval == _ERC721_RECEIVED);
     }
 
@@ -646,14 +738,17 @@ contract ERC721 is ERC165, IERC721 {
 
 pragma solidity ^0.5.0;
 
-
 /**
  * @title ERC-721 Non-Fungible Token Standard, optional enumeration extension
  * @dev See https://eips.ethereum.org/EIPS/eip-721
  */
 contract IERC721Enumerable is IERC721 {
     function totalSupply() public view returns (uint256);
-    function tokenOfOwnerByIndex(address owner, uint256 index) public view returns (uint256 tokenId);
+
+    function tokenOfOwnerByIndex(address owner, uint256 index)
+        public
+        view
+        returns (uint256 tokenId);
 
     function tokenByIndex(uint256 index) public view returns (uint256);
 }
@@ -661,9 +756,6 @@ contract IERC721Enumerable is IERC721 {
 // File: @openzeppelin/contracts/token/ERC721/ERC721Enumerable.sol
 
 pragma solidity ^0.5.0;
-
-
-
 
 /**
  * @title ERC-721 Non-Fungible Token with optional enumeration extension logic
@@ -694,7 +786,7 @@ contract ERC721Enumerable is ERC165, ERC721, IERC721Enumerable {
     /**
      * @dev Constructor function.
      */
-    constructor () public {
+    constructor() public {
         // register the supported interface to conform to ERC721Enumerable via ERC165
         _registerInterface(_INTERFACE_ID_ERC721_ENUMERABLE);
     }
@@ -705,8 +797,15 @@ contract ERC721Enumerable is ERC165, ERC721, IERC721Enumerable {
      * @param index uint256 representing the index to be accessed of the requested tokens list
      * @return uint256 token ID at the given index of the tokens list owned by the requested address
      */
-    function tokenOfOwnerByIndex(address owner, uint256 index) public view returns (uint256) {
-        require(index < balanceOf(owner), "ERC721Enumerable: owner index out of bounds");
+    function tokenOfOwnerByIndex(address owner, uint256 index)
+        public
+        view
+        returns (uint256)
+    {
+        require(
+            index < balanceOf(owner),
+            "ERC721Enumerable: owner index out of bounds"
+        );
         return _ownedTokens[owner][index];
     }
 
@@ -725,7 +824,10 @@ contract ERC721Enumerable is ERC165, ERC721, IERC721Enumerable {
      * @return uint256 token ID at the given index of the tokens list
      */
     function tokenByIndex(uint256 index) public view returns (uint256) {
-        require(index < totalSupply(), "ERC721Enumerable: global index out of bounds");
+        require(
+            index < totalSupply(),
+            "ERC721Enumerable: global index out of bounds"
+        );
         return _allTokens[index];
     }
 
@@ -736,7 +838,11 @@ contract ERC721Enumerable is ERC165, ERC721, IERC721Enumerable {
      * @param to address to receive the ownership of the given token ID
      * @param tokenId uint256 ID of the token to be transferred
      */
-    function _transferFrom(address from, address to, uint256 tokenId) internal {
+    function _transferFrom(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal {
         super._transferFrom(from, to, tokenId);
 
         _removeTokenFromOwnerEnumeration(from, tokenId);
@@ -780,7 +886,11 @@ contract ERC721Enumerable is ERC165, ERC721, IERC721Enumerable {
      * @param owner address owning the tokens
      * @return uint256[] List of token IDs owned by the requested address
      */
-    function _tokensOfOwner(address owner) internal view returns (uint256[] storage) {
+    function _tokensOfOwner(address owner)
+        internal
+        view
+        returns (uint256[] storage)
+    {
         return _ownedTokens[owner];
     }
 
@@ -811,7 +921,9 @@ contract ERC721Enumerable is ERC165, ERC721, IERC721Enumerable {
      * @param from address representing the previous owner of the given token ID
      * @param tokenId uint256 ID of the token to be removed from the tokens list of the given address
      */
-    function _removeTokenFromOwnerEnumeration(address from, uint256 tokenId) private {
+    function _removeTokenFromOwnerEnumeration(address from, uint256 tokenId)
+        private
+    {
         // To prevent a gap in from's tokens array, we store the last token in the index of the token to delete, and
         // then delete the last slot (swap and pop).
 
@@ -863,23 +975,21 @@ contract ERC721Enumerable is ERC165, ERC721, IERC721Enumerable {
 
 pragma solidity ^0.5.0;
 
-
 /**
  * @title ERC-721 Non-Fungible Token Standard, optional metadata extension
  * @dev See https://eips.ethereum.org/EIPS/eip-721
  */
 contract IERC721Metadata is IERC721 {
     function name() external view returns (string memory);
+
     function symbol() external view returns (string memory);
+
     function tokenURI(uint256 tokenId) external view returns (string memory);
 }
 
 // File: @openzeppelin/contracts/token/ERC721/ERC721Metadata.sol
 
 pragma solidity ^0.5.0;
-
-
-
 
 contract ERC721Metadata is ERC165, ERC721, IERC721Metadata {
     // Token name
@@ -903,7 +1013,7 @@ contract ERC721Metadata is ERC165, ERC721, IERC721Metadata {
     /**
      * @dev Constructor function
      */
-    constructor (string memory name, string memory symbol) public {
+    constructor(string memory name, string memory symbol) public {
         _name = name;
         _symbol = symbol;
 
@@ -933,7 +1043,10 @@ contract ERC721Metadata is ERC165, ERC721, IERC721Metadata {
      * @param tokenId uint256 ID of the token to query
      */
     function tokenURI(uint256 tokenId) external view returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        require(
+            _exists(tokenId),
+            "ERC721Metadata: URI query for nonexistent token"
+        );
         return _tokenURIs[tokenId];
     }
 
@@ -944,7 +1057,10 @@ contract ERC721Metadata is ERC165, ERC721, IERC721Metadata {
      * @param uri string URI to assign
      */
     function _setTokenURI(uint256 tokenId, string memory uri) internal {
-        require(_exists(tokenId), "ERC721Metadata: URI set of nonexistent token");
+        require(
+            _exists(tokenId),
+            "ERC721Metadata: URI set of nonexistent token"
+        );
         _tokenURIs[tokenId] = uri;
     }
 
@@ -969,9 +1085,6 @@ contract ERC721Metadata is ERC165, ERC721, IERC721Metadata {
 
 pragma solidity ^0.5.0;
 
-
-
-
 /**
  * @title Full ERC721 Token
  * This implementation includes all the required and some optional functionality of the ERC721 standard
@@ -979,7 +1092,10 @@ pragma solidity ^0.5.0;
  * @dev see https://eips.ethereum.org/EIPS/eip-721
  */
 contract ERC721Full is ERC721, ERC721Enumerable, ERC721Metadata {
-    constructor (string memory name, string memory symbol) public ERC721Metadata(name, symbol) {
+    constructor(string memory name, string memory symbol)
+        public
+        ERC721Metadata(name, symbol)
+    {
         // solhint-disable-previous-line no-empty-blocks
     }
 }
