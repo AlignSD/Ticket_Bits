@@ -111,11 +111,7 @@
             "name": "owner",
             "nodeType": "VariableDeclaration",
             "scope": 247,
-<<<<<<< Updated upstream
-            "src": "87:20:1",
-=======
             "src": "85:20:1",
->>>>>>> Stashed changes
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -126,11 +122,7 @@
               "id": 193,
               "name": "address",
               "nodeType": "ElementaryTypeName",
-<<<<<<< Updated upstream
-              "src": "87:7:1",
-=======
               "src": "85:7:1",
->>>>>>> Stashed changes
               "stateMutability": "nonpayable",
               "typeDescriptions": {
                 "typeIdentifier": "t_address",
@@ -146,11 +138,7 @@
             "name": "last_completed_migration",
             "nodeType": "VariableDeclaration",
             "scope": 247,
-<<<<<<< Updated upstream
-            "src": "114:39:1",
-=======
             "src": "112:39:1",
->>>>>>> Stashed changes
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -161,11 +149,7 @@
               "id": 195,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-<<<<<<< Updated upstream
-              "src": "114:7:1",
-=======
               "src": "112:7:1",
->>>>>>> Stashed changes
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -178,11 +162,7 @@
             "body": {
               "id": 204,
               "nodeType": "Block",
-<<<<<<< Updated upstream
-              "src": "183:37:1",
-=======
               "src": "179:37:1",
->>>>>>> Stashed changes
               "statements": [
                 {
                   "expression": {
@@ -199,11 +179,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 194,
-<<<<<<< Updated upstream
-                      "src": "194:5:1",
-=======
                       "src": "190:5:1",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -220,11 +196,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 262,
-<<<<<<< Updated upstream
-                        "src": "202:3:1",
-=======
                         "src": "198:3:1",
->>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
                           "typeString": "msg"
@@ -238,21 +210,13 @@
                       "memberName": "sender",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": null,
-<<<<<<< Updated upstream
-                      "src": "202:10:1",
-=======
                       "src": "198:10:1",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_address_payable",
                         "typeString": "address payable"
                       }
                     },
-<<<<<<< Updated upstream
-                    "src": "194:18:1",
-=======
                     "src": "190:18:1",
->>>>>>> Stashed changes
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -260,11 +224,7 @@
                   },
                   "id": 203,
                   "nodeType": "ExpressionStatement",
-<<<<<<< Updated upstream
-                  "src": "194:18:1"
-=======
                   "src": "190:18:1"
->>>>>>> Stashed changes
                 }
               ]
             },
@@ -279,27 +239,16 @@
               "id": 197,
               "nodeType": "ParameterList",
               "parameters": [],
-<<<<<<< Updated upstream
-              "src": "173:2:1"
-=======
               "src": "169:2:1"
->>>>>>> Stashed changes
             },
             "returnParameters": {
               "id": 198,
               "nodeType": "ParameterList",
               "parameters": [],
-<<<<<<< Updated upstream
-              "src": "183:0:1"
-            },
-            "scope": 247,
-            "src": "162:58:1",
-=======
               "src": "179:0:1"
             },
             "scope": 247,
             "src": "158:58:1",
->>>>>>> Stashed changes
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
@@ -308,11 +257,7 @@
             "body": {
               "id": 213,
               "nodeType": "Block",
-<<<<<<< Updated upstream
-              "src": "250:45:1",
-=======
               "src": "244:45:1",
->>>>>>> Stashed changes
               "statements": [
                 {
                   "condition": {
@@ -335,11 +280,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 262,
-<<<<<<< Updated upstream
-                        "src": "265:3:1",
-=======
                         "src": "259:3:1",
->>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_magic_message",
                           "typeString": "msg"
@@ -353,11 +294,7 @@
                       "memberName": "sender",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": null,
-<<<<<<< Updated upstream
-                      "src": "265:10:1",
-=======
                       "src": "259:10:1",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_address_payable",
                         "typeString": "address payable"
@@ -372,21 +309,13 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 194,
-<<<<<<< Updated upstream
-                      "src": "279:5:1",
-=======
                       "src": "273:5:1",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-<<<<<<< Updated upstream
-                    "src": "265:19:1",
-=======
                     "src": "259:19:1",
->>>>>>> Stashed changes
                     "typeDescriptions": {
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
@@ -395,19 +324,11 @@
                   "falseBody": null,
                   "id": 212,
                   "nodeType": "IfStatement",
-<<<<<<< Updated upstream
-                  "src": "261:26:1",
-                  "trueBody": {
-                    "id": 211,
-                    "nodeType": "PlaceholderStatement",
-                    "src": "286:1:1"
-=======
                   "src": "255:26:1",
                   "trueBody": {
                     "id": 211,
                     "nodeType": "PlaceholderStatement",
                     "src": "280:1:1"
->>>>>>> Stashed changes
                   }
                 }
               ]
@@ -420,26 +341,16 @@
               "id": 206,
               "nodeType": "ParameterList",
               "parameters": [],
-<<<<<<< Updated upstream
-              "src": "247:2:1"
-            },
-            "src": "228:67:1",
-=======
               "src": "241:2:1"
             },
             "src": "222:67:1",
->>>>>>> Stashed changes
             "visibility": "internal"
           },
           {
             "body": {
               "id": 225,
               "nodeType": "Block",
-<<<<<<< Updated upstream
-              "src": "362:55:1",
-=======
               "src": "354:55:1",
->>>>>>> Stashed changes
               "statements": [
                 {
                   "expression": {
@@ -456,11 +367,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 196,
-<<<<<<< Updated upstream
-                      "src": "373:24:1",
-=======
                       "src": "365:24:1",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -475,21 +382,13 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 216,
-<<<<<<< Updated upstream
-                      "src": "400:9:1",
-=======
                       "src": "392:9:1",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-<<<<<<< Updated upstream
-                    "src": "373:36:1",
-=======
                     "src": "365:36:1",
->>>>>>> Stashed changes
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -497,11 +396,7 @@
                   },
                   "id": 224,
                   "nodeType": "ExpressionStatement",
-<<<<<<< Updated upstream
-                  "src": "373:36:1"
-=======
                   "src": "365:36:1"
->>>>>>> Stashed changes
                 }
               ]
             },
@@ -520,22 +415,14 @@
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
                   "referencedDeclaration": 214,
-<<<<<<< Updated upstream
-                  "src": "351:10:1",
-=======
                   "src": "343:10:1",
->>>>>>> Stashed changes
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-<<<<<<< Updated upstream
-                "src": "351:10:1"
-=======
                 "src": "343:10:1"
->>>>>>> Stashed changes
               }
             ],
             "name": "setCompleted",
@@ -550,11 +437,7 @@
                   "name": "completed",
                   "nodeType": "VariableDeclaration",
                   "scope": 226,
-<<<<<<< Updated upstream
-                  "src": "325:17:1",
-=======
                   "src": "317:17:1",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -565,11 +448,7 @@
                     "id": 215,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-<<<<<<< Updated upstream
-                    "src": "325:7:1",
-=======
                     "src": "317:7:1",
->>>>>>> Stashed changes
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -579,27 +458,16 @@
                   "visibility": "internal"
                 }
               ],
-<<<<<<< Updated upstream
-              "src": "324:19:1"
-=======
               "src": "316:19:1"
->>>>>>> Stashed changes
             },
             "returnParameters": {
               "id": 220,
               "nodeType": "ParameterList",
               "parameters": [],
-<<<<<<< Updated upstream
-              "src": "362:0:1"
-            },
-            "scope": 247,
-            "src": "303:114:1",
-=======
               "src": "354:0:1"
             },
             "scope": 247,
             "src": "295:114:1",
->>>>>>> Stashed changes
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
@@ -608,11 +476,7 @@
             "body": {
               "id": 245,
               "nodeType": "Block",
-<<<<<<< Updated upstream
-              "src": "481:122:1",
-=======
               "src": "471:122:1",
->>>>>>> Stashed changes
               "statements": [
                 {
                   "assignments": [
@@ -625,11 +489,7 @@
                       "name": "upgraded",
                       "nodeType": "VariableDeclaration",
                       "scope": 245,
-<<<<<<< Updated upstream
-                      "src": "492:19:1",
-=======
                       "src": "482:19:1",
->>>>>>> Stashed changes
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -642,11 +502,7 @@
                         "name": "Migrations",
                         "nodeType": "UserDefinedTypeName",
                         "referencedDeclaration": 247,
-<<<<<<< Updated upstream
-                        "src": "492:10:1",
-=======
                         "src": "482:10:1",
->>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_Migrations_$247",
                           "typeString": "contract Migrations"
@@ -667,11 +523,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 228,
-<<<<<<< Updated upstream
-                        "src": "525:11:1",
-=======
                         "src": "515:11:1",
->>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -690,11 +542,7 @@
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
                       "referencedDeclaration": 247,
-<<<<<<< Updated upstream
-                      "src": "514:10:1",
-=======
                       "src": "504:10:1",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_type$_t_contract$_Migrations_$247_$",
                         "typeString": "type(contract Migrations)"
@@ -708,22 +556,14 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-<<<<<<< Updated upstream
-                    "src": "514:23:1",
-=======
                     "src": "504:23:1",
->>>>>>> Stashed changes
                     "typeDescriptions": {
                       "typeIdentifier": "t_contract$_Migrations_$247",
                       "typeString": "contract Migrations"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-<<<<<<< Updated upstream
-                  "src": "492:45:1"
-=======
                   "src": "482:45:1"
->>>>>>> Stashed changes
                 },
                 {
                   "expression": {
@@ -736,11 +576,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 196,
-<<<<<<< Updated upstream
-                        "src": "570:24:1",
-=======
                         "src": "560:24:1",
->>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -761,11 +597,7 @@
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
                         "referencedDeclaration": 234,
-<<<<<<< Updated upstream
-                        "src": "548:8:1",
-=======
                         "src": "538:8:1",
->>>>>>> Stashed changes
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_Migrations_$247",
                           "typeString": "contract Migrations"
@@ -779,11 +611,7 @@
                       "memberName": "setCompleted",
                       "nodeType": "MemberAccess",
                       "referencedDeclaration": 226,
-<<<<<<< Updated upstream
-                      "src": "548:21:1",
-=======
                       "src": "538:21:1",
->>>>>>> Stashed changes
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_uint256_$returns$__$",
                         "typeString": "function (uint256) external"
@@ -797,11 +625,7 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-<<<<<<< Updated upstream
-                    "src": "548:47:1",
-=======
                     "src": "538:47:1",
->>>>>>> Stashed changes
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
@@ -809,11 +633,7 @@
                   },
                   "id": 244,
                   "nodeType": "ExpressionStatement",
-<<<<<<< Updated upstream
-                  "src": "548:47:1"
-=======
                   "src": "538:47:1"
->>>>>>> Stashed changes
                 }
               ]
             },
@@ -832,22 +652,14 @@
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
                   "referencedDeclaration": 214,
-<<<<<<< Updated upstream
-                  "src": "470:10:1",
-=======
                   "src": "460:10:1",
->>>>>>> Stashed changes
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-<<<<<<< Updated upstream
-                "src": "470:10:1"
-=======
                 "src": "460:10:1"
->>>>>>> Stashed changes
               }
             ],
             "name": "upgrade",
@@ -862,11 +674,7 @@
                   "name": "new_address",
                   "nodeType": "VariableDeclaration",
                   "scope": 246,
-<<<<<<< Updated upstream
-                  "src": "442:19:1",
-=======
                   "src": "432:19:1",
->>>>>>> Stashed changes
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -877,11 +685,7 @@
                     "id": 227,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-<<<<<<< Updated upstream
-                    "src": "442:7:1",
-=======
                     "src": "432:7:1",
->>>>>>> Stashed changes
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -892,43 +696,22 @@
                   "visibility": "internal"
                 }
               ],
-<<<<<<< Updated upstream
-              "src": "441:21:1"
-=======
               "src": "431:21:1"
->>>>>>> Stashed changes
             },
             "returnParameters": {
               "id": 232,
               "nodeType": "ParameterList",
               "parameters": [],
-<<<<<<< Updated upstream
-              "src": "481:0:1"
-            },
-            "scope": 247,
-            "src": "425:178:1",
-=======
               "src": "471:0:1"
             },
             "scope": 247,
             "src": "415:178:1",
->>>>>>> Stashed changes
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
         "scope": 248,
-<<<<<<< Updated upstream
-        "src": "60:546:1"
-      }
-    ],
-    "src": "33:575:1"
-  },
-  "legacyAST": {
-    "attributes": {
-      "absolutePath": "/C/Users/gripn/Desktop/Programing/AlignSD.gitlab.io/Ticket_Bits/client/src/contracts/Migrations.sol",
-=======
         "src": "58:538:1"
       }
     ],
@@ -937,7 +720,6 @@
   "legacyAST": {
     "attributes": {
       "absolutePath": "/S/Code/Project_3/Cryptick/Ticket_Bits/client/src/contracts/Migrations.sol",
->>>>>>> Stashed changes
       "exportedSymbols": {
         "Migrations": [
           247
@@ -996,20 +778,12 @@
                 },
                 "id": 193,
                 "name": "ElementaryTypeName",
-<<<<<<< Updated upstream
-                "src": "87:7:1"
-=======
                 "src": "85:7:1"
->>>>>>> Stashed changes
               }
             ],
             "id": 194,
             "name": "VariableDeclaration",
-<<<<<<< Updated upstream
-            "src": "87:20:1"
-=======
             "src": "85:20:1"
->>>>>>> Stashed changes
           },
           {
             "attributes": {
@@ -1030,20 +804,12 @@
                 },
                 "id": 195,
                 "name": "ElementaryTypeName",
-<<<<<<< Updated upstream
-                "src": "114:7:1"
-=======
                 "src": "112:7:1"
->>>>>>> Stashed changes
               }
             ],
             "id": 196,
             "name": "VariableDeclaration",
-<<<<<<< Updated upstream
-            "src": "114:39:1"
-=======
             "src": "112:39:1"
->>>>>>> Stashed changes
           },
           {
             "attributes": {
@@ -1070,11 +836,7 @@
                 "children": [],
                 "id": 197,
                 "name": "ParameterList",
-<<<<<<< Updated upstream
-                "src": "173:2:1"
-=======
                 "src": "169:2:1"
->>>>>>> Stashed changes
               },
               {
                 "attributes": {
@@ -1085,11 +847,7 @@
                 "children": [],
                 "id": 198,
                 "name": "ParameterList",
-<<<<<<< Updated upstream
-                "src": "183:0:1"
-=======
                 "src": "179:0:1"
->>>>>>> Stashed changes
               },
               {
                 "children": [
@@ -1118,11 +876,7 @@
                             },
                             "id": 199,
                             "name": "Identifier",
-<<<<<<< Updated upstream
-                            "src": "194:5:1"
-=======
                             "src": "190:5:1"
->>>>>>> Stashed changes
                           },
                           {
                             "attributes": {
@@ -1148,56 +902,32 @@
                                 },
                                 "id": 200,
                                 "name": "Identifier",
-<<<<<<< Updated upstream
-                                "src": "202:3:1"
-=======
                                 "src": "198:3:1"
->>>>>>> Stashed changes
                               }
                             ],
                             "id": 201,
                             "name": "MemberAccess",
-<<<<<<< Updated upstream
-                            "src": "202:10:1"
-=======
                             "src": "198:10:1"
->>>>>>> Stashed changes
                           }
                         ],
                         "id": 202,
                         "name": "Assignment",
-<<<<<<< Updated upstream
-                        "src": "194:18:1"
-=======
                         "src": "190:18:1"
->>>>>>> Stashed changes
                       }
                     ],
                     "id": 203,
                     "name": "ExpressionStatement",
-<<<<<<< Updated upstream
-                    "src": "194:18:1"
-=======
                     "src": "190:18:1"
->>>>>>> Stashed changes
                   }
                 ],
                 "id": 204,
                 "name": "Block",
-<<<<<<< Updated upstream
-                "src": "183:37:1"
-=======
                 "src": "179:37:1"
->>>>>>> Stashed changes
               }
             ],
             "id": 205,
             "name": "FunctionDefinition",
-<<<<<<< Updated upstream
-            "src": "162:58:1"
-=======
             "src": "158:58:1"
->>>>>>> Stashed changes
           },
           {
             "attributes": {
@@ -1215,11 +945,7 @@
                 "children": [],
                 "id": 206,
                 "name": "ParameterList",
-<<<<<<< Updated upstream
-                "src": "247:2:1"
-=======
                 "src": "241:2:1"
->>>>>>> Stashed changes
               },
               {
                 "children": [
@@ -1267,20 +993,12 @@
                                 },
                                 "id": 207,
                                 "name": "Identifier",
-<<<<<<< Updated upstream
-                                "src": "265:3:1"
-=======
                                 "src": "259:3:1"
->>>>>>> Stashed changes
                               }
                             ],
                             "id": 208,
                             "name": "MemberAccess",
-<<<<<<< Updated upstream
-                            "src": "265:10:1"
-=======
                             "src": "259:10:1"
->>>>>>> Stashed changes
                           },
                           {
                             "attributes": {
@@ -1294,56 +1012,32 @@
                             },
                             "id": 209,
                             "name": "Identifier",
-<<<<<<< Updated upstream
-                            "src": "279:5:1"
-=======
                             "src": "273:5:1"
->>>>>>> Stashed changes
                           }
                         ],
                         "id": 210,
                         "name": "BinaryOperation",
-<<<<<<< Updated upstream
-                        "src": "265:19:1"
-=======
                         "src": "259:19:1"
->>>>>>> Stashed changes
                       },
                       {
                         "id": 211,
                         "name": "PlaceholderStatement",
-<<<<<<< Updated upstream
-                        "src": "286:1:1"
-=======
                         "src": "280:1:1"
->>>>>>> Stashed changes
                       }
                     ],
                     "id": 212,
                     "name": "IfStatement",
-<<<<<<< Updated upstream
-                    "src": "261:26:1"
-=======
                     "src": "255:26:1"
->>>>>>> Stashed changes
                   }
                 ],
                 "id": 213,
                 "name": "Block",
-<<<<<<< Updated upstream
-                "src": "250:45:1"
-=======
                 "src": "244:45:1"
->>>>>>> Stashed changes
               }
             ],
             "id": 214,
             "name": "ModifierDefinition",
-<<<<<<< Updated upstream
-            "src": "228:67:1"
-=======
             "src": "222:67:1"
->>>>>>> Stashed changes
           },
           {
             "attributes": {
@@ -1379,29 +1073,17 @@
                         },
                         "id": 215,
                         "name": "ElementaryTypeName",
-<<<<<<< Updated upstream
-                        "src": "325:7:1"
-=======
                         "src": "317:7:1"
->>>>>>> Stashed changes
                       }
                     ],
                     "id": 216,
                     "name": "VariableDeclaration",
-<<<<<<< Updated upstream
-                    "src": "325:17:1"
-=======
                     "src": "317:17:1"
->>>>>>> Stashed changes
                   }
                 ],
                 "id": 217,
                 "name": "ParameterList",
-<<<<<<< Updated upstream
-                "src": "324:19:1"
-=======
                 "src": "316:19:1"
->>>>>>> Stashed changes
               },
               {
                 "attributes": {
@@ -1412,11 +1094,7 @@
                 "children": [],
                 "id": 220,
                 "name": "ParameterList",
-<<<<<<< Updated upstream
-                "src": "362:0:1"
-=======
                 "src": "354:0:1"
->>>>>>> Stashed changes
               },
               {
                 "attributes": {
@@ -1435,20 +1113,12 @@
                     },
                     "id": 218,
                     "name": "Identifier",
-<<<<<<< Updated upstream
-                    "src": "351:10:1"
-=======
                     "src": "343:10:1"
->>>>>>> Stashed changes
                   }
                 ],
                 "id": 219,
                 "name": "ModifierInvocation",
-<<<<<<< Updated upstream
-                "src": "351:10:1"
-=======
                 "src": "343:10:1"
->>>>>>> Stashed changes
               },
               {
                 "children": [
@@ -1477,11 +1147,7 @@
                             },
                             "id": 221,
                             "name": "Identifier",
-<<<<<<< Updated upstream
-                            "src": "373:24:1"
-=======
                             "src": "365:24:1"
->>>>>>> Stashed changes
                           },
                           {
                             "attributes": {
@@ -1495,47 +1161,27 @@
                             },
                             "id": 222,
                             "name": "Identifier",
-<<<<<<< Updated upstream
-                            "src": "400:9:1"
-=======
                             "src": "392:9:1"
->>>>>>> Stashed changes
                           }
                         ],
                         "id": 223,
                         "name": "Assignment",
-<<<<<<< Updated upstream
-                        "src": "373:36:1"
-=======
                         "src": "365:36:1"
->>>>>>> Stashed changes
                       }
                     ],
                     "id": 224,
                     "name": "ExpressionStatement",
-<<<<<<< Updated upstream
-                    "src": "373:36:1"
-=======
                     "src": "365:36:1"
->>>>>>> Stashed changes
                   }
                 ],
                 "id": 225,
                 "name": "Block",
-<<<<<<< Updated upstream
-                "src": "362:55:1"
-=======
                 "src": "354:55:1"
->>>>>>> Stashed changes
               }
             ],
             "id": 226,
             "name": "FunctionDefinition",
-<<<<<<< Updated upstream
-            "src": "303:114:1"
-=======
             "src": "295:114:1"
->>>>>>> Stashed changes
           },
           {
             "attributes": {
@@ -1572,29 +1218,17 @@
                         },
                         "id": 227,
                         "name": "ElementaryTypeName",
-<<<<<<< Updated upstream
-                        "src": "442:7:1"
-=======
                         "src": "432:7:1"
->>>>>>> Stashed changes
                       }
                     ],
                     "id": 228,
                     "name": "VariableDeclaration",
-<<<<<<< Updated upstream
-                    "src": "442:19:1"
-=======
                     "src": "432:19:1"
->>>>>>> Stashed changes
                   }
                 ],
                 "id": 229,
                 "name": "ParameterList",
-<<<<<<< Updated upstream
-                "src": "441:21:1"
-=======
                 "src": "431:21:1"
->>>>>>> Stashed changes
               },
               {
                 "attributes": {
@@ -1605,11 +1239,7 @@
                 "children": [],
                 "id": 232,
                 "name": "ParameterList",
-<<<<<<< Updated upstream
-                "src": "481:0:1"
-=======
                 "src": "471:0:1"
->>>>>>> Stashed changes
               },
               {
                 "attributes": {
@@ -1628,20 +1258,12 @@
                     },
                     "id": 230,
                     "name": "Identifier",
-<<<<<<< Updated upstream
-                    "src": "470:10:1"
-=======
                     "src": "460:10:1"
->>>>>>> Stashed changes
                   }
                 ],
                 "id": 231,
                 "name": "ModifierInvocation",
-<<<<<<< Updated upstream
-                "src": "470:10:1"
-=======
                 "src": "460:10:1"
->>>>>>> Stashed changes
               },
               {
                 "children": [
@@ -1673,20 +1295,12 @@
                             },
                             "id": 233,
                             "name": "UserDefinedTypeName",
-<<<<<<< Updated upstream
-                            "src": "492:10:1"
-=======
                             "src": "482:10:1"
->>>>>>> Stashed changes
                           }
                         ],
                         "id": 234,
                         "name": "VariableDeclaration",
-<<<<<<< Updated upstream
-                        "src": "492:19:1"
-=======
                         "src": "482:19:1"
->>>>>>> Stashed changes
                       },
                       {
                         "attributes": {
@@ -1720,11 +1334,7 @@
                             },
                             "id": 235,
                             "name": "Identifier",
-<<<<<<< Updated upstream
-                            "src": "514:10:1"
-=======
                             "src": "504:10:1"
->>>>>>> Stashed changes
                           },
                           {
                             "attributes": {
@@ -1738,29 +1348,17 @@
                             },
                             "id": 236,
                             "name": "Identifier",
-<<<<<<< Updated upstream
-                            "src": "525:11:1"
-=======
                             "src": "515:11:1"
->>>>>>> Stashed changes
                           }
                         ],
                         "id": 237,
                         "name": "FunctionCall",
-<<<<<<< Updated upstream
-                        "src": "514:23:1"
-=======
                         "src": "504:23:1"
->>>>>>> Stashed changes
                       }
                     ],
                     "id": 238,
                     "name": "VariableDeclarationStatement",
-<<<<<<< Updated upstream
-                    "src": "492:45:1"
-=======
                     "src": "482:45:1"
->>>>>>> Stashed changes
                   },
                   {
                     "children": [
@@ -1808,20 +1406,12 @@
                                 },
                                 "id": 239,
                                 "name": "Identifier",
-<<<<<<< Updated upstream
-                                "src": "548:8:1"
-=======
                                 "src": "538:8:1"
->>>>>>> Stashed changes
                               }
                             ],
                             "id": 241,
                             "name": "MemberAccess",
-<<<<<<< Updated upstream
-                            "src": "548:21:1"
-=======
                             "src": "538:21:1"
->>>>>>> Stashed changes
                           },
                           {
                             "attributes": {
@@ -1835,65 +1425,37 @@
                             },
                             "id": 242,
                             "name": "Identifier",
-<<<<<<< Updated upstream
-                            "src": "570:24:1"
-=======
                             "src": "560:24:1"
->>>>>>> Stashed changes
                           }
                         ],
                         "id": 243,
                         "name": "FunctionCall",
-<<<<<<< Updated upstream
-                        "src": "548:47:1"
-=======
                         "src": "538:47:1"
->>>>>>> Stashed changes
                       }
                     ],
                     "id": 244,
                     "name": "ExpressionStatement",
-<<<<<<< Updated upstream
-                    "src": "548:47:1"
-=======
                     "src": "538:47:1"
->>>>>>> Stashed changes
                   }
                 ],
                 "id": 245,
                 "name": "Block",
-<<<<<<< Updated upstream
-                "src": "481:122:1"
-=======
                 "src": "471:122:1"
->>>>>>> Stashed changes
               }
             ],
             "id": 246,
             "name": "FunctionDefinition",
-<<<<<<< Updated upstream
-            "src": "425:178:1"
-=======
             "src": "415:178:1"
->>>>>>> Stashed changes
           }
         ],
         "id": 247,
         "name": "ContractDefinition",
-<<<<<<< Updated upstream
-        "src": "60:546:1"
-=======
         "src": "58:538:1"
->>>>>>> Stashed changes
       }
     ],
     "id": 248,
     "name": "SourceUnit",
-<<<<<<< Updated upstream
-    "src": "33:575:1"
-=======
     "src": "33:563:1"
->>>>>>> Stashed changes
   },
   "compiler": {
     "name": "solc",
@@ -1903,21 +1465,12 @@
     "5777": {
       "events": {},
       "links": {},
-<<<<<<< Updated upstream
-      "address": "0x484ac019f8DECbe9979d52746977c93a66AEe048",
-      "transactionHash": "0x84a151993d3669b1d68b8eb56029b084dadffd203c6edffb08eee163860348c8"
+      "address": "0xf989517E14582508E540143FbeC9fC6720fcF409",
+      "transactionHash": "0xad0e6a2f1192a7d1be47c07b53625f3ef75d001596d3a2c939eda7dd68a4a06d"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-03-21T04:31:16.243Z",
-=======
-      "address": "0x8c5B22F474A5FDd4F635099556cc4Ed8502bEF2d",
-      "transactionHash": "0xe601e995829d0a7ba012db89f469722e5f53c71a8ba60aefd4206e4640350e43"
-    }
-  },
-  "schemaVersion": "3.3.4",
-  "updatedAt": "2021-03-21T04:18:44.222Z",
->>>>>>> Stashed changes
+  "updatedAt": "2021-03-21T06:11:04.695Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
