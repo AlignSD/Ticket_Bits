@@ -11,7 +11,7 @@ contract Marketplace {
 
     struct Ticket {
         uint256 id;
-        string imgHash;
+        // string imgHash;
         string name;
         uint256 price;
         string startDate;
@@ -23,7 +23,7 @@ contract Marketplace {
 
       event TicketCreated(
         uint256 id,
-        string imgHash,
+        // string imgHash,
         string name,
         uint256 price,
         string startDate,
@@ -35,7 +35,7 @@ contract Marketplace {
 
     event TicketPurchased(
         uint256 id,
-        string imgHash,
+        // string imgHash,
         string name,
         uint256 price,
         string startDate,
@@ -48,11 +48,11 @@ contract Marketplace {
         name = "Marketplace";
     }
 
-    function createTicket(string memory _imgHash, string memory _name, uint256 _price, string memory _startDate, string memory _location, string memory _description) public {
-        //Validate uploader address exists
-        require(msg.sender!=address(0)); 
-        //Validate hash exists
-        require(bytes(_imgHash).length > 0);
+    function createTicket(/*string memory _imgHash,*/ string memory _name, uint256 _price, string memory _startDate, string memory _location, string memory _description) public {
+        // //Validate uploader address exists
+        // require(msg.sender!=address(0)); 
+        // //Validate hash exists
+        // require(bytes(_imgHash).length > 0);
         //Require a valid name
         require(bytes(_name).length > 0);
         // Reuire a valid price
@@ -69,7 +69,7 @@ contract Marketplace {
         //Create the ticket
         tickets[ticketCount] = Ticket(
             ticketCount,
-            _imgHash,
+            // _imgHash,
             _name,
             _price,
             _startDate,
@@ -79,7 +79,7 @@ contract Marketplace {
             false
         );
         //Trigger an event
-        emit TicketCreated(ticketCount, _imgHash, _name, _price, _startDate, _location, _description, msg.sender, false);
+        emit TicketCreated(ticketCount, /*_imgHash,*/ _name, _price, _startDate, _location, _description, msg.sender, false);
     }
 
 
@@ -107,7 +107,7 @@ contract Marketplace {
         //Trigger an event
         emit TicketPurchased(
             ticketCount,
-            _ticket.imgHash,
+            // _ticket.imgHash,
             _ticket.name,
             _ticket.price,
             _ticket.startDate,

@@ -30,8 +30,11 @@ const TicketsContextProvider = (props) => {
     availableTickets: 0
   })
 
+  const [captureFile, setCaptureFile] = useState()
+  const [bufferState, setBufferState] = useState();
+
   return(
-    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, eventState, eventFactoryState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, setEvent, setEventFactory, eventModel, setEventModel}}>
+    <TicketsContext.Provider value={{account, tickets, loading, userType, paypalState, marketplaceState, openPopup, eventState, eventFactoryState, captureFile, bufferState, setAccountName, setTickets, setLoading, setUserType, setPaypalState, setMarket, setOpenPopup, setEvent, setEventFactory, eventModel, setEventModel, setCaptureFile, setBufferState}}>
         {props.children}
         </TicketsContext.Provider>
   )

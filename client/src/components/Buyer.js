@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
+// import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { makeStyles} from "@material-ui/core/styles";
@@ -48,17 +48,23 @@ function Buyer(props) {
                 <TableHead>
                   <TableRow>
                   <TableCell align="left">#</TableCell>
+                  {/* <TableCell align="left">Event Image</TableCell> */}
                   <TableCell align="left">Name</TableCell>
                   <TableCell align="left">Price</TableCell>
+                  <TableCell align="left">Start Date</TableCell>
+                  <TableCell align="left">Location</TableCell>
+                  <TableCell align="left">Description</TableCell>
                   <TableCell align="left">Owner</TableCell>  
                   </TableRow>
                 </TableHead>
                 <TableBody>
+                  {console.log(props.tickets)}
                   {props.tickets.map((ticket, key) => {
                     return (
                       // <Grid container>
                         <TableRow key={key}>
                           <th scope="row">{ticket.id.toString()}</th>
+                          {/* <TableCell>{ticket.imgHash}</TableCell> */}
                           <TableCell>{ticket.name}</TableCell>
                           <TableCell>
                             {window.web3.utils.fromWei(
@@ -66,6 +72,9 @@ function Buyer(props) {
                               "Ether"
                             )}
                           </TableCell>
+                          <TableCell>{ticket.startDate}</TableCell>
+                          <TableCell>{ticket.location}</TableCell>
+                          <TableCell>{ticket.description}</TableCell>
                           <TableCell>{ticket.owner}</TableCell>
                           <TableCell>
                             {!ticket.purchased ? (
