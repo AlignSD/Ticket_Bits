@@ -81,7 +81,6 @@ export default function LayoutTextFields(props) {
 
   function submitForm() {
     const ticketPrice = events.ticketPrice
-    console.log(ticketPrice)
     const name = events.eventName;
     const price = window.web3.utils.toWei(
       ticketPrice,
@@ -89,7 +88,6 @@ export default function LayoutTextFields(props) {
     const total = events.ticketAmount;
     const startDate = events.eventStarts;
     const location = events.venueName;
-    console.log(location)
     const description = events.summary;
 		axios
 			.post("/api/events", {
@@ -105,7 +103,6 @@ export default function LayoutTextFields(props) {
         category: events.category
 			})
 			.then(function () {
-        console.log("post test")
         props.createTicket( name, price, startDate, location, description)
       }
 			)}
