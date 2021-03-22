@@ -220,6 +220,7 @@ const App = () => {
             <ProtectedRoute  exact path='/CreateEvent'><CreateEvent
                                                       eventModel = {eventModel}
                                                       setEventModel = {setEventModel}
+                                                      tickets={tickets} createTicket={createTicket}
             /></ProtectedRoute>
             <ProtectedRoute exact path='/EventDetails' component={EventDetails}></ProtectedRoute>
             <ProtectedRoute exact path='/CheckOut' component={Paypal}/>

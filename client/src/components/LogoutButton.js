@@ -93,16 +93,17 @@ React.useEffect(() => {
   return (
 
     <div className={classes.root}>
-      <Toolbar>
+      <Toolbar disableGutter={true}>
     <IconButton
           edge="start" className={classes.iconButton}
           ref={anchorRef}
           aria-controls={open ? 'menu-list-grow' : undefined}
           aria-haspopup="true"
           onClick={handleToggle}
+          style={{marginTop: 5}}
         >
           <AccountCircleIcon/>
-          <span style={{ color: `white` }}>Profile</span>
+          <span style={{ fontSize: 16 }}>PROFILE</span>
         </IconButton>
     <IconButton edge="start" className={classes.iconButton}
     >

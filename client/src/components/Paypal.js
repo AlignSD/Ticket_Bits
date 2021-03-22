@@ -67,7 +67,7 @@ export default function Paypal() {
         <h1>Shopping Cart</h1>
         <div>{ticketName}</div>
         <div>{convertTickets}</div>
-        <div ref={paypalRef}  />
+        <div ref={paypalRef}/>
       </div>
     </Grid>
   );

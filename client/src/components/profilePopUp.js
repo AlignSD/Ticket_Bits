@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "2rem",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -38,12 +37,16 @@ const useStyles = makeStyles((theme) => ({
     borderColor: "#000000"
   },
   logOut:{
+    marginButtom: 0,
     color: "#ffffff",
     backgroundColor: "#000000",
     '&:hover': {
       backgroundColor: '#3d4c65',
       boxShadow: 'black',
     },
+  btnmrg:{
+    marginTop: 5
+  }
 }}));
 
 export default function LayoutTextFields() {
@@ -134,8 +137,8 @@ export default function LayoutTextFields() {
             </Typography>
             </Grid>
         
-          <Grid >
-              <Grid>
+          <Grid container direction="column" justify="space-evenly" alignItems="flex-end">
+              <Grid item>
           <Button
     className={classes.logOut}
     color="inherit"
@@ -147,8 +150,7 @@ export default function LayoutTextFields() {
       Log Out
     </Button>
     </Grid>
-    <br></br>
-    <Grid>
+    <Grid item >
     <Button
     className={classes.logOut}
     color="inherit"
@@ -156,7 +158,7 @@ export default function LayoutTextFields() {
     
       onClick={() =>
        window.location = "/profile"}>
-      Edit Info
+      View Profile
     </Button>
     </Grid>
     </Grid>
