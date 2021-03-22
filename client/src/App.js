@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
@@ -25,27 +25,6 @@ import EventDetails from './pages/EventDetails'
 
 const App = () => {
 
-  // const CoinbasePro = require('coinbase-pro');
-  // const publicClient = new CoinbasePro.PublicClient();
-
-
-//   var result = "";
-//   publicClient.getProductTicker(
-//     'ETH-USD',
-//     (error, response, data, result) => {
-//       if (error) {
-//         console.log("You're a ticker")
-//     }
-//     else {
-//         console.log(response)
-//         console.log(data)
-
-//         console.log(data.price)
-//         result = JSON.stringify(data.price)
-//         console.log(result)
-//     }
-//     return result
-// });
 
 //Declare IPFS
   // const ipfsClient = require('ipfs-http-client')
@@ -59,6 +38,13 @@ const App = () => {
     loadBlockchainData()
 
   }, [userType])
+
+
+
+        
+
+
+
 
     // *****This Function Loads Web3*****
   async function loadWeb3() {
