@@ -54,7 +54,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function LayoutTextFields(props) {
-  
   const classes = useStyles();
   
    const [events, setEvents] = useState({
@@ -80,9 +79,16 @@ export default function LayoutTextFields(props) {
 
 	}, []);
 
-  function submitForm() { 
-		
-    console.log(events, "events")
+  function submitForm() {
+    const ticketPrice = events.ticketPrice
+    const name = events.eventName;
+    const price = window.web3.utils.toWei(
+      ticketPrice,
+      "Ether");
+    const total = events.ticketAmount;
+    const startDate = events.eventStarts;
+    const location = events.venueName;
+    const description = events.summary;
 		axios
 			.post("/api/events", {
 				eventName: events.eventName,
@@ -97,14 +103,10 @@ export default function LayoutTextFields(props) {
         category: events.category
 			})
 			.then(function () {
-				alert("Event created successfully");
-				window.location.reload();
-			})
-			.catch(function () {
-				alert("Could not create Event. Please try again");
-			}
-    );
-	}
+        props.createTicket( name, price, startDate, location, description)
+      }
+			)}
+
   return (
     <Grid className={classes.contained}  >
       <div>
@@ -135,9 +137,9 @@ export default function LayoutTextFields(props) {
             onChange = {(e) => setEvents({...events,summary: e.target.value})}
           />
           <TextField className="outlined-margin-none" id="outlined-full-width" label="Venue Name *" style={{ padding: 6 }} fullWidth margin="normal" InputLabelProps={{ shrink: true, }} variant="outlined" 
-            onChange = {(e) => setEvents({...events,organizer: e.target.value})}
+            onChange = {(e) => setEvents({...events,venueName: e.target.value})}
           />
-                    <Button onClick= {submitForm}size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
+                    <Button onClick={submitForm} size="large" variant="contained" color="primary" className={classes.btnMargin} type="sumbit">
           CREATE EVENT
         </Button>
         </div>

@@ -117,6 +117,7 @@ const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' 
                   //       })
                   // const imgHash = input.imgHash;
                   const name = input.name;
+                  const total = input.total;
                   const price = window.web3.utils.toWei(
                     input.price,
                     "Ether");
@@ -158,6 +159,17 @@ const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' 
                     placeholder="Ticket Price"
                     required
                     onChange={(e) => setInput({...input, price: e.target.value})}
+                  />
+                  </div>
+                  <div>
+                  <input
+                    style={{ widith: "30%" }}
+                    id="totalTickets"
+                    type="text"
+                    className="form"
+                    placeholder="Ticket Amount"
+                    required
+                    onChange={(e) => setInput({...input, total: e.target.value})}
                   />
                 </div>
                 <div className="form-group mr-sm-2">

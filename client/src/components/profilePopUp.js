@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     display: "flex",
     flexWrap: "wrap",
-    marginTop: "2rem",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -35,19 +34,25 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
     zIndex: 1,
+    borderColor: "#000000"
   },
   logOut:{
+    marginButtom: 0,
     color: "#ffffff",
     backgroundColor: "#000000",
     '&:hover': {
       backgroundColor: '#3d4c65',
       boxShadow: 'black',
     },
+  btnmrg:{
+    marginTop: 5
+  }
 }}));
 
 export default function LayoutTextFields() {
     const { logout } = useAuth0();
   const { user, isAuthenticated, isLoading } = useAuth0();
+  console.log(user)
   const classes = useStyles();
 
   // mongo states
@@ -59,13 +64,28 @@ export default function LayoutTextFields() {
     lastName: '',
   })
   function authLoadProfile() {
-    axios
-          .post("/api/users", {
-              username: user.nickname,
-              email: user.email,
-      firstName: userProfile.firstName,
-      lastName: userProfile.lastName,
-          })
+    console.log(user.email)
+    setUserProfile({...userProfile, 
+      username: user.nickname,
+      email: user.email
+    })
+    if(userProfile.email === null){
+      setUserProfile({...userProfile, 
+        username: user.nickname,
+        email: user.email
+
+        
+      })
+        axios
+              .post("/api/users", {
+                  username: userProfile.nickname,
+                  email: userProfile.email,
+          firstName: userProfile.firstName,
+          lastName: userProfile.lastName,
+              })
+      } else {
+        return;
+      }
   }
 
   function userProfileInfo() {
@@ -85,8 +105,9 @@ export default function LayoutTextFields() {
     }
 
 	useEffect(() => {
-    userProfileInfo()
     authLoadProfile()
+    userProfileInfo()
+    
   }, []);
   
   if (isLoading) {
@@ -116,8 +137,8 @@ export default function LayoutTextFields() {
             </Typography>
             </Grid>
         
-          <Grid >
-              <Grid>
+          <Grid container direction="column" justify="space-evenly" alignItems="flex-end">
+              <Grid item>
           <Button
     className={classes.logOut}
     color="inherit"
@@ -129,8 +150,7 @@ export default function LayoutTextFields() {
       Log Out
     </Button>
     </Grid>
-    <br></br>
-    <Grid>
+    <Grid item >
     <Button
     className={classes.logOut}
     color="inherit"
@@ -138,7 +158,7 @@ export default function LayoutTextFields() {
     
       onClick={() =>
        window.location = "/profile"}>
-      Edit Info
+      View Profile
     </Button>
     </Grid>
     </Grid>
