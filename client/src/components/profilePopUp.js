@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#FFFFFF",
     borderRadius: 6,
     zIndex: 1,
+    borderColor: "#000000"
   },
   logOut:{
     color: "#ffffff",

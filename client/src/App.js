@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
@@ -22,8 +22,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Matrix from "../src/components/MatrixRain"
 import EventDetails from './pages/EventDetails'
 
+
 const App = () => {
-  let {account, tickets, loading, userType, marketplaceState, setAccountName, setTickets, setLoading, setMarket,eventModel, setEventModel} = useContext(TicketsContext)
+
+
+//Declare IPFS
+  // const ipfsClient = require('ipfs-http-client')
+  // const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' }) // leaving out the arguments will default to these values
+
+  let {account, loading, tickets, userType, marketplaceState, captureFile, bufferState, setAccountName, setTickets, setLoading, setMarket,eventModel, setEventModel, setBufferState} = useContext(TicketsContext)
 
   useEffect(() => {
     // Update the document title using the browser API
@@ -31,6 +38,13 @@ const App = () => {
     loadBlockchainData()
 
   }, [userType])
+
+
+
+        
+
+
+
 
     // *****This Function Loads Web3*****
   async function loadWeb3() {
@@ -65,6 +79,7 @@ const App = () => {
       )
       // Set marketplace state and load items into shop
       setMarket((marketplaceState = marketplace))
+      console.log(marketplaceState)
       const ticketCount = await marketplace.methods.ticketCount().call()
       loadTickets(ticketCount, marketplace);
       // const eventList = await eventfactory.methods.getDeployedEvents().call()
@@ -73,6 +88,37 @@ const App = () => {
       window.alert('Marketplace contract not deployed to detected network.')
     }  
   }
+
+  
+//  function convertFile (captureFile) {
+//     console.log(captureFile)
+//     event.preventDefault()
+//     const file = event.target.files[0]
+//     const reader = new window.FileReader()
+//     reader.readAsArrayBuffer(file)
+
+//     reader.onloadend = () => {
+//       setBufferState({ bufferState: Buffer(reader.result) })
+//       console.log('buffer', bufferState)
+//     } 
+
+//   }
+
+  // uploadImage = description => {
+  //   console.log("Submitting file to ipfs...")
+
+  //   //adding file to the IPFS
+  //   ipfs.add(this.state.buffer, (error, result) => {
+  //     console.log('Ipfs result', result)
+  //     if(error) {
+  //       console.error(error)
+  //       return
+  //     }
+
+
+  //     })
+  //   })
+  // }
 
   async function loadTickets(ticketCount, marketplace) {
     // We're pushing ticketarr into ticket to update the state when needed
@@ -85,23 +131,13 @@ const App = () => {
     setTickets(ticketArr)
     setLoading((loading = false))
   } 
-
-  function createTotalTickets(total, name, price){
-    console.log(total)
-    console.log(name)
-    console.log(price)
-    console.log("totaltick")
-    var i
-    for(i=0; i<total; i++){
-      createTicket(name, price);
-    }
-  }
-  function createTicket(name, price) {
-    console.log("ticket Test")
+  
+  function createTicket( name, price, startDate, location, description) {
     if (marketplaceState) {
+      console.log( name, price, startDate, location, description)
       setLoading({ loading: true })
       marketplaceState.methods
-        .createTicket(name, price)
+        .createTicket( name, price, startDate, location, description)
         .send({ from: account })
         .once("receipt", (receipt) => {
           setLoading({ loading: false });
@@ -139,12 +175,16 @@ const App = () => {
   // *****Purchase ticket function*****
   function purchaseTicket(id, price) {
     //Add setPaypalState to update shoping cart inventory and total value
+    console.log(marketplaceState)
     if (marketplaceState) {
       setLoading({ loading: true })
       marketplaceState.methods
         .purchaseTicket(id)
         .send({ from: account, value: price })
         .once("receipt", (receipt) => {
+          console.log(receipt);
+          // let receiptData = web3.eth.getTransactionReceipt(receipt).then(
+          // console.log());
           setLoading({ loading: false });
         });
     }
@@ -180,13 +220,11 @@ const App = () => {
             <ProtectedRoute  exact path='/CreateEvent'><CreateEvent
                                                       eventModel = {eventModel}
                                                       setEventModel = {setEventModel}
-                                                      createTicket={createTicket}
-                                                      createTotalTickets={createTotalTickets}
             /></ProtectedRoute>
             <ProtectedRoute exact path='/EventDetails' component={EventDetails}></ProtectedRoute>
             <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
             <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
-            <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} createTotalTickets={createTotalTickets} /></ProtectedRoute>
+            <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>
         </Switch>
         </Grid>
         <Matrix className={classes.rain}>
