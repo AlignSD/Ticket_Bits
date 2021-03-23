@@ -3,7 +3,7 @@ import RainStream from "./RainStream"
 import "./Dogica.css"
 
 const MatrixRain = () => {
-    const streamCount = Math.floor(window.innerWidth/26)
+    const streamCount = Math.floor(window.innerHeight/26)
     return(
         <div style={{
             position: 'fixed',
