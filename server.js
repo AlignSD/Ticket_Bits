@@ -14,9 +14,9 @@ app.use('./api/users', users);
 const events = require('./api/events');
 app.use('./api/events', events);
 
-app.use(express.static(path.join(__dirname, 'build')))
+app.use(express.static(path.join(__dirname, './client/build')))
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build'))
+    res.sendFile(path.join(__dirname, './client/build'))
 })
 
 const port = process.env.PORT || 5000;
