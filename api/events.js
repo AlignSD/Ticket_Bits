@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router()
 
-const Event = require('../models/Event');
+const Event = require('../models/event');
 
 router.get('/', (req, res) => {
     Event.find()

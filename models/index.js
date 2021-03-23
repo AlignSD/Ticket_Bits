@@ -1,4 +1,4 @@
 module.exports = {
-    userSaved: require("./Users"),
-    eventSaved: require("./Events")
+    userSaved: require("./users"),
+    eventSaved: require("./events")
   };

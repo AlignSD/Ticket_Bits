@@ -10,9 +10,9 @@ app.use(cors());
 
 // API
 const users = require('./api/users');
-app.use('/api/users', users);
+app.use('./api/users', users);
 const events = require('./api/events');
-app.use('/api/events', events);
+app.use('./api/events', events);
 
 app.use(express.static(path.join(__dirname, '../build')))
 app.get('*', (req, res) => {
