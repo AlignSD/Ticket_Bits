@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# CRYPICK  #
+# CRYPTICK  #
 
 Welcome to Crytick, a ticketing platform built around the Ethereum blockchain! 
 
