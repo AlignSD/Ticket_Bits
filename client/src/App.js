@@ -207,7 +207,7 @@ const App = () => {
 
   return (
  <>
- <NavBar className={classes.absolute}/>
+ <NavBar className={classes.absolute}purchaseTicket={purchaseTicket}/>
     <div id="app" style={{height: "100%"}} className="d-flex flex-column h-100">
       <div className="container flex-grow-1 " style={{position: "relative"}}>
         <Grid container >
@@ -222,7 +222,7 @@ const App = () => {
                                                       setEventModel = {setEventModel}
                                                       tickets={tickets} createTicket={createTicket}
             /></ProtectedRoute>
-            <ProtectedRoute exact path='/EventDetails' component={EventDetails}></ProtectedRoute>
+            <ProtectedRoute exact path='/EventDetails'><EventDetails tickets={tickets} purchaseTicket={purchaseTicket}/></ProtectedRoute>
             <ProtectedRoute exact path='/CheckOut' component={Paypal}/>
             <ProtectedRoute exact path='/Buyer'><Buyer tickets={tickets} purchaseTicket={purchaseTicket} /></ProtectedRoute>
             <ProtectedRoute exact path='/Seller'><Seller tickets={tickets} createTicket={createTicket} /></ProtectedRoute>

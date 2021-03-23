@@ -110,7 +110,6 @@ export default function LayoutTextFields(props) {
   return (
     <Grid className={classes.contained}  >
       <div>
-           
       <form  autoComplete="off" noValidate  onSubmit = { (event) => { event.preventDefault();
     }}
           >

@@ -3,11 +3,13 @@ import AuthenticationButton from "./AuthenticationButton";
 
 // AuthNav links should be only visible to logged in members
 
-const AuthNav = () => (
+function AuthNav(props) {
+  return(
   <div className="navbar-nav ml-auto">
-    <AuthenticationButton />
+    <AuthenticationButton purchaseTicket={props.purchaseTicket}  />
             
   </div>
-);
+  )
+};
 
 export default AuthNav;

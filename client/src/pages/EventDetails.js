@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function EventDetails() {
+export default function EventDetails(props) {
   const [events, setEvents] = useState([]);
   useEffect(() => {
     getEventInfo()
@@ -65,6 +65,7 @@ export default function EventDetails() {
   
   return(
     <EventCard
+    tickets={props.tickets} purchaseTicket={props.purchaseTicket}
       className={classes.contained}
       events={events}/>
   )

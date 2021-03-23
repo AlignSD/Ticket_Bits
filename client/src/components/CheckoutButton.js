@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const CheckoutButton = () => {
+function CheckoutButton (props) {
 
   const [open, setOpen] = React.useState(false);
 const anchorRef = React.useRef(null);
@@ -112,7 +112,7 @@ React.useEffect(() => {
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <Grid className={classes.popitem}>
-                      <PayPal/>
+                      <PayPal purchaseTicket={props.purchaseTicket}/>
                     </Grid>
                   </MenuList>
                 </ClickAwayListener>
