@@ -11,7 +11,6 @@ import TicketMarketPlace from './components/TicketMarketPlace';
 import Home from "./views/home";
 import Web3 from 'web3';
 import ProtectedRoute from "./auth/protected-route";
-import CoinbaseAPI from "./CoinbaseAPI";
 import CreateEvent from "./pages/CreateEvent"
 import UserProfile from "./pages/UserProfile"
 import Paypal from "./components/Paypal"
@@ -212,9 +211,7 @@ const App = () => {
         <Grid container >
         <Switch>
           <Route  exact path="/home" component={Home}/>
-            <ProtectedRoute  exact path="/coinbaseAPI"><CoinbaseAPI/></ProtectedRoute>
             <ProtectedRoute  exact path="/profile" component={UserProfile} />
-            <ProtectedRoute  exact path="/external-api" component={ExternalApi} />
             <ProtectedRoute  exact path='/TicketMarketPlace' component={TicketMarketPlace}/>
             <ProtectedRoute  exact path='/CreateEvent'><CreateEvent
                                                       eventModel = {eventModel}
