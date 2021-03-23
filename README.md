@@ -20,10 +20,11 @@ TO BE POSTED
 In the ever changing land scape of the online marketplace and the surge in cryto currencies as well as blockchain technologies,
 we wanted to utitilize these technologies to create a safe, secure, and decentralized ticketing marketplace. 
 Where users can.
- 1.Create Events
- 2.Buy Tickets
- 3.Sell Tickets
- 4.See Marketplace Transactions
+ * Create Events()
+*  Buy Tickets()
+* [Description](#Description)
+* [Images](#Images)
+* [License](#License)
 
 # Description
 
