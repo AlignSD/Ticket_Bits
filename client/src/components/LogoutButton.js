@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const LogoutButton = () => {
+function LogoutButton(props) {
 
   const [open, setOpen] = React.useState(false);
 const anchorRef = React.useRef(null);
@@ -128,7 +128,7 @@ React.useEffect(() => {
          
   </IconButton>
 
-  <CheckoutButton/>
+  <CheckoutButton purchaseTicket={props.purchaseTicket}/>
   </Toolbar>
   </div>
   );

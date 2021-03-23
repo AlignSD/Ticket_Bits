@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import {TicketsContext} from '../utils/TicketsContext'
+
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,6 +62,10 @@ const useStyles = makeStyles((theme) => ({
   }));
 
   export default function eventCard(props){
+    let {addToCart, setAddToCart} = useContext(TicketsContext)
+    console.log(props)
+      const tickets = props.tickets
+      console.log(tickets)
       const events = props.events
       const classes = useStyles();
 
@@ -108,14 +115,78 @@ const useStyles = makeStyles((theme) => ({
                 <Grid item xs={4}></Grid>
                 <Grid item xs={4}></Grid>
               <Grid item xs={4}>
-              <Button
-            size="large"
-            variant="contained"
-            className={classes.btnMargin}
-          >
-            Buy Ticket
-          </Button>
+                              {/* <Button
+                                className={classes.buyButton}
+                                name={props.tickets.id}
+                                value={props.tickets.price}
+                                onClick={(event) => {
+                                  props.purchaseTicket(
+                                
+                                  );
+                                }}
+                              >
+                                Add to cart
+                              </Button> */}
+              </Grid>
+            </Grid>
+            </Grid>
           </Grid>
+          <hr />
+        </div>
+        </div>
+            ))}
+            {tickets.map((tickets, index) => (
+                <div key={index} className={classes.contained}>
+        <div key={index} className={classes.root}>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={5}>
+              <img
+                src="https://images.discotech.me/artists/8afa7b3a-6d68-467c-805d-04b538dee1d1.jpg"
+                alt=""
+                className="img-fluid"
+              />
+            </Grid>
+            <Grid item xs={12} sm={7}>
+              <Typography variant="h3" className={classes.eventName}>
+              <strong>{tickets.name}</strong>
+              </Typography>
+              <Typography variant="h5" className={classes.eventLocation}>
+                {tickets.location}
+              </Typography>
+              <Typography variant="body1" className={classes.eventInfo}>
+              <strong>Start:</strong> {tickets.startDate}
+              </Typography>
+              <Typography variant="body1" className={classes.eventInfo}>
+              
+              </Typography>
+              <Typography variant="body1" className={classes.eventInfo}>
+              <strong>Ticket Price:</strong> {tickets.ticketPrice}
+              </Typography>
+              <hr />
+              <Typography
+                variant="body1"
+                color="textSecondary"
+                component="p"
+                className={classes.paragraphText}
+              >
+                <strong>Description:</strong>
+                {tickets.description}
+              </Typography>
+              <Grid container alignItems={'flex-end'}>
+                <Grid item xs={4}></Grid>
+                <Grid item xs={4}></Grid>
+              <Grid item xs={4}>
+                              <Button
+                                className={classes.buyButton}
+                                name={tickets.id}
+                                value={tickets.price}
+                                onClick={(event) => {
+                                  setAddToCart(tickets)
+                                }}
+                              >
+                                Add to cart
+                              </Button>
+              </Grid>
             </Grid>
             </Grid>
           </Grid>

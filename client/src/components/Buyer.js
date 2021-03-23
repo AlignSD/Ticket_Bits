@@ -113,8 +113,8 @@ useEffect(() => {
                                 value={ticket.price}
                                 onClick={(event) => {
                                   props.purchaseTicket(
-                                    event.target.name,
-                                    event.target.value
+                                  ticket.id,
+                                  ticket.price
                                   );
                                 }}
                               >

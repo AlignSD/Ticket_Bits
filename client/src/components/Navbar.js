@@ -35,7 +35,7 @@ function NavBar(props){
           <MainNav
           props={props} />
           </Grid>
-          <AuthNav />
+          <AuthNav purchaseTicket={props.purchaseTicket} />
           </Grid>
           </div>
       </nav>
