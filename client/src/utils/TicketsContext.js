@@ -30,9 +30,9 @@ const TicketsContextProvider = (props) => {
 description: "",
 id: "",
 location: "",
-name: "for larry",
+name: "TicketForEvent",
 owner: "",
-price: "1",
+price: "2000",
 purchased: false,
 startDate: ""
   })
