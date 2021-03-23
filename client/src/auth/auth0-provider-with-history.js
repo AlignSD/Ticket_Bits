@@ -16,7 +16,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri='http://localhost:3000/Profile'
+      redirectUri='https://ticket-bits.herokuapp.com/Profile'
       onRedirectCallback={onRedirectCallback}
     >
       {children}
