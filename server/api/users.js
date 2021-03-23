@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
         .catch(err => console.log(err))
 })
 router.post('/', (req, res) => {
+    console.log(req.body, "req");
     const { username, email, firstName, lastName } = req.body;
     const newUser = new User({
         _id : req.body.id,
@@ -16,9 +17,10 @@ router.post('/', (req, res) => {
         email: email,
         firstName: firstName,
         lastName: lastName
+       
 
     })
-    console.log(newUser, "newUser")
+    
     newUser.save()
         .then(() => res.json({
             message: "Created account successfully"
@@ -27,6 +29,7 @@ router.post('/', (req, res) => {
             "error": err,
             "message": "Error creating account"
         }))
+        console.log(newUser, "newUser")
 })
     router.put('/:id', (req, res) => {
         console.log(req.params, "res")
