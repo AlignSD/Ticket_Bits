@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useRef } from "react";
+import React, { useEffect, useContext } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "./components/Navbar";
@@ -9,8 +9,7 @@ import Seller from './components/Seller'
 import Grid from "@material-ui/core/Grid";
 import TicketMarketPlace from './components/TicketMarketPlace';
 import Home from "./views/home";
-import Web3 from 'web3'
-import ExternalApi from "./views/external-api";
+import Web3 from 'web3';
 import ProtectedRoute from "./auth/protected-route";
 import CoinbaseAPI from "./CoinbaseAPI";
 import CreateEvent from "./pages/CreateEvent"
