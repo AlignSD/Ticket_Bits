@@ -59,9 +59,8 @@ export default function LayoutTextFields() {
     email: '',
     firstName: '',
     lastName: '',
-    
-
   })
+
   console.log(userProfile.username);
   console.log(userProfile.users);
   // const [users, setUsers] = useState(null);
@@ -70,6 +69,7 @@ export default function LayoutTextFields() {
   // const [firstName, setFirstName ] = useState("");
 	// const [lastName, setLastName] = useState("");
 	useEffect(() => {
+    console.log("sdhjkgsdhjkgsdfhjkgsdhjkfghjkdfg")
     axios
 			.get("/api/users")
 			.then((users) => setUserProfile(...userProfile, users))
@@ -78,7 +78,7 @@ export default function LayoutTextFields() {
 	}, []);
 
   function authLoadProfile() {
-    
+    console.log(user);
       if(user.email === null){
       axios
 			.post("/api/users", {
