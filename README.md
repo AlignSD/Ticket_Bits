@@ -13,7 +13,7 @@ Welcome to Crytick, a ticketing platform built around the Ethereum blockchain!
 * [License](#License)
 
 # Link
-TO BE POSTED
+[https://ticket-bits.herokuapp.com/](https://ticket-bits.herokuapp.com/)
 
 # Motivation
 
