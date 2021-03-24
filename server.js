@@ -10,9 +10,9 @@ app.use(cors());
 
 // API
 const users = require('./api/users');
-app.use('./api/users', users);
+app.use('/api/users', users);
 const events = require('./api/events');
-app.use('./api/events', events);
+app.use('/api/events', events);
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static('client/build'));
