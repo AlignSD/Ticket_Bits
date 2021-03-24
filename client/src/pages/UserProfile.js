@@ -76,7 +76,7 @@ export default function LayoutTextFields() {
 			.catch((err) => console.log(err));
       authLoadProfile()
 	}, []);
-
+console.log(userProfile.users, "users")
   function authLoadProfile() {
     console.log(user);
       if(user.email === null){

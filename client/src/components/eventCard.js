@@ -71,70 +71,7 @@ const useStyles = makeStyles((theme) => ({
 
       return(
         <div className={classes.overall}>
-            {events.map((events, index) => (
-                <div key={index} className={classes.contained}>
-        <div key={index} className={classes.root}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={5}>
-              <img
-                src="https://images.discotech.me/artists/8afa7b3a-6d68-467c-805d-04b538dee1d1.jpg"
-                alt=""
-                className="img-fluid"
-              />
-            </Grid>
-            <Grid item xs={12} sm={7}>
-              <Typography variant="h3" className={classes.eventName}>
-              <strong>{events.eventName}</strong>
-              </Typography>
-              <Typography variant="h5" className={classes.eventLocation}>
-                {events.venueName}
-              </Typography>
-              <Typography variant="body1" className={classes.eventInfo}>
-              <strong>Start:</strong> {events.eventStarts}
-              </Typography>
-              <Typography variant="body1" className={classes.eventInfo}>
-              <strong>End:</strong> {events.eventsEnd}
-              </Typography>
-              <Typography variant="body1" className={classes.eventInfo}>
-              <strong>Available Tickets:</strong> {events.ticketAmount}
-              </Typography>
-              <Typography variant="body1" className={classes.eventInfo}>
-              <strong>Ticket Price:</strong> {events.ticketPrice}
-              </Typography>
-              <hr />
-              <Typography
-                variant="body1"
-                color="textSecondary"
-                component="p"
-                className={classes.paragraphText}
-              >
-                <strong>Description:</strong>
-                {events.summary}
-              </Typography>
-              <Grid container alignItems={'flex-end'}>
-                <Grid item xs={4}></Grid>
-                <Grid item xs={4}></Grid>
-              <Grid item xs={4}>
-                              {/* <Button
-                                className={classes.buyButton}
-                                name={props.tickets.id}
-                                value={props.tickets.price}
-                                onClick={(event) => {
-                                  props.purchaseTicket(
-                                
-                                  );
-                                }}
-                              >
-                                Add to cart
-                              </Button> */}
-              </Grid>
-            </Grid>
-            </Grid>
-          </Grid>
-          <hr />
-        </div>
-        </div>
-            ))}
+     
             {tickets.map((tickets, index) => (
                 <div key={index} className={classes.contained}>
         <div key={index} className={classes.root}>
@@ -161,6 +98,9 @@ const useStyles = makeStyles((theme) => ({
               </Typography>
               <Typography variant="body1" className={classes.eventInfo}>
               <strong>Ticket Price:</strong> {tickets.ticketPrice}
+              </Typography>
+              <Typography variant="body1" className={classes.eventInfo}>
+              <strong>Ticket Owner:</strong> {tickets.owner}
               </Typography>
               <hr />
               <Typography
@@ -197,3 +137,70 @@ const useStyles = makeStyles((theme) => ({
       </div>
   )
 }
+
+// If we want to pull from the backen as well use this 
+
+/* //      {events.map((events, index) => ( 
+      //          <div key={index} className={classes.contained}>
+      //  <div key={index} className={classes.root}>
+      //    <Grid container spacing={3}>
+      //      <Grid item xs={12} sm={5}>
+      //        <img
+      //          src="https://images.discotech.me/artists/8afa7b3a-6d68-467c-805d-04b538dee1d1.jpg"
+      //          alt=""
+      //          className="img-fluid"
+      //        />
+      //      </Grid>
+      //      <Grid item xs={12} sm={7}>
+      //        <Typography variant="h3" className={classes.eventName}>
+      //        <strong>{events.eventName}</strong>
+      //        </Typography>
+      //        <Typography variant="h5" className={classes.eventLocation}>
+      //          {events.venueName}
+      //        </Typography>
+      //        <Typography variant="body1" className={classes.eventInfo}>
+      //        <strong>Start:</strong> {events.eventStarts}
+      //        </Typography>
+      //        <Typography variant="body1" className={classes.eventInfo}>
+      //        <strong>End:</strong> {events.eventsEnd}
+      //        </Typography>
+      //        <Typography variant="body1" className={classes.eventInfo}>
+      //        <strong>Available Tickets:</strong> {events.ticketAmount}
+      //        </Typography>
+      //        <Typography variant="body1" className={classes.eventInfo}>
+      //        <strong>Ticket Price:</strong> {events.ticketPrice}
+      //        </Typography>
+      //        <hr />
+      //        <Typography
+      //          variant="body1"
+      //          color="textSecondary"
+      //          component="p"
+      //          className={classes.paragraphText}
+      //        >
+      //          <strong>Description:</strong>
+      //          {events.summary}
+      //        </Typography>
+      //        <Grid container alignItems={'flex-end'}>
+      //          <Grid item xs={4}></Grid>
+      //          <Grid item xs={4}></Grid>
+      //        <Grid item xs={4}>
+      //                        {/* <Button
+      //                          className={classes.buyButton}
+      //                          name={props.tickets.id}
+      //                          value={props.tickets.price}
+      //                          onClick={(event) => {
+      //                            props.purchaseTicket(
+      //                          
+      //                            );
+      //                          }}
+      //                        >
+      //                          Add to cart
+      //                        </Button> }
+      //        </Grid>
+      //      </Grid>
+      //      </Grid>
+      //    </Grid>
+      //    <hr />
+      //  </div>
+      //  </div>
+      //      ))} */
