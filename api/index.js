@@ -3,7 +3,7 @@ const userRoutes = require("./users");
 const eventRoutes = require("./events")
 
 // routes
-router.use("/Users", userRoutes);
-router.use("/Events", eventRoutes);
+router.use("/users", userRoutes);
+router.use("/events", eventRoutes);
 
 module.exports = router;
