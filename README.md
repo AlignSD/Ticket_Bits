@@ -1,29 +1,47 @@
-# Create React Express App
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## About This Boilerplate
+# CRYPTICK  #
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+Welcome to Crytick, a ticketing platform built around the Ethereum blockchain! 
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+# Table of Contents
 
-## Starting the app locally
+* [Link](#Link)
+* [Motivation](#Motivation)
+* [Description](#Description)
+* [Images](#Images)
+* [License](#License)
 
-Start by installing front and backend dependencies. While in this directory, run the following command:
+# Link
+[https://ticket-bits.herokuapp.com/](https://ticket-bits.herokuapp.com/)
 
-```
-npm install
-```
+# Motivation
 
-This should install node modules within the server and the client folder.
+In the ever changing land scape of the online marketplace and the surge in cryto currencies as well as blockchain technologies,
+we wanted to utitilize these technologies to create a safe, secure, and decentralized ticketing marketplace. 
+Where users can.
+ * Create Events
+*  Buy Tickets
+*  Sell Tickets
+*  See Market Transactions
 
-After both installations complete, run the following command in your terminal:
+# Description
 
-```
-npm start
-```
+The app uses the following technologies:
+* [React](https://reactjs.org/) is used to run the application.
+* [Material-Ui](https://material-ui.com/) is used to create the user interface of the application.
+* [BootStrap](https://getbootstrap.com/) is used as a css framework.
+* [MongoDB Atlas](https://docs.mongodb.com/manual/) is used in the backend to post and recieve inform from our database.
+* [Ethereum](https://ethereum.org/en/) is used the Block Chain technology used to create tickets, buy tickets, and sell tickets
+* [Solidity](https://docs.soliditylang.org/en/v0.8.3/) is used to create Smart Contract that interact with the Ethereum Block Chain
+* [Truffle](https://www.trufflesuite.com/) is used as a development environment, testing framework, and assset pipline for Ethereum.
+* [Truffle Ganache](https://www.trufflesuite.com/docs/ganache/overview) is used as a personal blockchain for Ethereum distribution durring development.
+* [Paypal API](https://developer.paypal.com/docs/api/overview/) is used as an endpoint checkout.
+* [Coinbase API](https://developers.coinbase.com/) is used to convert price values from USD to ETH.
+* [Web3.js API](https://web3js.readthedocs.io/en/v1.3.4/) is a java script library that allows you to interact with a local or remote Ethereum node.
+* [MetaMask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) is an Ethereum wallet used to make transaction with ETH in your browser.
+* 
 
-Your app should now be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
 
-## Deployment (Heroku)
 
-To deploy, simply add and commit your changes, and push to Heroku. As is, the NPM scripts should take care of the rest.
+# Images
